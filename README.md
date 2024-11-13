@@ -22,10 +22,41 @@ To compile and run this project, make sure the following tools are installed
 ## Implemented but Not Working Properly
 ## Features Not Implemented
 ## New Java Classes
+### LevelLoadingException.java
+- Location
+  - src/main/java/com/example/demo/exceptions/LevelLoadingException.java
+- Description
+  - A custom exception for unified management of loading errors.
+- Purpose
+  - Handling all exceptions in one place keeps the code cleaner and more organized.
+  - It helps in identifying and managing errors more easily.
+### AlertUtil.java
+
+- Location
+  - src/main/java/com/example/demo/utils/AlertUtil.java
+- Description
+  - Unified management of Alert-related handling.
+- Purpose
+  - It's easier to maintain and update the logic about alert in one location.
+
 ### xxxClass
+
 - Location
 - Description
 - Purpose
+
+### xxxClass
+
+- Location
+- Description
+- Purpose
+
+### xxxClass
+
+- Location
+- Description
+- Purpose
+
 ## Modified Java Classes
 ### module-info.java
 - Location
@@ -34,7 +65,82 @@ To compile and run this project, make sure the following tools are installed
   - Add `exports com.example.demo;`
 - Reason for change
   - Make sure all classes can be exported for JavaDoc.
+### LevelParent.java
+- Location
+  - src/main/java/com/example/demo/LevelParent.java
+
+- Changes
+  - fix method `goToNextLevel` . 
+    - I added the `levelChanging` variable to ensure thread safety.
+    - Before entering a new level, I make sure to remove the observers for the old level and delete the entities related to the old level.
+  - add method `stopCurrentLevelActivities`
+    - Stop the loading of the timeline
+    - Remove the observers.
+
+- Reason for change
+  - In order to prevent any potential infinite loops.
+  - Make the game be able to load the next level correctly.
+
+
+### ShieldImage.java
+
+- Location
+  - src/main/java/com/example/demo/ShieldImage.java
+- Changes
+  - I modified the path for finding the Shield image.
+- Reason for change
+  - The original image path had a `.png` extension, but the code was using a `.jpg` extension, which caused the exception.
+
+### Controller.java
+
+- Location
+  - src/main/java/com/example/demo/controller/Controller.java
+- Changes
+  - Unified the exceptions with a try-catch block.
+- Reason for change
+  - In actual app development, it is difficult to handle and list every possible exception, so managing them in a unified way can make the code structure clearer. Later, when we can handle each specific case more thoroughly, we can add them back individually.
+
+### Main.java
+
+- Location
+  - src/main/java/com/example/demo/controller/Main.java
+- Changes
+  - Unified the exceptions with a try-catch block.
+- Reason for change
+  - In actual app development, it is difficult to handle and list every possible exception, so managing them in a unified way can make the code structure clearer. Later, when we can handle each specific case more thoroughly, we can add them back individually.
+
 ### xxxClass
+
+- Location
+- Changes
+- Reason for change
+
+### xxxClass
+
+- Location
+- Changes
+- Reason for change
+
+### xxxClass
+
+- Location
+- Changes
+- Reason for change
+
+### xxxClass
+
+- Location
+- Changes
+- Reason for change
+
+### xxxClass
+
+- Location
+- Changes
+- Reason for change
+
+### xxxClass
+
 - Location
 - Changes
 - Reason for change
