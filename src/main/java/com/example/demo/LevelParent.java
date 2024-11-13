@@ -34,16 +34,18 @@ public abstract class LevelParent extends Observable {
 	private final List<ActiveActorDestructible> enemyUnits;
 	private final List<ActiveActorDestructible> userProjectiles;
 	private final List<ActiveActorDestructible> enemyProjectiles;
-	
+
 	private int currentNumberOfEnemies;
 	private LevelView levelView;
+
+	private boolean levelChanging = false;
 
 	/**
 	 * Constructor to initialize the game level with the given parameters.
 	 *
 	 * @param backgroundImageName the name of the background image for the level
-	 * @param screenHeight the height of the game screen
-	 * @param screenWidth the width of the game screen
+	 * @param screenHeight        the height of the game screen
+	 * @param screenWidth         the width of the game screen
 	 * @param playerInitialHealth the initial health of the player
 	 */
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth) {
@@ -114,8 +116,16 @@ public abstract class LevelParent extends Observable {
 	 * @param levelName the name of the next level
 	 */
 	public void goToNextLevel(String levelName) {
+		if (levelChanging) {
+			return;
+		}
+		levelChanging = true;
+
 		setChanged();
-		notifyObservers(levelName);
+		notifyObservers(levelName); // Notify the observers about the level change
+
+		stopCurrentLevelActivities();
+		levelChanging = false;
 	}
 
 	/**
@@ -391,6 +401,11 @@ public abstract class LevelParent extends Observable {
 	 */
 	private void updateNumberOfEnemies() {
 		currentNumberOfEnemies = enemyUnits.size();
+	}
+
+	public void stopCurrentLevelActivities() {
+		timeline.stop();
+		deleteObservers();
 	}
 
 }

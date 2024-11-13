@@ -5,6 +5,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.example.demo.exceptions.LevelLoadingException;
+import com.example.demo.utils.AlertUtil;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -23,7 +26,8 @@ public class Controller implements Observer {
 
 	/**
 	 * Constructor for Controller.
-	 * @param stage The main stage of the game (game window).
+	 *
+	 * @param stage the primary window for JavaFX Application.
 	 */
 	public Controller(Stage stage) {
 		this.stage = stage;
@@ -31,60 +35,69 @@ public class Controller implements Observer {
 
 	/**
 	 * Launch the game by showing the stage and going to the first level.
-	 * @throws ClassNotFoundException If the level class is not found.
-	 * @throws NoSuchMethodException If the constructor is not found.
-	 * @throws SecurityException If a security manager denies access.
-	 * @throws InstantiationException If the class cannot be instantiated.
-	 * @throws IllegalAccessException If the constructor is not accessible.
-	 * @throws IllegalArgumentException If the constructor arguments are invalid.
-	 * @throws InvocationTargetException If the constructor throws an exception.
+	 * If any exception occurs, we will show an [Alert] to tell users.
+	 * And you can check the error Message in the stack.(Where run this JavaFX Application)
 	 */
-	public void launchGame() throws ClassNotFoundException, NoSuchMethodException, SecurityException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException  {
-
+	public void launchGame() {
+		try {
 			// Show the game window
 			stage.show();
 			// Start the game by going to the first level
 			goToLevel(LEVEL_ONE_CLASS_NAME);
+		} catch (Exception e) {
+			e.printStackTrace();
+			AlertUtil.showError("ERROR",
+					"Failed to launch the Game.",
+					"An error occurred while starting the game. <br>" +
+							"Please check the stack information");
+			Platform.exit();
+		}
 	}
 
 	/**
 	 * Transition to a specific game level.
+	 *
 	 * @param className The name of the class representing the level.
-	 * @throws ClassNotFoundException If the level class is not found.
-	 * @throws NoSuchMethodException If the constructor is not found.
-	 * @throws SecurityException If a security manager denies access.
-	 * @throws InstantiationException If the class cannot be instantiated.
-	 * @throws IllegalAccessException If the constructor is not accessible.
-	 * @throws IllegalArgumentException If the constructor arguments are invalid.
-	 * @throws InvocationTargetException If the constructor throws an exception.
+	 * @throws LevelLoadingException: A custom exception that will be thrown if any error occurs while loading the level.
 	 */
-	private void goToLevel(String className) throws ClassNotFoundException, NoSuchMethodException, SecurityException,
-			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-			Class<?> myClass = Class.forName(className);
-			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
-			LevelParent myLevel = (LevelParent) constructor.newInstance(stage.getHeight(), stage.getWidth());
-			myLevel.addObserver(this);
-			Scene scene = myLevel.initializeScene();
-			stage.setScene(scene);
-			myLevel.startGame();
+	private void goToLevel(String className) throws LevelLoadingException {
+		try {
+			if (stage.getScene() != null) {
+				stage.getScene().getRoot().setOnMouseClicked(null);
+			}
 
+			// Use full className to get the newLevel's class
+			Class<?> newLevelClass = Class.forName(className);
+			Constructor<?> newLevelClassConstructor = newLevelClass.getConstructor(double.class, double.class);
+			LevelParent newLevel = (LevelParent) newLevelClassConstructor.newInstance(stage.getHeight(), stage.getWidth());
+
+			//add observer for newLevel
+			newLevel.addObserver(this); // Add observer only if not already added
+			//show newLevel in the stage
+			Scene scene = newLevel.initializeScene();
+			stage.setScene(scene);
+			//newLevel start
+			newLevel.startGame();
+		} catch (Exception e) {
+			throw new LevelLoadingException("Failed to load level: " + className, e);
+		}
 	}
 
 	/**
 	 * Updates the controller when the observed level changes.
-	 * @param arg0 The observable object (level).
-	 * @param arg1 The new level class name to switch to.
+	 *
+	 * @param levelObj     The observable object (level).
+	 * @param newLevelName The new level class name to switch to.
 	 */
 	@Override
-	public void update(Observable arg0, Object arg1) {
+	public void update(Observable levelObj, Object newLevelName) {
 		try {
-			goToLevel((String) arg1);
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException
-				| IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			Alert alert = new Alert(AlertType.ERROR);
-			alert.setContentText(e.getClass().toString());
-			alert.show();
+			goToLevel((String) newLevelName);
+		} catch (LevelLoadingException e) {
+			e.printStackTrace();
+			AlertUtil.showError("Level Load Error",
+					"Unable to load level",
+					e.getMessage());
 		}
 	}
 
