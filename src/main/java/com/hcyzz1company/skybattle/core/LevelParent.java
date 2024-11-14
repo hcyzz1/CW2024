@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.hcyzz1company.skybattle.entity.actors.FighterPlane;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.projectiles.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.utils.LevelUtil;
 import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -77,9 +78,27 @@ public abstract class LevelParent extends Observable {
 	protected abstract void initializeFriendlyUnits();
 
 	/**
-	 * Abstract method to check whether the game is over. This method will handle the game over logic.
+	 * Method to check whether the game is over.
+	 * This method will handle the game over logic.
 	 */
-	protected abstract void checkIfGameOver();
+	protected void checkIfGameOver() {
+		if (userIsDestroyed()) {
+			loseGame();
+		} else if (winLevel()) {
+			//If win, try to get next level;
+			String currentLevelClassName = this.getClass().getName();
+			//If is already the final level, winGame
+			if (LevelUtil.isFinalLevel(currentLevelClassName)) {
+				winGame();
+			} else {
+				// If is not the final level, go to the next level.
+				String nextLevel = LevelUtil.getNextLevel(currentLevelClassName);
+				goToNextLevel(nextLevel);
+			}
+		}
+	}
+
+	protected abstract boolean winLevel();
 
 	/**
 	 * Abstract method to spawn enemy units. This method handles the logic for creating and adding enemies to the level.

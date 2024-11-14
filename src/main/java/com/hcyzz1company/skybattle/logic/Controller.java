@@ -1,11 +1,12 @@
 package com.hcyzz1company.skybattle.logic;
 
-import java.lang.reflect.Constructor;
 import java.util.Observable;
 import java.util.Observer;
 
+import com.hcyzz1company.skybattle.core.LevelFactory;
 import com.hcyzz1company.skybattle.exceptions.LevelLoadingException;
 import com.hcyzz1company.skybattle.utils.AlertUtil;
+import com.hcyzz1company.skybattle.utils.LevelUtil;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,8 +18,6 @@ import com.hcyzz1company.skybattle.core.LevelParent;
  */
 public class Controller implements Observer {
 
-	// Constant for the first level class name
-	private static final String LEVEL_ONE_CLASS_NAME = "com.hcyzz1company.skybattle.core.levelOne.LevelOne";
 	private final Stage stage;
 
 	/**
@@ -40,7 +39,7 @@ public class Controller implements Observer {
 			// Show the game window
 			stage.show();
 			// Start the game by going to the first level
-			goToLevel(LEVEL_ONE_CLASS_NAME);
+			goToLevel(LevelUtil.getFirstLevel());
 		} catch (Exception e) {
 			e.printStackTrace();
 			AlertUtil.showError("ERROR",
@@ -52,27 +51,23 @@ public class Controller implements Observer {
 	}
 
 	/**
-	 * Transition to a specific game level.
+	 * Move to a specific game level.
 	 *
 	 * @param className The name of the class representing the level.
 	 * @throws LevelLoadingException : A custom exception that will be thrown if any error occurs while loading the level.
 	 */
 	private void goToLevel(String className) throws LevelLoadingException {
 		try {
-			if (stage.getScene() != null) {
-				stage.getScene().getRoot().setOnMouseClicked(null);
-			}
-
-			// Use full className to get the newLevel's class
-			Class<?> newLevelClass = Class.forName(className);
-			Constructor<?> newLevelClassConstructor = newLevelClass.getConstructor(double.class, double.class);
-			LevelParent newLevel = (LevelParent) newLevelClassConstructor.newInstance(stage.getHeight(), stage.getWidth());
+			// Use LevelFactory to get the instance of new Level
+			LevelParent newLevel = LevelFactory.createLevel(className, stage);
 
 			//add observer for newLevel
-			newLevel.addObserver(this); // Add observer only if not already added
+			newLevel.addObserver(this);
+
 			//show newLevel in the stage
 			Scene scene = newLevel.initializeScene();
 			stage.setScene(scene);
+
 			//newLevel start
 			newLevel.startGame();
 		} catch (Exception e) {

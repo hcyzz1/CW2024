@@ -22,4 +22,5 @@ module com.hcyzz1company.skybattle {
     exports com.hcyzz1company.skybattle.core.levelTwo;
     exports com.hcyzz1company.skybattle.core;
     opens com.hcyzz1company.skybattle.core to javafx.fxml;
+    exports com.hcyzz1company.skybattle.utils;
 }

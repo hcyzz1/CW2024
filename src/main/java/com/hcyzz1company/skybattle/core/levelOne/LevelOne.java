@@ -14,7 +14,6 @@ import com.hcyzz1company.skybattle.entity.projectiles.ActiveActorDestructible;
 public class LevelOne extends LevelParent {
 
 	private static final String BACKGROUND_IMAGE_NAME = "/com/hcyzz1company/skybattle/images/background1.jpg";
-	private static final String NEXT_LEVEL = "com.hcyzz1company.skybattle.core.levelTwo.LevelTwo";
 	private static final int TOTAL_ENEMIES = 5;
 	private static final int KILLS_TO_ADVANCE = 10;
 	private static final double ENEMY_SPAWN_PROBABILITY = .20;
@@ -30,17 +29,9 @@ public class LevelOne extends LevelParent {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
 	}
 
-	/**
-	 * Checks whether the game is over. The game ends if the user is destroyed or if the player
-	 * has reached the required number of kills to advance to the next level.
-	 */
 	@Override
-	protected void checkIfGameOver() {
-		if (userIsDestroyed()) {
-			loseGame();
-		}
-		else if (userHasReachedKillTarget())
-			goToNextLevel(NEXT_LEVEL);
+	protected boolean winLevel() {
+		return userHasReachedKillTarget();
 	}
 
 	/**

@@ -36,17 +36,11 @@ public class LevelTwo extends LevelParent {
 	}
 
 	/**
-	 * Checks if the game is over. The game is over if the user plane is destroyed or the boss is destroyed.
-	 * If the user is destroyed, the game ends with a loss. If the boss is destroyed, the game ends with a win.
+	 * Check win the level or not
 	 */
 	@Override
-	protected void checkIfGameOver() {
-		if (userIsDestroyed()) {
-			loseGame();
-		}
-		else if (boss.isDestroyed()) {
-			winGame();
-		}
+	protected boolean winLevel() {
+		return boss.isDestroyed();
 	}
 
 	/**
