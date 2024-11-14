@@ -168,14 +168,21 @@ You can check branch `https://github.com/hcyzz1/CW2024/tree/setup-and-initial-se
 - Reviewed the code and added comments.
   - This helped me gain an initial understanding of the project.
   - I may revise the comments later as I continue working on the project.
-  - I can use these comments to generate **JavaDoc** files.
+  - I can use these comments to generate **JavaDoc** files successfully!
 
 ### Day2 (2024/11/13)
 
+You can check branch `https://github.com/hcyzz1/CW2024/tree/basic-bugs-fix` here.
+
 - Try to run and play locally. I found the game can't go to Level2. In order to resolve this problem, What I do:
-  - I added the AlertUtil class to help split some logic for better understanding of the information.
-  - The first problem I found was that the path to the shield file was incorrect, so I changed the extension from .jpg
-    to .png. This allowed the image to be found correctly, and now I can load the background for levelTwo!
-  - Then, while debugging, I noticed that even though I hadn't performed any actions in levelTwo, the update method was
-    being called repeatedly, which eventually led to an Out of Memory (OOM) error.
-    - I found that it is the [Observable] class use problem! We should destroy the old obj to avoid OOM!
+  - I added the [AlertUtil] class to help split some logic for better understanding of the project.
+  - The first problem I found was that [the path to the shield file was incorrect]
+    - I changed the extension from .jpg to .png. This allowed the image to be found correctly, and now I can load the
+      background for levelTwo!
+  - Then, while debugging, I noticed that even though I hadn't performed any actions in levelTwo, the [update] method
+    in [LevelParent] was being called repeatedly, which eventually led to an Out of Memory (OOM) error.
+    - I found that it is the [LevelParent] class use problem!
+    - When using [Observable], before we observe the newLevel, we should destroy the old observable obj to avoid OOM!
+  - Now we can play Level Two and Kill the Boss!
+
+### Day3 (2024/11/14)
