@@ -22,14 +22,47 @@ To compile and run this project, make sure the following tools are installed
 ## Implemented but Not Working Properly
 ## Features Not Implemented
 ## New Java Classes
-### LevelLoadingException.java
+### [AppConstants.java]()
+
 - Location
-  - src/main/java/com/example/demo/exceptions/LevelLoadingException.java
+  - 
+- Description
+  - A new const class, save the game window settings and related variables here.
+- Purpose
+  - Decouple the code, make it easier to change the windows settings and title information in the future.
+
+### [LevelUtil.java]()
+
+- Location
+  - 
+
+- Description
+  - An Util class to manage level information. Including finding the first level, finding the next level for the specific level and other functions.
+- Purpose
+  - Make the logic about level management in the same file.
+  - It will be easier to add new levels later, and we can modify the relationships more clearly, avoiding any impact on the main logic.
+
+### [LevelFactory.java]()
+
+- Location
+  - 
+- Description
+  - Used the Factory Design Pattern to manage level information.
+  - Created a factory class to obtain the level instances.
+- Purpose
+  - It makes the code easier to maintain by organizing level creation in one place, keeping the code
+    clean.
+  - The factory reuses the same logic for creating levels, reducing repetition and mistakes.
+
+### [LevelLoadingException.java]()
+
+- Location
+  - 
 - Description
   - A custom exception for unified management of loading errors.
 - Purpose
   - Handling all exceptions in one place keeps the code cleaner and more organized.
-  - It helps in identifying and managing errors more easily.
+  - It helps in identifying and managing errors more easily. 
 ### AlertUtil.java
 
 - Location
@@ -39,75 +72,89 @@ To compile and run this project, make sure the following tools are installed
 - Purpose
   - It's easier to maintain and update the logic about alert in one location.
 
-### xxxClass
-
-- Location
-- Description
-- Purpose
-
-### xxxClass
-
-- Location
-- Description
-- Purpose
-
-### xxxClass
-
-- Location
-- Description
-- Purpose
+- 
 
 ## Modified Java Classes
-### module-info.java
-- Location
-  - ./CW2024/src/main/java/module-info.java
-- Changes
-  - Add `exports com.example.demo;`
-- Reason for change
-  - Make sure all classes can be exported for JavaDoc.
-### LevelParent.java
-- Location
-  - src/main/java/com/example/demo/LevelParent.java
 
-- Changes
-  - fix method `goToNextLevel` . 
-    - I added the `levelChanging` variable to ensure thread safety.
-    - Before entering a new level, I make sure to remove the observers for the old level and delete the entities related to the old level.
-  - add method `stopCurrentLevelActivities`
-    - Stop the loading of the timeline
-    - Remove the observers.
+Each number represents a change point. 
 
-- Reason for change
-  - In order to prevent any potential infinite loops.
-  - Make the game be able to load the next level correctly.
+I will explain the change points and the reasons for the changes, including the line numbers associated with the files.
+
+### [module-info.java]()
+
+1. I modified the information to be exported based on the new file directory structure after the refactor.
+
+   - Location:
+
+   - Reason:
+
+     - Make sure all classes can be exported for JavaDoc.
+
+     - Make sure the application can run successfully.
+
+### [Main.java](URL)
+
+1. Simplified exception handling.
+
+     - Location:
+
+     - Reason:  
+       - I used a custom exception to better pinpoint errors. 
+       - It will be easier to read the code after.
 
 
-### ShieldImage.java
+2. Moved some variables about settings into a new Constant file.
 
-- Location
-  - src/main/java/com/example/demo/ShieldImage.java
-- Changes
-  - I modified the path for finding the Shield image.
-- Reason for change
-  - The original image path had a `.png` extension, but the code was using a `.jpg` extension, which caused the exception.
+   - Location:
 
-### Controller.java
+   - Reason: 
+     
+     - Move some constants that is not about the main logic into a new file. It will make the project easier to maintenance in the future. 
+     
+     - Also, when we want to change the settings, we can find the settings easier in the new file.
 
-- Location
-  - src/main/java/com/example/demo/controller/Controller.java
-- Changes
-  - Unified the exceptions with a try-catch block.
-- Reason for change
-  - In actual app development, it is difficult to handle and list every possible exception, so managing them in a unified way can make the code structure clearer. Later, when we can handle each specific case more thoroughly, we can add them back individually.
 
-### Main.java
+### [Controller.java]()
 
-- Location
-  - src/main/java/com/example/demo/controller/Main.java
-- Changes
-  - Unified the exceptions with a try-catch block.
-- Reason for change
-  - In actual app development, it is difficult to handle and list every possible exception, so managing them in a unified way can make the code structure clearer. Later, when we can handle each specific case more thoroughly, we can add them back individually.
+1. Split the logic for loading the first level and subsequent levels into a new file.
+   - Location:
+   - Reason:
+     - Ensured that the Controller is only responsible for controlling level listeners and other parts related to the main logic.
+     - Moved parts(logics about levels) that might change into new methods, making it easier to modify and extend in the future.
+
+### [LevelParent.java]()
+
+1. Fix method `goToNextLevel` .
+   - Location: 
+   - Reason:
+     - I added the `levelChanging` variable to ensure thread safety.
+     - Call the new method following `stopCurrentLevelActivities`, make sure the game be able to load the next level correctly.
+2. Add method `stopCurrentLevelActivities`.
+   - Location: 
+   - Reason: 
+     - In order to prevent any dead loops.
+     - Before entering a new level, I make sure to remove the observers for the old level and delete the entities related
+       to the old level.
+
+
+### [ShieldImage.java]()
+
+1. I modified the path for finding the Shield image.
+   - Location: 
+   - Reason: 
+     - The original image path had a `.png` extension, but the code was using a `.jpg` extension, which caused the exception.
+
+### [LevelParent.java]()
+
+1. I rewrited method `checkIfGameOver` and added `winLevel` method, in orde to extract the same logic, avoiding child class override the same logic again and again.
+   - Location: 
+   - Reason: 
+     - Actually, the logic for completing or failing a level is quite similar, so I extracted them.
+       - When the player fails, it’s because they received enough damage.
+       - When a level is won, it’s either by advancing to the next level or winning the entire game.
+       - Each level is allowed to define its own victory conditions, such as defeating enough enemies or defeating a boss, by override the `winLevel` method.
+     - Subclasses only need to override the `winLevel` method！It's easier to use now!
+
 
 ### xxxClass
 
@@ -115,35 +162,7 @@ To compile and run this project, make sure the following tools are installed
 - Changes
 - Reason for change
 
-### xxxClass
 
-- Location
-- Changes
-- Reason for change
-
-### xxxClass
-
-- Location
-- Changes
-- Reason for change
-
-### xxxClass
-
-- Location
-- Changes
-- Reason for change
-
-### xxxClass
-
-- Location
-- Changes
-- Reason for change
-
-### xxxClass
-
-- Location
-- Changes
-- Reason for change
 
 ## Unexpected Problems
 
@@ -186,3 +205,28 @@ You can check branch `https://github.com/hcyzz1/CW2024/tree/basic-bugs-fix` here
   - Now we can play Level Two and Kill the Boss!
 
 ### Day3 (2024/11/14)
+
+I have refactored the project preliminarily.
+
+- Meaningful package naming
+  - I looked up the naming conventions for packages in Java.
+  - I found that they generally use the company's domain name followed by project information.
+  - So, for the company domain part, I'm using my GitHub username as a placeholder.
+  - For the project information, I named it "skybattle", which reflects my understanding of this game.(same as the
+    default title)
+- Meaningful package organisation
+  - I reorganized the package structure. I extracted them into packages like action, boot, constants, core, entity,
+    exceptions, logic, ui, and utils.(I still think that I will change it again and again later)
+    - action: Contains actions and game events.
+    - boot: Manages the game's startup processes.
+    - constants: Stores constant values like settings, and other game parameters.
+    - core: Includes the core game logic about level changes and others.
+    - entity: Holds classes representing game entities, such as characters and objects(projectiles here).
+    - exceptions: Custom exceptions for error and Exceptions.
+    - logic: Some game's behavior to destroy actors.
+    - ui: The user interface of the game. Like win image and other images.
+    - utils: Utility classes ,helper methods used across the project.
+- Add Factory Design Pattern
+  - Add `LevelFactory` , which uses factory design pattern. In order to make instaces of levels. By using this design pattern, we can make the logic more clearly while creating instance about levels.
+- Change `LevelParent`
+  - I rewrited method `checkIfGameOver` and added `winLevel` method, in orde to extract the same logic, avoiding child class override the same logic again and again.
