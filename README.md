@@ -39,11 +39,15 @@ To compile and run this project, make sure the following tools are installed
 - Purpose
   - It's easier to maintain and update the logic about alert in one location.
 
-### xxxClass
+### AppConstants.java
 
 - Location
+  - 
 - Description
+  - Extracted the game window settings and related variables into a const class.
 - Purpose
+  - The goal is to decouple the code, making each file easier to maintain and making it simpler to identify the related
+    modification points when issues occur.
 
 ### xxxClass
 
@@ -62,7 +66,7 @@ To compile and run this project, make sure the following tools are installed
 - Location
   - ./CW2024/src/main/java/module-info.java
 - Changes
-  - Add `exports com.example.demo;`
+  - Add `exports com.example.demo;`(After I renamed packages, <=>exports com.hcyzz1company.skybattle)
 - Reason for change
   - Make sure all classes can be exported for JavaDoc.
 ### LevelParent.java
@@ -186,3 +190,24 @@ You can check branch `https://github.com/hcyzz1/CW2024/tree/basic-bugs-fix` here
   - Now we can play Level Two and Kill the Boss!
 
 ### Day3 (2024/11/14)
+
+I have refactored the project preliminarily.
+
+- Meaningful package naming
+  - I looked up the naming conventions for packages in Java.
+  - I found that they generally use the company's domain name followed by project information.
+  - So, for the company domain part, I'm using my GitHub username as a placeholder.
+  - For the project information, I named it "skybattle", which reflects my understanding of this game.(same as the
+    default title)
+- Meaningful package organisation
+  - I reorganized the package structure. I extracted them into packages like action, boot, constants, core, entity,
+    exceptions, logic, ui, and utils.(I still think that I will change it again and again later)
+    - action: Contains actions and game events.
+    - boot: Manages the game's startup processes.
+    - constants: Stores constant values like settings, and other game parameters.
+    - core: Includes the core game logic about level changes and others.
+    - entity: Holds classes representing game entities, such as characters and objects(projectiles here).
+    - exceptions: Custom exceptions for error and Exceptions.
+    - logic: Some game's behavior to destroy actors.
+    - ui: The user interface of the game. Like win image and other images.
+    - utils: Utility classes ,helper methods used across the project.
