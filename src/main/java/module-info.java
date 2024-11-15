@@ -23,4 +23,6 @@ module com.hcyzz1company.skybattle {
     exports com.hcyzz1company.skybattle.core;
     opens com.hcyzz1company.skybattle.core to javafx.fxml;
     exports com.hcyzz1company.skybattle.utils;
+    exports com.hcyzz1company.skybattle.utils.ui;
+    opens com.hcyzz1company.skybattle.utils.ui to javafx.fxml;
 }
