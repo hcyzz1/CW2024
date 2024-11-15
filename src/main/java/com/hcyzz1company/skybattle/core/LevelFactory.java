@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import java.lang.reflect.Constructor;
 
 /**
- * Factory Design for creating level instances.
+ * Factory Design Pattern for creating level instances.
  */
 public class LevelFactory {
 
