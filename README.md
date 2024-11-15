@@ -47,30 +47,61 @@ To compile and run this project, make sure the following tools are installed
 - Location
   - 
 - Description
-  - Used the Factory Design Pattern to manage level information.
-  - Created a factory class to obtain the level instances.
+    - Used the Factory Design Pattern to manage level information.
+    - Created a factory class to obtain the level instances.
 - Purpose
-  - It makes the code easier to maintain by organizing level creation in one place, keeping the code
-    clean.
-  - The factory reuses the same logic for creating levels, reducing repetition and mistakes.
+    - It makes the code easier to maintain by organizing level creation in one place, keeping the code clean.
+    - The factory reuses the same logic for creating levels, reducing repetition and mistakes.
 
-### [LevelLoadingException.java]()
+### [ImageFactory.java]()
 
 - Location
   - 
 - Description
-  - A custom exception for unified management of loading errors.
+    - Used the Factory Design Pattern to create Image instances in the project.
 - Purpose
-  - Handling all exceptions in one place keeps the code cleaner and more organized.
-  - It helps in identifying and managing errors more easily. 
+    - Extensibility: The Factory pattern allows easy extension.
+    
+      Maybe we will need more ways to load pictures in the future. At that time, we just need to update this method.
+    
+    - Separation of Concerns: Keeps the creation logic separate from the rest of the codebase.
+
+### [ImageUtil.java]()
+
+- Location
+
+  - 
+
+- Description
+
+  - A utility class providing methods for creating and displaying images.
+
+- Purpose
+
+  - Better Image Operations: 
+
+    Organize image-related operations (such as resizing, positioning, and displaying) in a single class. The code becomes easier to maintain and extend.
+
+  - Improving Code Readability: By extracting common operations, the business logic code becomes cleaner and easier to understand.
+
+### [HeartImage.java]()
+
+- Location
+  - 
+- Description
+  - A class to organize Heart Image.
+- Purpose
+  - Extracted the image-related operations from `HeartDisplay.java`.
+    This ensures that `HeartDisplay.java` mainly handles the logical relationships, making the code structure clearer and easier to understand.
+
 ### AlertUtil.java
 
 - Location
-  - src/main/java/com/example/demo/utils/AlertUtil.java
+    - src/main/java/com/example/demo/utils/AlertUtil.java
 - Description
-  - Unified management of Alert-related handling.
+    - Unified management of Alert-related handling.
 - Purpose
-  - It's easier to maintain and update the logic about alert in one location.
+    - It's easier to maintain and update the logic about alert in one location.
 
 - 
 
@@ -135,18 +166,7 @@ I will explain the change points and the reasons for the changes, including the 
      - In order to prevent any dead loops.
      - Before entering a new level, I make sure to remove the observers for the old level and delete the entities related
        to the old level.
-
-
-### [ShieldImage.java]()
-
-1. I modified the path for finding the Shield image.
-   - Location: 
-   - Reason: 
-     - The original image path had a `.png` extension, but the code was using a `.jpg` extension, which caused the exception.
-
-### [LevelParent.java]()
-
-1. I rewrited method `checkIfGameOver` and added `winLevel` method, in orde to extract the same logic, avoiding child class override the same logic again and again.
+3. I rewrited method `checkIfGameOver` and added `winLevel` method, in orde to extract the same logic, avoiding child class override the same logic again and again.
    - Location: 
    - Reason: 
      - Actually, the logic for completing or failing a level is quite similar, so I extracted them.
@@ -156,13 +176,40 @@ I will explain the change points and the reasons for the changes, including the 
      - Subclasses only need to override the `winLevel` method！It's easier to use now!
 
 
+### [ShieldImage.java]()
+
+1. I modified the path for finding the Shield image.
+   - Location: 
+   - Reason: 
+     - The original image path had a `.png` extension, but the code was using a `.jpg` extension, which caused the exception.
+
+### [HeartDisplay.java]()
+
+1. The image handling logic has been moved to a new file, `HeartImage.java`.
+   - Location:
+   - Reason:
+     - Split the logic so that each class is responsible for a single function, making the code structure clearer.
+
+
 ### xxxClass
 
 - Location
 - Changes
 - Reason for change
 
+### Other Simple Changes
 
+In this section, I will list some small changes I made. The changes and their reasons are straightforward, so I’ve grouped them together.
+
+- [ShieldImage.java]()
+
+- [WinImage.java]()
+
+- [GameOverImage.java]()
+
+  - To align with the refactored image handling approach, I rewrote the methods using the newly created `ImageUtil`.
+
+  
 
 ## Unexpected Problems
 
@@ -230,3 +277,10 @@ I have refactored the project preliminarily.
   - Add `LevelFactory` , which uses factory design pattern. In order to make instaces of levels. By using this design pattern, we can make the logic more clearly while creating instance about levels.
 - Change `LevelParent`
   - I rewrited method `checkIfGameOver` and added `winLevel` method, in orde to extract the same logic, avoiding child class override the same logic again and again.
+
+### Day4 (2024/11/15)
+
+- I mainly refactored the image handling logic.
+  - I found that many constants representing image positions and sizes were scattered across various files in the project, which made it difficult to understand the key logic.
+  - I decided to extract part of the logic. 
+  - I created `ImageFactory` and `ImageUtil` files and rewrote `WinImage`, `GameOverImage`, and other related classes.
