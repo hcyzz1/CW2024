@@ -9,20 +9,23 @@ module com.hcyzz1company.skybattle {
     exports com.hcyzz1company.skybattle.boot;
     exports com.hcyzz1company.skybattle.logic;
     exports com.hcyzz1company.skybattle.entity.actors;
-    opens com.hcyzz1company.skybattle.entity.actors to javafx.fxml;
     exports com.hcyzz1company.skybattle.entity.projectiles;
-    opens com.hcyzz1company.skybattle.entity.projectiles to javafx.fxml;
     exports com.hcyzz1company.skybattle.ui;
-    opens com.hcyzz1company.skybattle.ui to javafx.fxml;
     exports com.hcyzz1company.skybattle.action;
-    opens com.hcyzz1company.skybattle.action to javafx.fxml;
-    exports com.hcyzz1company.skybattle.core.levelOne;
-    opens com.hcyzz1company.skybattle.core.levelOne to javafx.fxml;
-    opens com.hcyzz1company.skybattle.core.levelTwo to javafx.fxml;
-    exports com.hcyzz1company.skybattle.core.levelTwo;
     exports com.hcyzz1company.skybattle.core;
-    opens com.hcyzz1company.skybattle.core to javafx.fxml;
+    exports com.hcyzz1company.skybattle.core.levelOne;
+    exports com.hcyzz1company.skybattle.core.levelTwo;
     exports com.hcyzz1company.skybattle.utils;
     exports com.hcyzz1company.skybattle.utils.ui;
-    opens com.hcyzz1company.skybattle.utils.ui to javafx.fxml;
+
+    opens com.hcyzz1company.skybattle.ui to javafx.fxml;
+    opens com.hcyzz1company.skybattle.action to javafx.fxml;
+    opens com.hcyzz1company.skybattle.core to javafx.fxml;
+    opens com.hcyzz1company.skybattle.core.levelOne to javafx.fxml;
+    opens com.hcyzz1company.skybattle.core.levelTwo to javafx.fxml;
+    opens com.hcyzz1company.skybattle.entity.actors to javafx.fxml;
+    opens com.hcyzz1company.skybattle.entity.projectiles to javafx.fxml;
+
+    // For JUnit Test
+    opens com.hcyzz1company.skybattle.utils.ui;
 }
