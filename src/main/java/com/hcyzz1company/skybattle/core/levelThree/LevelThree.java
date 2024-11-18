@@ -1,6 +1,7 @@
 package com.hcyzz1company.skybattle.core.levelThree;
 
 import com.hcyzz1company.skybattle.core.LevelParent;
+import com.hcyzz1company.skybattle.entity.actors.Boss;
 import com.hcyzz1company.skybattle.entity.actors.EnemyPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.ui.screenView.LevelView;
@@ -13,30 +14,24 @@ import com.hcyzz1company.skybattle.ui.screenView.LevelView;
  */
 public class LevelThree extends LevelParent {
 
-	private static final String BACKGROUND_IMAGE_NAME = "/com/hcyzz1company/skybattle/images/background3.jpg";
-	private static final int TOTAL_ENEMIES = 5;
-	private static final int KILLS_TO_ADVANCE = 20;
-	private static final double ENEMY_SPAWN_PROBABILITY = .20;
+	private static final String BACKGROUND_IMAGE_NAME = "/com/hcyzz1company/skybattle/images/background2.jpg";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
+	private final Boss boss;
+	private LevelView levelView;
 
 	/**
-	 * Constructs a LevelOne instance with the specified screen dimensions.
+	 * Constructor to initialize LevelTwo with the given screen dimensions.
 	 *
-	 * @param screenHeight the height of the screen
-	 * @param screenWidth  the width of the screen
+	 * @param screenHeight the height of the screen for the level
+	 * @param screenWidth  the width of the screen for the level
 	 */
 	public LevelThree(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
-	}
-
-	@Override
-	protected boolean winLevel() {
-		return userHasReachedKillTarget();
+		boss = new Boss();
 	}
 
 	/**
-	 * Initializes the friendly units for this level. Specifically, this method adds the user's
-	 * unit (the player) to the game root.
+	 * Initializes the friendly units for this level, which is just the user plane.
 	 */
 	@Override
 	protected void initializeFriendlyUnits() {
@@ -44,40 +39,34 @@ public class LevelThree extends LevelParent {
 	}
 
 	/**
-	 * Spawns enemy units for this level. The method randomly generates enemy planes based on
-	 * a predefined spawn probability and ensures that the total number of enemies does not exceed
-	 * the limit.
+	 * Check win the level or not
+	 */
+	@Override
+	protected boolean winLevel() {
+		return boss.isDestroyed();
+	}
+
+	/**
+	 * Spawns enemy units for the level. In LevelTwo, the boss is the only enemy unit.
+	 * The boss is only spawned once there are no remaining enemies in the level.
 	 */
 	@Override
 	protected void spawnEnemyUnits() {
-		int currentNumberOfEnemies = getCurrentNumberOfEnemies();
-		for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
-			if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
-				double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
-				ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
-				addEnemyUnit(newEnemy);
-			}
+		if (getCurrentNumberOfEnemies() == 0) {
+			addEnemyUnit(boss);
 		}
 	}
 
 	/**
-	 * Instantiates the LevelView for this level. The view is responsible for displaying the
-	 * current status of the level, including the player's health.
+	 * Instantiates the LevelView for LevelTwo, which manages the display of the player's health and other level-specific information.
 	 *
-	 * @return the LevelView for this level
+	 * @return a new instance of LevelView for this level
 	 */
 	@Override
 	protected LevelView instantiateLevelView() {
-		return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
+		levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
+		return levelView;
 	}
 
-	/**
-	 * Checks if the user has reached the target number of kills required to advance to the next level.
-	 *
-	 * @return true if the user has reached the kill target, false otherwise
-	 */
-	private boolean userHasReachedKillTarget() {
-		return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;
-	}
 
 }
