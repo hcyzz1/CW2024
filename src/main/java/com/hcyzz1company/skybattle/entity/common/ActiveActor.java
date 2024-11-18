@@ -1,4 +1,4 @@
-package com.hcyzz1company.skybattle.entity.projectiles;
+package com.hcyzz1company.skybattle.entity.common;
 
 import javafx.scene.image.*;
 

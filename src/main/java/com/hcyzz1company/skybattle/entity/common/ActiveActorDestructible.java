@@ -1,6 +1,6 @@
-package com.hcyzz1company.skybattle.entity.projectiles;
+package com.hcyzz1company.skybattle.entity.common;
 
-import com.hcyzz1company.skybattle.action.Destructible;
+import javafx.scene.image.ImageView;
 
 /**
  * The ActiveActorDestructible class extends the ActiveActor class and implements
@@ -67,5 +67,5 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 	public boolean isDestroyed() {
 		return isDestroyed;
 	}
-	
+
 }

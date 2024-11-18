@@ -1,7 +1,7 @@
 package com.hcyzz1company.skybattle.core.levelTwo;
 
 import com.hcyzz1company.skybattle.core.LevelParent;
-import com.hcyzz1company.skybattle.core.LevelView;
+import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 import com.hcyzz1company.skybattle.entity.actors.Boss;
 
 /**
@@ -14,7 +14,7 @@ public class LevelTwo extends LevelParent {
 	private static final String BACKGROUND_IMAGE_NAME = "/com/hcyzz1company/skybattle/images/background2.jpg";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private final Boss boss;
-	private LevelViewLevelTwo levelView;
+	private LevelView levelView;
 
 	/**
 	 * Constructor to initialize LevelTwo with the given screen dimensions.
@@ -57,11 +57,11 @@ public class LevelTwo extends LevelParent {
 	/**
 	 * Instantiates the LevelView for LevelTwo, which manages the display of the player's health and other level-specific information.
 	 *
-	 * @return a new instance of LevelViewLevelTwo for this level
+	 * @return a new instance of LevelView for this level
 	 */
 	@Override
 	protected LevelView instantiateLevelView() {
-		levelView = new LevelViewLevelTwo(getRoot(), PLAYER_INITIAL_HEALTH);
+		levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 		return levelView;
 	}
 

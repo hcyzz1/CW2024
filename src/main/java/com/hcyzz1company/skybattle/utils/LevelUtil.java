@@ -9,7 +9,8 @@ import javafx.stage.Stage;
 public class LevelUtil {
     private static final String LEVEL_ONE = "com.hcyzz1company.skybattle.core.levelOne.LevelOne";
     private static final String LEVEL_TWO = "com.hcyzz1company.skybattle.core.levelTwo.LevelTwo";
-    private static final String FINAL_LEVEL = LEVEL_TWO;
+    private static final String LEVEL_THREE = "com.hcyzz1company.skybattle.core.levelThree.LevelThree";
+    private static final String FINAL_LEVEL = LEVEL_THREE;
 
     /**
      * Get the next level class name based on the current level class name.
@@ -21,6 +22,8 @@ public class LevelUtil {
         switch (currentLevel) {
             case LEVEL_ONE:
                 return LEVEL_TWO;
+            case LEVEL_TWO:
+                return LEVEL_THREE;
             default:
                 return null;
         }

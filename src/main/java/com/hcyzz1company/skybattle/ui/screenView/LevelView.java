@@ -1,11 +1,11 @@
-package com.hcyzz1company.skybattle.core;
+package com.hcyzz1company.skybattle.ui.screenView;
 
-import com.hcyzz1company.skybattle.ui.GameOverImage;
-import com.hcyzz1company.skybattle.ui.HeartDisplay;
-import com.hcyzz1company.skybattle.ui.WinImage;
+import com.hcyzz1company.skybattle.ui.basicImage.GameOverImage;
+import com.hcyzz1company.skybattle.ui.basicImage.ShieldImage;
+import com.hcyzz1company.skybattle.ui.specialElements.HeartDisplay;
+import com.hcyzz1company.skybattle.ui.basicImage.WinImage;
 import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
 import javafx.scene.Group;
-import javafx.scene.image.Image;
 
 /**
  * The LevelView class handles the graphical display elements for a specific game level.
@@ -13,9 +13,9 @@ import javafx.scene.image.Image;
  */
 public class LevelView {
 
-
 	private final Group root;
 	private final HeartDisplay heartDisplay;
+	private final ShieldImage shieldImage;
 
 	/**
 	 * Constructor to initialize the LevelView.
@@ -26,6 +26,8 @@ public class LevelView {
 	public LevelView(Group root, int heartsToDisplay) {
 		this.root = root;
 		this.heartDisplay = new HeartDisplay(heartsToDisplay);
+		this.shieldImage = new ShieldImage();
+		root.getChildren().addAll(shieldImage);
 	}
 
 	/**
@@ -58,4 +60,17 @@ public class LevelView {
 		heartDisplay.removeHeart(heartsRemaining);
 	}
 
+	/**
+	 * Shows the shield image (make it visible).
+	 */
+	public void showShield() {
+		shieldImage.showShield();
+	}
+
+	/**
+	 * Hides the shield image (makes it invisible).
+	 */
+	public void hideShield() {
+		shieldImage.hideShield();
+	}
 }

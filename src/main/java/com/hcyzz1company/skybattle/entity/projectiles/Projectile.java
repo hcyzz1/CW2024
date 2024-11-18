@@ -1,6 +1,6 @@
 package com.hcyzz1company.skybattle.entity.projectiles;
 
-import com.hcyzz1company.skybattle.entity.projectiles.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 
 /**
  * The Projectile class represents a general projectile object in the game,

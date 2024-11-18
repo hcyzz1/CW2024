@@ -5,7 +5,8 @@ import java.util.stream.Collectors;
 
 import com.hcyzz1company.skybattle.entity.actors.FighterPlane;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
-import com.hcyzz1company.skybattle.entity.projectiles.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 import com.hcyzz1company.skybattle.utils.LevelUtil;
 import javafx.animation.*;
 import javafx.event.EventHandler;

@@ -1,9 +1,9 @@
-package com.hcyzz1company.skybattle.core.levelOne;
+package com.hcyzz1company.skybattle.core.levelThree;
 
 import com.hcyzz1company.skybattle.core.LevelParent;
-import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 import com.hcyzz1company.skybattle.entity.actors.EnemyPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 
 /**
  * The LevelOne class represents the first level of the game. It inherits from LevelParent and
@@ -11,11 +11,11 @@ import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
  * for advancing to the next level or losing the game. It also manages the user's progress in terms
  * of kills and health.
  */
-public class LevelOne extends LevelParent {
+public class LevelThree extends LevelParent {
 
-	private static final String BACKGROUND_IMAGE_NAME = "/com/hcyzz1company/skybattle/images/background1.jpg";
+	private static final String BACKGROUND_IMAGE_NAME = "/com/hcyzz1company/skybattle/images/background3.jpg";
 	private static final int TOTAL_ENEMIES = 5;
-	private static final int KILLS_TO_ADVANCE = 10;
+	private static final int KILLS_TO_ADVANCE = 20;
 	private static final double ENEMY_SPAWN_PROBABILITY = .20;
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 
@@ -23,9 +23,9 @@ public class LevelOne extends LevelParent {
 	 * Constructs a LevelOne instance with the specified screen dimensions.
 	 *
 	 * @param screenHeight the height of the screen
-	 * @param screenWidth the width of the screen
+	 * @param screenWidth  the width of the screen
 	 */
-	public LevelOne(double screenHeight, double screenWidth) {
+	public LevelThree(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
 	}
 

@@ -1,6 +1,6 @@
 package com.hcyzz1company.skybattle.entity.actors;
 
-import com.hcyzz1company.skybattle.entity.projectiles.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 
 /**
  * The FighterPlane class is an abstract class that represents a fighter plane in the game.
