@@ -1,4 +1,4 @@
-package com.hcyzz1company.skybattle.action;
+package com.hcyzz1company.skybattle.entity.common;
 
 /**
  * The Destructible interface represents an entity that can take damage and be destroyed.

@@ -1,4 +1,4 @@
-package com.hcyzz1company.skybattle.ui;
+package com.hcyzz1company.skybattle.ui.basicImage;
 
 import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
 import javafx.scene.image.ImageView;

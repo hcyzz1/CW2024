@@ -1,9 +1,9 @@
 package com.hcyzz1company.skybattle.core.levelOne;
 
 import com.hcyzz1company.skybattle.core.LevelParent;
-import com.hcyzz1company.skybattle.core.LevelView;
+import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 import com.hcyzz1company.skybattle.entity.actors.EnemyPlane;
-import com.hcyzz1company.skybattle.entity.projectiles.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 
 /**
  * The LevelOne class represents the first level of the game. It inherits from LevelParent and
