@@ -1,5 +1,6 @@
 package com.hcyzz1company.skybattle.utils.ui;
 
+import com.hcyzz1company.skybattle.constants.ImageConstants;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -79,7 +80,7 @@ class ImageUtilTest extends ApplicationTest {
     void testShowImageInContainerWithGroup() {
         Platform.runLater(() -> {
             Group group = new Group();
-            Image image = new Image(getClass().getResource("/com/hcyzz1company/skybattle/images/loadFailImage.jpg").toExternalForm());
+            Image image = new Image(getClass().getResource(ImageConstants.IMAGE_ROOT_PATH + "loadFailImage.jpg").toExternalForm());
             ImageView imageView = new ImageView(image);
 
             ImageUtil.showImageInContainer(group, imageView);
@@ -95,7 +96,7 @@ class ImageUtilTest extends ApplicationTest {
     public void testShowImageInContainerWithHBox() {
         Platform.runLater(() -> {
             HBox hbox = new HBox();
-            Image image = new Image(getClass().getResource("/com/hcyzz1company/skybattle/images/loadFailImage.jpg").toExternalForm());
+            Image image = new Image(getClass().getResource(ImageConstants.IMAGE_ROOT_PATH + "loadFailImage.jpg").toExternalForm());
             ImageView imageView = new ImageView(image);
 
             ImageUtil.showImageInContainer(hbox, imageView);

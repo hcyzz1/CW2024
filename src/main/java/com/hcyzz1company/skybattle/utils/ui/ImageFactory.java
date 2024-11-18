@@ -1,5 +1,6 @@
 package com.hcyzz1company.skybattle.utils.ui;
 
+import com.hcyzz1company.skybattle.constants.ImageConstants;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -10,7 +11,7 @@ import javafx.scene.image.ImageView;
 public class ImageFactory {
 
     // Default image to display in case of failure to load a requested image.
-    private static final String EXCEPTION_IMAGE_PATH = "/com/hcyzz1company/skybattle/images/loadFailImage.jpg";
+    private static final String EXCEPTION_IMAGE_PATH = ImageConstants.IMAGE_ROOT_PATH + "loadFailImage.jpg";
 
     /**
      * Creates and returns an Image instance based on the provided image path.
