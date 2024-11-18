@@ -1,6 +1,8 @@
 package com.hcyzz1company.skybattle.entity.common;
 
 import com.hcyzz1company.skybattle.constants.ImageConstants;
+import com.hcyzz1company.skybattle.utils.ui.ImageFactory;
+import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
 import javafx.scene.image.*;
 
 /**
@@ -9,8 +11,6 @@ import javafx.scene.image.*;
  * and provides basic functionality for moving the actor.
  */
 public abstract class ActiveActor extends ImageView {
-
-    private static final String IMAGE_LOCATION = ImageConstants.IMAGE_ROOT_PATH;
 
     /**
      * Constructs an ActiveActor with the specified image and position.
@@ -21,12 +21,10 @@ public abstract class ActiveActor extends ImageView {
      * @param initialYPos The initial vertical position of the actor.
      */
     public ActiveActor(String imageName, int imageHeight, double initialXPos, double initialYPos) {
-        //this.setImage(new Image(IMAGE_LOCATION + imageName));
-        this.setImage(new Image(getClass().getResource(IMAGE_LOCATION + imageName).toExternalForm()));
-        this.setLayoutX(initialXPos);
-        this.setLayoutY(initialYPos);
-        this.setFitHeight(imageHeight);
-        this.setPreserveRatio(true);
+        Image image = ImageFactory.createImage(ImageConstants.IMAGE_ROOT_PATH + imageName);
+        this.setImage(image);
+        ImageUtil.setImageViewRatio(this, -1, imageHeight);
+        ImageUtil.setImagePositon(this, initialXPos, initialYPos);
     }
 
     /**
