@@ -8,8 +8,11 @@ import com.hcyzz1company.skybattle.entity.projectiles.Projectile;
  */
 public class UserProjectile extends Projectile {
 
+    //Image Information
     private static final String IMAGE_NAME = "userfire.png";
     private static final int IMAGE_HEIGHT = 125;
+
+    //Projectile Action Information
     private static final int HORIZONTAL_VELOCITY = 15;
 
     /**
@@ -20,17 +23,9 @@ public class UserProjectile extends Projectile {
      * @param initialYPos the initial Y position of the projectile.
      */
     public UserProjectile(double initialXPos, double initialYPos) {
-        super(IMAGE_NAME, IMAGE_HEIGHT, initialXPos, initialYPos);
+        super(IMAGE_NAME, IMAGE_HEIGHT,
+                initialXPos, initialYPos,
+                HORIZONTAL_VELOCITY);
     }
-
-    /**
-     * Updates the position of the user's projectile.
-     * The projectile moves horizontally with a constant velocity.
-     */
-    @Override
-    public void updatePosition() {
-        moveHorizontally(HORIZONTAL_VELOCITY);
-    }
-
 
 }

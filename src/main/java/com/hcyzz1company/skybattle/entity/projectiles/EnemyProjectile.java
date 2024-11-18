@@ -6,8 +6,11 @@ package com.hcyzz1company.skybattle.entity.projectiles;
  */
 public class EnemyProjectile extends Projectile {
 
+    //Image Information
     private static final String IMAGE_NAME = "enemyFire.png";
     private static final int IMAGE_HEIGHT = 50;
+    
+    //Projectile Action Information
     private static final int HORIZONTAL_VELOCITY = -10;
 
     /**
@@ -18,17 +21,9 @@ public class EnemyProjectile extends Projectile {
      * @param initialYPos the initial vertical position of the projectile.
      */
     public EnemyProjectile(double initialXPos, double initialYPos) {
-        super(IMAGE_NAME, IMAGE_HEIGHT, initialXPos, initialYPos);
+        super(IMAGE_NAME, IMAGE_HEIGHT,
+                initialXPos, initialYPos,
+                HORIZONTAL_VELOCITY);
     }
-
-    /**
-     * Updates the position of the enemy projectile by moving it horizontally.
-     * The projectile moves leftward with a constant horizontal velocity.
-     */
-    @Override
-    public void updatePosition() {
-        moveHorizontally(HORIZONTAL_VELOCITY);
-    }
-
 
 }
