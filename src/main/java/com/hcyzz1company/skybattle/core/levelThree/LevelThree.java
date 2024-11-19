@@ -27,14 +27,6 @@ public class LevelThree extends LevelParent {
     }
 
     /**
-     * Initializes the friendly units for this level, which is just the user plane.
-     */
-    @Override
-    protected void initializeFriendlyUnits() {
-        getRoot().getChildren().add(getUser());
-    }
-
-    /**
      * Check win the level or not
      */
     @Override

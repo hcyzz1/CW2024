@@ -64,7 +64,9 @@ public abstract class LevelParent extends Observable {
     /**
      * Abstract method to initialize the friendly units for the level.
      */
-    protected abstract void initializeFriendlyUnits();
+    protected void initializeFriendlyUnits() {
+        getRoot().getChildren().add(getUser());
+    }
 
     /**
      * Method to check whether the game is over.

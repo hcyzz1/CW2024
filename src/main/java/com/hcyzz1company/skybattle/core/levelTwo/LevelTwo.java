@@ -31,15 +31,6 @@ public class LevelTwo extends LevelParent {
     }
 
     /**
-     * Initializes the friendly units for this level. Specifically, this method adds the user's
-     * unit (the player) to the game root.
-     */
-    @Override
-    protected void initializeFriendlyUnits() {
-        getRoot().getChildren().add(getUser());
-    }
-
-    /**
      * Spawns enemy units for this level. The method randomly generates enemy planes based on
      * a predefined spawn probability and ensures that the total number of enemies does not exceed
      * the limit.
@@ -55,7 +46,7 @@ public class LevelTwo extends LevelParent {
             }
         }
     }
-    
+
 
     /**
      * Checks if the user has reached the target number of kills required to advance to the next level.
