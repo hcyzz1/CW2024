@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.hcyzz1company.skybattle.constants.AppConstants;
+import com.hcyzz1company.skybattle.core.handle.UserInputHandle;
 import com.hcyzz1company.skybattle.entity.actors.Plane;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
@@ -111,7 +112,7 @@ public abstract class LevelParent extends Observable {
      * @return the Scene for this level
      */
     public Scene initializeScene() {
-        initializeBackground();
+        new UserInputHandle(this).initializeBackground();
         initializeFriendlyUnits();
         levelView.showHeartDisplay();
         return scene;
@@ -170,38 +171,14 @@ public abstract class LevelParent extends Observable {
         timeline.getKeyFrames().add(gameLoop);
     }
 
-    /**
-     * Initializes the background image and sets up key event handlers for user input (e.g., movement, shooting).
-     */
-    private void initializeBackground() {
-        background.setFocusTraversable(true);
-        background.setFitHeight(AppConstants.SCREEN_HEIGHT);
-        background.setFitWidth(AppConstants.SCREEN_WIDTH);
-        background.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent e) {
-                KeyCode kc = e.getCode();
-                if (kc == KeyCode.UP) user.moveUp();
-                if (kc == KeyCode.DOWN) user.moveDown();
-                if (kc == KeyCode.SPACE) fireProjectile();
-            }
-        });
-        background.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent e) {
-                KeyCode kc = e.getCode();
-                if (kc == KeyCode.UP || kc == KeyCode.DOWN) user.stop();
-            }
-        });
-        root.getChildren().add(background);
+    public ImageView getBackground() {
+        return this.background;
     }
 
-    /**
-     * Fires a projectile from the player's plane and adds it to the scene.
-     */
-    private void fireProjectile() {
-        ActiveActorDestructible projectile = user.fireProjectile();
-        root.getChildren().add(projectile);
-        userProjectiles.add(projectile);
+    public List<ActiveActorDestructible> getUserProjectiles() {
+        return this.userProjectiles;
     }
+
 
     /**
      * Generates enemy fire by having each enemy spawn a projectile.
@@ -352,7 +329,7 @@ public abstract class LevelParent extends Observable {
      *
      * @return the user's plane
      */
-    protected UserPlane getUser() {
+    public UserPlane getUser() {
         return user;
     }
 
@@ -361,7 +338,7 @@ public abstract class LevelParent extends Observable {
      *
      * @return the root group
      */
-    protected Group getRoot() {
+    public Group getRoot() {
         return root;
     }
 
