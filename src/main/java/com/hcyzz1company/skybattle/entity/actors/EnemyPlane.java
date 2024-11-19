@@ -5,9 +5,9 @@ import com.hcyzz1company.skybattle.entity.projectiles.EnemyProjectile;
 
 /**
  * The EnemyPlane class represents an enemy aircraft in the game.
- * It extends the FighterPlane class and includes functionality for movement, firing projectiles, and taking damage.
+ * It extends the Plane class and includes functionality for movement, firing projectiles, and taking damage.
  */
-public class EnemyPlane extends FighterPlane {
+public class EnemyPlane extends Plane {
 
     private static final String IMAGE_NAME = "enemyplane.png";
     private static final int IMAGE_HEIGHT = 150;

@@ -3,7 +3,7 @@ package com.hcyzz1company.skybattle.core;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.hcyzz1company.skybattle.entity.actors.FighterPlane;
+import com.hcyzz1company.skybattle.entity.actors.Plane;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.ui.screenView.LevelView;
@@ -215,7 +215,7 @@ public abstract class LevelParent extends Observable {
      * Generates enemy fire by having each enemy spawn a projectile.
      */
     private void generateEnemyFire() {
-        enemyUnits.forEach(enemy -> spawnEnemyProjectile(((FighterPlane) enemy).fireProjectile()));
+        enemyUnits.forEach(enemy -> spawnEnemyProjectile(((Plane) enemy).fireProjectile()));
     }
 
     /**

@@ -2,9 +2,7 @@ package com.hcyzz1company.skybattle.core.levelThree;
 
 import com.hcyzz1company.skybattle.constants.ImageConstants;
 import com.hcyzz1company.skybattle.core.LevelParent;
-import com.hcyzz1company.skybattle.entity.actors.Boss;
-import com.hcyzz1company.skybattle.entity.actors.EnemyPlane;
-import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.entity.actors.BossPlane;
 import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 
 /**
@@ -17,7 +15,7 @@ public class LevelThree extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = ImageConstants.IMAGE_ROOT_PATH + "background2.jpg";
     private static final int PLAYER_INITIAL_HEALTH = 5;
-    private final Boss boss;
+    private final BossPlane boss;
     private LevelView levelView;
 
     /**
@@ -28,7 +26,7 @@ public class LevelThree extends LevelParent {
      */
     public LevelThree(double screenHeight, double screenWidth) {
         super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
-        boss = new Boss();
+        boss = new BossPlane();
     }
 
     /**

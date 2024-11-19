@@ -3,24 +3,24 @@ package com.hcyzz1company.skybattle.entity.actors;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 
 /**
- * The FighterPlane class is an abstract class that represents a fighter plane in the game.
+ * The Plane class is an abstract class that represents a fighter plane in the game.
  * It extends the ActiveActorDestructible class and provides functionality related to health,
  * damage handling, and projectile firing for fighter planes.
  */
-public abstract class FighterPlane extends ActiveActorDestructible {
+public abstract class Plane extends ActiveActorDestructible {
 
 	private int health;
 
 	/**
-	 * Constructs a FighterPlane object with the specified parameters.
+	 * Constructs a Plane object with the specified parameters.
 	 *
-	 * @param imageName the name of the image representing the fighter plane.
+	 * @param imageName   the name of the image representing the fighter plane.
 	 * @param imageHeight the height of the image representing the fighter plane.
 	 * @param initialXPos the initial horizontal position of the fighter plane.
 	 * @param initialYPos the initial vertical position of the fighter plane.
-	 * @param health the initial health of the fighter plane.
+	 * @param health      the initial health of the fighter plane.
 	 */
-	public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health) {
+	public Plane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health) {
 		super(imageName, imageHeight, initialXPos, initialYPos);
 		this.health = health;
 	}

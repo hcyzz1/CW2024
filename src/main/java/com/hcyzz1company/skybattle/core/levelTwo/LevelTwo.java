@@ -5,7 +5,6 @@ import com.hcyzz1company.skybattle.core.LevelParent;
 import com.hcyzz1company.skybattle.entity.actors.EnemyPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.ui.screenView.LevelView;
-import com.hcyzz1company.skybattle.entity.actors.Boss;
 
 /**
  * The LevelTwo class represents the second level in the game, which introduces a boss enemy.
