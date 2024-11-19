@@ -16,7 +16,6 @@ public class LevelThree extends LevelParent {
     private static final String BACKGROUND_IMAGE_NAME = ImageConstants.IMAGE_ROOT_PATH + "background2.jpg";
     private static final int PLAYER_INITIAL_HEALTH = 5;
     private final BossPlane boss;
-    private LevelView levelView;
 
     /**
      * Constructor to initialize LevelTwo with the given screen dimensions.

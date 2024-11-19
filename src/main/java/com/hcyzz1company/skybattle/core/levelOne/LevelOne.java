@@ -1,5 +1,6 @@
 package com.hcyzz1company.skybattle.core.levelOne;
 
+import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.constants.ImageConstants;
 import com.hcyzz1company.skybattle.core.LevelParent;
 import com.hcyzz1company.skybattle.ui.screenView.LevelView;
@@ -43,7 +44,7 @@ public class LevelOne extends LevelParent {
         for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
             if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
                 double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
-                ActiveActorDestructible newEnemy = new EnemyPlane(getScreenWidth(), newEnemyInitialYPosition);
+                ActiveActorDestructible newEnemy = new EnemyPlane(AppConstants.SCREEN_WIDTH, newEnemyInitialYPosition);
                 addEnemyUnit(newEnemy);
             }
         }

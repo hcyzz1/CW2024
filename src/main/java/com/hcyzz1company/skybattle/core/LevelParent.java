@@ -10,8 +10,8 @@ import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 import com.hcyzz1company.skybattle.utils.LevelUtil;
+import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
 import javafx.animation.*;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
@@ -55,7 +55,7 @@ public abstract class LevelParent extends Observable {
         this.enemyUnits = new ArrayList<>();
         this.userProjectiles = new ArrayList<>();
         this.enemyProjectiles = new ArrayList<>();
-        this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
+        this.background = new ImageView(ImageUtil.creteImage(backgroundImageName));
         this.levelView = instantiateLevelView();
         this.currentNumberOfEnemies = 0;
         initializeTimeline();
@@ -74,7 +74,7 @@ public abstract class LevelParent extends Observable {
      * This method will handle the game over logic.
      */
     protected void checkIfGameOver() {
-        if (userIsDestroyed()) {
+        if (user.isDestroyed()) {
             loseGame();
         } else if (winLevel()) {
             //If win, try to get next level;
@@ -203,10 +203,14 @@ public abstract class LevelParent extends Observable {
      * Updates the state of all actors in the game, including the user, enemies, and projectiles.
      */
     private void updateActors() {
-        friendlyUnits.forEach(plane -> plane.updatePosition());
-        enemyUnits.forEach(enemy -> enemy.updatePosition());
-        userProjectiles.forEach(projectile -> projectile.updatePosition());
-        enemyProjectiles.forEach(projectile -> projectile.updatePosition());
+        updateActorPositions(friendlyUnits);
+        updateActorPositions(enemyUnits);
+        updateActorPositions(userProjectiles);
+        updateActorPositions(enemyProjectiles);
+    }
+
+    private <T extends ActiveActorDestructible> void updateActorPositions(List<T> actors) {
+        actors.stream().forEach(ActiveActorDestructible::updatePosition);
     }
 
     /**
@@ -368,24 +372,6 @@ public abstract class LevelParent extends Observable {
      */
     protected double getEnemyMaximumYPosition() {
         return AppConstants.SCREEN_HEIGHT - AppConstants.SCREEN_HEIGHT_ADJUSTMENT;
-    }
-
-    /**
-     * Returns the screen width of the level.
-     *
-     * @return the screen width
-     */
-    protected double getScreenWidth() {
-        return AppConstants.SCREEN_WIDTH;
-    }
-
-    /**
-     * Checks if the user has been destroyed.
-     *
-     * @return true if the user is destroyed, false otherwise
-     */
-    protected boolean userIsDestroyed() {
-        return user.isDestroyed();
     }
 
     /**
