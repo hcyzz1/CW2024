@@ -53,16 +53,5 @@ public class LevelThree extends LevelParent {
         }
     }
 
-    /**
-     * Instantiates the LevelView for LevelTwo, which manages the display of the player's health and other level-specific information.
-     *
-     * @return a new instance of LevelView for this level
-     */
-    @Override
-    protected LevelView instantiateLevelView() {
-        levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
-        return levelView;
-    }
-
 
 }

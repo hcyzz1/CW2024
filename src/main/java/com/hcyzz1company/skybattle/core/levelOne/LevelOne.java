@@ -57,18 +57,7 @@ public class LevelOne extends LevelParent {
             }
         }
     }
-
-    /**
-     * Instantiates the LevelView for this level. The view is responsible for displaying the
-     * current status of the level, including the player's health.
-     *
-     * @return the LevelView for this level
-     */
-    @Override
-    protected LevelView instantiateLevelView() {
-        return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
-    }
-
+    
     /**
      * Checks if the user has reached the target number of kills required to advance to the next level.
      *

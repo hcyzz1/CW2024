@@ -99,7 +99,9 @@ public abstract class LevelParent extends Observable {
      *
      * @return a new instance of LevelView for the level
      */
-    protected abstract LevelView instantiateLevelView();
+    protected LevelView instantiateLevelView() {
+        return new LevelView(getRoot(), this.user.getHealth());
+    }
 
     /**
      * Initializes the scene for the level, including the background, friendly units, and the heart display.
