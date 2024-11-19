@@ -24,4 +24,9 @@ public class AppConstants {
      * The title of the game window.
      */
     public static final String TITLE = "Sky Battle";
+
+    public static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
+
+    public static final int MILLISECOND_DELAY = 50;
+
 }

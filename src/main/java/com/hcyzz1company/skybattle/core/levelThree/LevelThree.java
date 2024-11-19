@@ -20,12 +20,9 @@ public class LevelThree extends LevelParent {
 
     /**
      * Constructor to initialize LevelTwo with the given screen dimensions.
-     *
-     * @param screenHeight the height of the screen for the level
-     * @param screenWidth  the width of the screen for the level
      */
-    public LevelThree(double screenHeight, double screenWidth) {
-        super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
+    public LevelThree() {
+        super(BACKGROUND_IMAGE_NAME, PLAYER_INITIAL_HEALTH);
         boss = new BossPlane();
     }
 

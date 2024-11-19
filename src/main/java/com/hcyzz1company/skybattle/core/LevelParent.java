@@ -3,6 +3,7 @@ package com.hcyzz1company.skybattle.core;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.entity.actors.Plane;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
@@ -22,13 +23,6 @@ import javafx.util.Duration;
  * to the next level or game over state.
  */
 public abstract class LevelParent extends Observable {
-
-    private static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
-    private static final int MILLISECOND_DELAY = 50;
-    private final double screenHeight;
-    private final double screenWidth;
-    private final double enemyMaximumYPosition;
-
     private final Group root;
     private final Timeline timeline;
     private final UserPlane user;
@@ -49,24 +43,18 @@ public abstract class LevelParent extends Observable {
      * Constructor to initialize the game level with the given parameters.
      *
      * @param backgroundImageName the name of the background image for the level
-     * @param screenHeight        the height of the game screen
-     * @param screenWidth         the width of the game screen
      * @param playerInitialHealth the initial health of the player
      */
-    public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth) {
+    public LevelParent(String backgroundImageName, int playerInitialHealth) {
         this.root = new Group();
-        this.scene = new Scene(root, screenWidth, screenHeight);
+        this.scene = new Scene(root, AppConstants.SCREEN_WIDTH, AppConstants.SCREEN_HEIGHT);
         this.timeline = new Timeline();
         this.user = new UserPlane(playerInitialHealth);
         this.friendlyUnits = new ArrayList<>();
         this.enemyUnits = new ArrayList<>();
         this.userProjectiles = new ArrayList<>();
         this.enemyProjectiles = new ArrayList<>();
-
         this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
-        this.screenHeight = screenHeight;
-        this.screenWidth = screenWidth;
-        this.enemyMaximumYPosition = screenHeight - SCREEN_HEIGHT_ADJUSTMENT;
         this.levelView = instantiateLevelView();
         this.currentNumberOfEnemies = 0;
         initializeTimeline();
@@ -174,7 +162,7 @@ public abstract class LevelParent extends Observable {
      */
     private void initializeTimeline() {
         timeline.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame gameLoop = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> updateScene());
+        KeyFrame gameLoop = new KeyFrame(Duration.millis(AppConstants.MILLISECOND_DELAY), e -> updateScene());
         timeline.getKeyFrames().add(gameLoop);
     }
 
@@ -183,8 +171,8 @@ public abstract class LevelParent extends Observable {
      */
     private void initializeBackground() {
         background.setFocusTraversable(true);
-        background.setFitHeight(screenHeight);
-        background.setFitWidth(screenWidth);
+        background.setFitHeight(AppConstants.SCREEN_HEIGHT);
+        background.setFitWidth(AppConstants.SCREEN_WIDTH);
         background.setOnKeyPressed(new EventHandler<KeyEvent>() {
             public void handle(KeyEvent e) {
                 KeyCode kc = e.getCode();
@@ -336,7 +324,7 @@ public abstract class LevelParent extends Observable {
      * @return true if the enemy has penetrated, false otherwise
      */
     private boolean enemyHasPenetratedDefenses(ActiveActorDestructible enemy) {
-        return Math.abs(enemy.getTranslateX()) > screenWidth;
+        return Math.abs(enemy.getTranslateX()) > AppConstants.SCREEN_WIDTH;
     }
 
     /**
@@ -398,7 +386,7 @@ public abstract class LevelParent extends Observable {
      * @return the maximum Y position for enemy spawn
      */
     protected double getEnemyMaximumYPosition() {
-        return enemyMaximumYPosition;
+        return AppConstants.SCREEN_HEIGHT - AppConstants.SCREEN_HEIGHT_ADJUSTMENT;
     }
 
     /**
@@ -407,7 +395,7 @@ public abstract class LevelParent extends Observable {
      * @return the screen width
      */
     protected double getScreenWidth() {
-        return screenWidth;
+        return AppConstants.SCREEN_WIDTH;
     }
 
     /**
