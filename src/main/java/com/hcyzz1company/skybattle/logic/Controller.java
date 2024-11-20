@@ -59,7 +59,7 @@ public class Controller implements Observer {
 	private void goToLevel(String className) throws LevelLoadingException {
 		try {
 			// Use LevelFactory to get the instance of new Level
-			LevelParent newLevel = LevelFactory.createLevel(className, stage);
+			LevelParent newLevel = LevelFactory.createLevel(className);
 
 			//add observer for newLevel
 			newLevel.addObserver(this);

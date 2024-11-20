@@ -6,11 +6,11 @@ import com.hcyzz1company.skybattle.entity.projectiles.BossProjectile;
 import java.util.*;
 
 /**
- * The Boss class represents a powerful boss fighter plane in the game. It extends
- * the FighterPlane class and introduces additional behavior like movement patterns,
+ * The BossPlane class represents a powerful boss fighter plane in the game. It extends
+ * the Plane class and introduces additional behavior like movement patterns,
  * projectile firing, and shield management.
  */
-public class Boss extends FighterPlane {
+public class BossPlane extends Plane {
 
     private static final String IMAGE_NAME = "bossplane.png";
     private static final double INITIAL_X_POSITION = 1000.0;
@@ -34,9 +34,9 @@ public class Boss extends FighterPlane {
     private int framesWithShieldActivated;
 
     /**
-     * Constructs a Boss object with predefined image, position, health, and movement pattern.
+     * Constructs a BossPlane object with predefined image, position, health, and movement pattern.
      */
-    public Boss() {
+    public BossPlane() {
         super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, HEALTH);
         movePattern = new ArrayList<>();
         consecutiveMovesInSameDirection = 0;

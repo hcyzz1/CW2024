@@ -5,10 +5,10 @@ import com.hcyzz1company.skybattle.entity.projectiles.UserProjectile;
 
 /**
  * The UserPlane class represents the player's plane in the game.
- * It extends the FighterPlane class and handles the movement, firing,
+ * It extends the Plane class and handles the movement, firing,
  * and state updates for the user's plane.
  */
-public class UserPlane extends FighterPlane {
+public class UserPlane extends Plane {
 
     private static final String IMAGE_NAME = "userplane.png";
     private static final double Y_UPPER_BOUND = -40;

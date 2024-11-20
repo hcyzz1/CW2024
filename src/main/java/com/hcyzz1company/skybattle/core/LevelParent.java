@@ -3,13 +3,15 @@ package com.hcyzz1company.skybattle.core;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.hcyzz1company.skybattle.entity.actors.FighterPlane;
+import com.hcyzz1company.skybattle.constants.AppConstants;
+import com.hcyzz1company.skybattle.core.handle.UserInputHandle;
+import com.hcyzz1company.skybattle.entity.actors.Plane;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 import com.hcyzz1company.skybattle.utils.LevelUtil;
+import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
 import javafx.animation.*;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
@@ -22,13 +24,6 @@ import javafx.util.Duration;
  * to the next level or game over state.
  */
 public abstract class LevelParent extends Observable {
-
-    private static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
-    private static final int MILLISECOND_DELAY = 50;
-    private final double screenHeight;
-    private final double screenWidth;
-    private final double enemyMaximumYPosition;
-
     private final Group root;
     private final Timeline timeline;
     private final UserPlane user;
@@ -49,24 +44,18 @@ public abstract class LevelParent extends Observable {
      * Constructor to initialize the game level with the given parameters.
      *
      * @param backgroundImageName the name of the background image for the level
-     * @param screenHeight        the height of the game screen
-     * @param screenWidth         the width of the game screen
      * @param playerInitialHealth the initial health of the player
      */
-    public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth) {
+    public LevelParent(String backgroundImageName, int playerInitialHealth) {
         this.root = new Group();
-        this.scene = new Scene(root, screenWidth, screenHeight);
+        this.scene = new Scene(root, AppConstants.SCREEN_WIDTH, AppConstants.SCREEN_HEIGHT);
         this.timeline = new Timeline();
         this.user = new UserPlane(playerInitialHealth);
         this.friendlyUnits = new ArrayList<>();
         this.enemyUnits = new ArrayList<>();
         this.userProjectiles = new ArrayList<>();
         this.enemyProjectiles = new ArrayList<>();
-
-        this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
-        this.screenHeight = screenHeight;
-        this.screenWidth = screenWidth;
-        this.enemyMaximumYPosition = screenHeight - SCREEN_HEIGHT_ADJUSTMENT;
+        this.background = new ImageView(ImageUtil.creteImage(backgroundImageName));
         this.levelView = instantiateLevelView();
         this.currentNumberOfEnemies = 0;
         initializeTimeline();
@@ -76,14 +65,16 @@ public abstract class LevelParent extends Observable {
     /**
      * Abstract method to initialize the friendly units for the level.
      */
-    protected abstract void initializeFriendlyUnits();
+    protected void initializeFriendlyUnits() {
+        getRoot().getChildren().add(getUser());
+    }
 
     /**
      * Method to check whether the game is over.
      * This method will handle the game over logic.
      */
     protected void checkIfGameOver() {
-        if (userIsDestroyed()) {
+        if (user.isDestroyed()) {
             loseGame();
         } else if (winLevel()) {
             //If win, try to get next level;
@@ -111,7 +102,9 @@ public abstract class LevelParent extends Observable {
      *
      * @return a new instance of LevelView for the level
      */
-    protected abstract LevelView instantiateLevelView();
+    protected LevelView instantiateLevelView() {
+        return new LevelView(getRoot(), this.user.getHealth());
+    }
 
     /**
      * Initializes the scene for the level, including the background, friendly units, and the heart display.
@@ -119,7 +112,7 @@ public abstract class LevelParent extends Observable {
      * @return the Scene for this level
      */
     public Scene initializeScene() {
-        initializeBackground();
+        new UserInputHandle(this).initializeBackground();
         initializeFriendlyUnits();
         levelView.showHeartDisplay();
         return scene;
@@ -174,48 +167,24 @@ public abstract class LevelParent extends Observable {
      */
     private void initializeTimeline() {
         timeline.setCycleCount(Timeline.INDEFINITE);
-        KeyFrame gameLoop = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> updateScene());
+        KeyFrame gameLoop = new KeyFrame(Duration.millis(AppConstants.MILLISECOND_DELAY), e -> updateScene());
         timeline.getKeyFrames().add(gameLoop);
     }
 
-    /**
-     * Initializes the background image and sets up key event handlers for user input (e.g., movement, shooting).
-     */
-    private void initializeBackground() {
-        background.setFocusTraversable(true);
-        background.setFitHeight(screenHeight);
-        background.setFitWidth(screenWidth);
-        background.setOnKeyPressed(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent e) {
-                KeyCode kc = e.getCode();
-                if (kc == KeyCode.UP) user.moveUp();
-                if (kc == KeyCode.DOWN) user.moveDown();
-                if (kc == KeyCode.SPACE) fireProjectile();
-            }
-        });
-        background.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            public void handle(KeyEvent e) {
-                KeyCode kc = e.getCode();
-                if (kc == KeyCode.UP || kc == KeyCode.DOWN) user.stop();
-            }
-        });
-        root.getChildren().add(background);
+    public ImageView getBackground() {
+        return this.background;
     }
 
-    /**
-     * Fires a projectile from the player's plane and adds it to the scene.
-     */
-    private void fireProjectile() {
-        ActiveActorDestructible projectile = user.fireProjectile();
-        root.getChildren().add(projectile);
-        userProjectiles.add(projectile);
+    public List<ActiveActorDestructible> getUserProjectiles() {
+        return this.userProjectiles;
     }
+
 
     /**
      * Generates enemy fire by having each enemy spawn a projectile.
      */
     private void generateEnemyFire() {
-        enemyUnits.forEach(enemy -> spawnEnemyProjectile(((FighterPlane) enemy).fireProjectile()));
+        enemyUnits.forEach(enemy -> spawnEnemyProjectile(((Plane) enemy).fireProjectile()));
     }
 
     /**
@@ -234,10 +203,14 @@ public abstract class LevelParent extends Observable {
      * Updates the state of all actors in the game, including the user, enemies, and projectiles.
      */
     private void updateActors() {
-        friendlyUnits.forEach(plane -> plane.updatePosition());
-        enemyUnits.forEach(enemy -> enemy.updatePosition());
-        userProjectiles.forEach(projectile -> projectile.updatePosition());
-        enemyProjectiles.forEach(projectile -> projectile.updatePosition());
+        updateActorPositions(friendlyUnits);
+        updateActorPositions(enemyUnits);
+        updateActorPositions(userProjectiles);
+        updateActorPositions(enemyProjectiles);
+    }
+
+    private <T extends ActiveActorDestructible> void updateActorPositions(List<T> actors) {
+        actors.stream().forEach(ActiveActorDestructible::updatePosition);
     }
 
     /**
@@ -336,7 +309,7 @@ public abstract class LevelParent extends Observable {
      * @return true if the enemy has penetrated, false otherwise
      */
     private boolean enemyHasPenetratedDefenses(ActiveActorDestructible enemy) {
-        return Math.abs(enemy.getTranslateX()) > screenWidth;
+        return Math.abs(enemy.getTranslateX()) > AppConstants.SCREEN_WIDTH;
     }
 
     /**
@@ -360,7 +333,7 @@ public abstract class LevelParent extends Observable {
      *
      * @return the user's plane
      */
-    protected UserPlane getUser() {
+    public UserPlane getUser() {
         return user;
     }
 
@@ -369,7 +342,7 @@ public abstract class LevelParent extends Observable {
      *
      * @return the root group
      */
-    protected Group getRoot() {
+    public Group getRoot() {
         return root;
     }
 
@@ -398,25 +371,7 @@ public abstract class LevelParent extends Observable {
      * @return the maximum Y position for enemy spawn
      */
     protected double getEnemyMaximumYPosition() {
-        return enemyMaximumYPosition;
-    }
-
-    /**
-     * Returns the screen width of the level.
-     *
-     * @return the screen width
-     */
-    protected double getScreenWidth() {
-        return screenWidth;
-    }
-
-    /**
-     * Checks if the user has been destroyed.
-     *
-     * @return true if the user is destroyed, false otherwise
-     */
-    protected boolean userIsDestroyed() {
-        return user.isDestroyed();
+        return AppConstants.SCREEN_HEIGHT - AppConstants.SCREEN_HEIGHT_ADJUSTMENT;
     }
 
     /**
