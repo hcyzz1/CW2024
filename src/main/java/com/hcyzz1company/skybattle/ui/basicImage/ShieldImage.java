@@ -10,8 +10,8 @@ import javafx.scene.image.ImageView;
  */
 public class ShieldImage extends ImageView {
     private static final String SHIELD_PATH = ImageConstants.IMAGE_ROOT_PATH + "shield.png";
-    private static final int SHIELD_X_POSITION = 1150;
-    private static final int SHIELD_Y_POSITION = 500;
+    private static final int SHIELD_X_POSITION = 100;
+    private static final int SHIELD_Y_POSITION = 40;
     private static final int SHIELD_WIDTH = 200;
     private static final int SHIELD_HEIGHT = 200;
 
@@ -23,6 +23,7 @@ public class ShieldImage extends ImageView {
         super(ImageUtil.creteImage(SHIELD_PATH));
         ImageUtil.setImageViewRatio(this, SHIELD_WIDTH, SHIELD_HEIGHT);
         ImageUtil.setImagePositon(this, SHIELD_X_POSITION, SHIELD_Y_POSITION);
+        this.setOpacity(0.5);
 
         this.setVisible(false);
     }

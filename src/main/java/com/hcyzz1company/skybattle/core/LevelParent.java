@@ -159,6 +159,7 @@ public abstract class LevelParent extends Observable {
         removeAllDestroyedActors();
         updateKillCount();
         updateLevelView();
+        updateExtraLevelView();
         checkIfGameOver();
     }
 
@@ -384,6 +385,13 @@ public abstract class LevelParent extends Observable {
     public void stopCurrentLevelActivities() {
         timeline.stop();
         deleteObservers();
+    }
+
+    protected LevelView getLevelView() {
+        return this.levelView;
+    }
+
+    protected void updateExtraLevelView() {
     }
 
 }
