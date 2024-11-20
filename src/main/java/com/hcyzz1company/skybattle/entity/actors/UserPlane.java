@@ -117,14 +117,6 @@ public class UserPlane extends Plane {
         horizontalMultiplier = 1;
     }
 
-    /**
-     * Stops the movement of the user's plane.
-     * Sets the velocity multiplier to zero.
-     */
-    public void stop() {
-        velocityMultiplier = 0;
-        horizontalMultiplier = 0;
-    }
 
     public void stopVertical() {
         velocityMultiplier = 0;
