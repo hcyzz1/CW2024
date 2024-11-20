@@ -41,7 +41,17 @@ public class LevelThree extends LevelParent {
     protected void spawnEnemyUnits() {
         if (getCurrentNumberOfEnemies() == 0) {
             addEnemyUnit(boss);
+            addShieldView();
         }
+    }
+
+    private void addShieldView() {
+        super.getLevelView().addElement(this.boss.getSheildImageView());
+    }
+
+    @Override
+    protected void updateExtraLevelView() {
+        this.boss.updateShieldView();
     }
 
 
