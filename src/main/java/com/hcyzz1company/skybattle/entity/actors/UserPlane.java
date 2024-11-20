@@ -1,13 +1,11 @@
 package com.hcyzz1company.skybattle.entity.actors;
 
-import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.entity.projectiles.UserProjectile;
 
 /**
- * The UserPlane class represents the player's plane in the game.
- * It extends the Plane class and handles the movement, firing,
- * and state updates for the user's plane.
+ * The UserPlane class represents the player's plane.
+ * It handles movement, firing, and state updates for the player's plane.
  */
 public class UserPlane extends Plane {
 
@@ -36,10 +34,9 @@ public class UserPlane extends Plane {
     private int numberOfKills;
 
     /**
-     * Constructs a UserPlane object with the specified initial health.
-     * Initializes the player's plane position, image, and other properties.
+     * Constructs a UserPlane with initial health, position, and other properties.
      *
-     * @param initialHealth the initial health of the player's plane.
+     * @param initialHealth the initial health of the user's plane.
      */
     public UserPlane(int initialHealth) {
         super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, initialHealth);
@@ -48,8 +45,8 @@ public class UserPlane extends Plane {
     }
 
     /**
-     * Updates the position of the user's plane based on its movement.
-     * The plane can move up or down within a specified range of Y coordinates.
+     * Updates the position of the user's plane based on movement input.
+     * The plane can move up/down and left/right within bounds.
      */
     @Override
     public void updatePosition() {
@@ -73,10 +70,9 @@ public class UserPlane extends Plane {
     }
 
     /**
-     * Creates a new projectile fired by the user's plane.
-     * The projectile is positioned based on the user's plane position.
+     * Fires a projectile from the user's plane.
      *
-     * @return a new UserProjectile object.
+     * @return a new UserProjectile.
      */
     @Override
     public ActiveActorDestructible fireProjectile() {
@@ -84,8 +80,7 @@ public class UserPlane extends Plane {
     }
 
     /**
-     * Checks whether the user's plane is moving.
-     * The plane is moving if the velocity multiplier is not zero.
+     * Checks if the plane is moving.
      *
      * @return true if the plane is moving, false otherwise.
      */
@@ -94,40 +89,49 @@ public class UserPlane extends Plane {
     }
 
     /**
-     * Moves the user's plane up.
-     * Sets the velocity multiplier to move the plane upwards.
+     * Moves the plane up by setting the vertical velocity multiplier.
      */
     public void moveUp() {
         velocityMultiplier = -1;
     }
 
     /**
-     * Moves the user's plane down.
-     * Sets the velocity multiplier to move the plane downwards.
+     * Moves the plane down by setting the vertical velocity multiplier.
      */
     public void moveDown() {
         velocityMultiplier = 1;
     }
 
+    /**
+     * Moves the plane left by setting the horizontal velocity multiplier.
+     */
     public void moveLeft() {
         horizontalMultiplier = -1;
     }
 
+    /**
+     * Moves the plane right by setting the horizontal velocity multiplier.
+     */
     public void moveRight() {
         horizontalMultiplier = 1;
     }
 
-
+    /**
+     * Stops vertical movement.
+     */
     public void stopVertical() {
         velocityMultiplier = 0;
     }
 
+    /**
+     * Stops horizontal movement.
+     */
     public void stopHorizontal() {
         horizontalMultiplier = 0;
     }
 
     /**
-     * Gets the number of enemy planes destroyed by the user's plane.
+     * Gets the number of kills (enemy planes destroyed).
      *
      * @return the number of kills.
      */
@@ -136,7 +140,7 @@ public class UserPlane extends Plane {
     }
 
     /**
-     * Increments the number of enemy planes destroyed by the user's plane.
+     * Increments the kill count by 1.
      */
     public void incrementKillCount() {
         numberOfKills++;

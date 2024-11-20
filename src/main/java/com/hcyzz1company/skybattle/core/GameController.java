@@ -1,38 +1,37 @@
-package com.hcyzz1company.skybattle.logic;
+package com.hcyzz1company.skybattle.core;
 
 import java.util.Observable;
 import java.util.Observer;
 
-import com.hcyzz1company.skybattle.core.LevelFactory;
+import com.hcyzz1company.skybattle.core.factory.LevelFactory;
+import com.hcyzz1company.skybattle.core.level.LevelParent;
 import com.hcyzz1company.skybattle.exceptions.LevelLoadingException;
 import com.hcyzz1company.skybattle.utils.AlertUtil;
 import com.hcyzz1company.skybattle.utils.LevelUtil;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import com.hcyzz1company.skybattle.core.LevelParent;
 
 /**
- * Controller class that manages game flow and changes between levels.
- * Implements Observer to handle level changes.
+ * Manages game flow and handles transitions between levels.
+ * Implements Observer to react to level changes.
  */
-public class Controller implements Observer {
+public class GameController implements Observer {
 
 	private final Stage stage;
 
 	/**
-	 * Constructor for Controller.
+	 * Constructor for GameController.
 	 *
-	 * @param stage the primary window for JavaFX Application.
+	 * @param stage the primary window for JavaFX Application
 	 */
-	public Controller(Stage stage) {
+	public GameController(Stage stage) {
 		this.stage = stage;
 	}
 
 	/**
-	 * Launch the game by showing the stage and going to the first level.
-	 * If any exception occurs, we will show an [Alert] to tell users.
-	 * And you can check the error Message in the stack.(Where run this JavaFX Application)
+	 * Launches the game, shows the stage, and starts the first level.
+	 * Displays an error alert if there is a failure.
 	 */
 	public void launchGame() {
 		try {
@@ -51,10 +50,10 @@ public class Controller implements Observer {
 	}
 
 	/**
-	 * Move to a specific game level.
+	 * Switches to a specified level.
 	 *
-	 * @param className The name of the class representing the level.
-	 * @throws LevelLoadingException : A custom exception that will be thrown if any error occurs while loading the level.
+	 * @param className The class name representing the level.
+	 * @throws LevelLoadingException if loading the level fails.
 	 */
 	private void goToLevel(String className) throws LevelLoadingException {
 		try {
@@ -76,10 +75,10 @@ public class Controller implements Observer {
 	}
 
 	/**
-	 * Updates the controller when the observed level changes.
+	 * Reacts to level changes and loads the new level.
 	 *
-	 * @param levelObj     The observable object (level).
-	 * @param newLevelName The new level class name to switch to.
+	 * @param levelObj     The level that was observed.
+	 * @param newLevelName The name of the next level to switch to.
 	 */
 	@Override
 	public void update(Observable levelObj, Object newLevelName) {

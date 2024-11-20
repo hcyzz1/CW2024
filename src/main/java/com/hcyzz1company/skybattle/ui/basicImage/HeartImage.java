@@ -1,12 +1,11 @@
 package com.hcyzz1company.skybattle.ui.basicImage;
 
 import com.hcyzz1company.skybattle.constants.ImageConstants;
-import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
+import com.hcyzz1company.skybattle.utils.ImageUtil;
 import javafx.scene.image.ImageView;
 
 /**
- * The HeartImage class represents the "Heart" image that is displayed to show the health of the player.
- * It uses ImageUtil to create and display the image on the screen.
+ * Displays the "Heart" image representing the player's health.
  */
 public class HeartImage extends ImageView {
     private static final String HEART_PATH = ImageConstants.IMAGE_ROOT_PATH + "heart.png";
@@ -16,8 +15,7 @@ public class HeartImage extends ImageView {
 
 
     /**
-     * Constructs a HeartImage object.
-     * Set the width & heigh & position of the Pic.
+     * Initializes the heart image with default size and position.
      */
     public HeartImage() {
         super(ImageUtil.creteImage(HEART_PATH));

@@ -1,8 +1,8 @@
 package com.hcyzz1company.skybattle.entity.projectiles;
 
 /**
- * The EnemyProjectile class represents a projectile fired by an enemy plane.
- * It extends the Projectile class and defines behavior specific to the enemy's projectiles, such as movement.
+ * Represents a projectile fired by an enemy plane.
+ * Extends Projectile for movement behavior.
  */
 public class EnemyProjectile extends Projectile {
 
@@ -14,11 +14,10 @@ public class EnemyProjectile extends Projectile {
     private static final int HORIZONTAL_VELOCITY = -10;
 
     /**
-     * Constructs an EnemyProjectile object with the specified initial position.
-     * The projectile is initialized with an image and position.
+     * Constructs an EnemyProjectile with the given initial position.
      *
-     * @param initialXPos the initial horizontal position of the projectile.
-     * @param initialYPos the initial vertical position of the projectile.
+     * @param initialXPos Initial horizontal position.
+     * @param initialYPos Initial vertical position.
      */
     public EnemyProjectile(double initialXPos, double initialYPos) {
         super(IMAGE_NAME, IMAGE_HEIGHT,

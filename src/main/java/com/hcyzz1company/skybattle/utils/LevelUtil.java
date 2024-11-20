@@ -4,19 +4,21 @@ import com.hcyzz1company.skybattle.exceptions.LevelLoadingException;
 import javafx.stage.Stage;
 
 /**
- * Manages the flow of levels in the game.
+ * Manages the flow of levels in the game, including advancing to the next level and checking if it's the final level.
  */
 public class LevelUtil {
-    private static final String LEVEL_ONE = "com.hcyzz1company.skybattle.core.levelOne.LevelOne";
-    private static final String LEVEL_TWO = "com.hcyzz1company.skybattle.core.levelTwo.LevelTwo";
-    private static final String LEVEL_THREE = "com.hcyzz1company.skybattle.core.levelThree.LevelThree";
+    // Constants for the levels (fully-qualified class names)
+    private static final String LEVEL_ONE = "com.hcyzz1company.skybattle.core.level.levelOne.LevelOne";
+    private static final String LEVEL_TWO = "com.hcyzz1company.skybattle.core.level.levelTwo.LevelTwo";
+    private static final String LEVEL_THREE = "com.hcyzz1company.skybattle.core.level.levelThree.LevelThree";
     private static final String FINAL_LEVEL = LEVEL_THREE;
 
     /**
      * Get the next level class name based on the current level class name.
+     * If the current level is the last one, it returns null.
      *
      * @param currentLevel The current level class name.
-     * @return The next level class name.
+     * @return The next level class name, or null if the current level is the final level.
      */
     public static String getNextLevel(String currentLevel) {
         switch (currentLevel) {
@@ -30,10 +32,10 @@ public class LevelUtil {
     }
 
     /**
-     * Get the current level is the final level or not.
+     * Checks if the current level is the final level in the game.
      *
      * @param currentLevel The current level class name.
-     * @return if it is the final level, true;else, false.
+     * @return true if it's the final level, otherwise false.
      */
     public static boolean isFinalLevel(String currentLevel) {
         if (currentLevel.equals(FINAL_LEVEL)) {
@@ -43,9 +45,9 @@ public class LevelUtil {
     }
 
     /**
-     * Get the first level class name.
+     * Retrieves the class name of the first level.
      *
-     * @return The first level class name.
+     * @return The class name of the first level.
      */
     public static String getFirstLevel() {
         return LEVEL_ONE;

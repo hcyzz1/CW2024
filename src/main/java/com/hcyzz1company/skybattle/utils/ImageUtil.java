@@ -1,18 +1,19 @@
-package com.hcyzz1company.skybattle.utils.ui;
+package com.hcyzz1company.skybattle.utils;
 
+import com.hcyzz1company.skybattle.core.factory.ImageFactory;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * A utility class providing methods for creating and displaying images.
+ * Utility class providing methods for creating and displaying images.
  */
 public class ImageUtil {
 
     /**
      * Creates an Image instance from the specified image path.
-     * This method uses the ImageFactory class to load the image.
+     * Uses the ImageFactory class to load the image.
      *
      * @param imagePath the path to the image file to be loaded.
      * @return an Image object.
@@ -23,8 +24,8 @@ public class ImageUtil {
     }
 
     /**
-     * Sets the width, height, and preserve ratio properties of the provided ImageView.
-     * The method adjusts the width and height of the ImageView while maintaining the image's aspect ratio.
+     * Sets the width, height, and preserves the ratio properties of the provided ImageView.
+     * Adjusts the width and height of the ImageView while maintaining the image's aspect ratio.
      *
      * @param imageView the ImageView whose dimensions and aspect ratio are to be set.
      * @param width     the desired width of the image (use -1 for the original width).
@@ -54,10 +55,10 @@ public class ImageUtil {
 
 
     /**
-     * Displays the given ImageView within the specified Group container.
+     * Displays the given ImageView within the specified container.
      * The image will be added to the container and made visible on the screen.
      *
-     * @param root      the Group container where the image will be displayed.
+     * @param root      the container where the image will be displayed (can be Group or HBox).
      * @param imageView the ImageView containing the image to be displayed.
      */
     public static void showImageInContainer(Group root, ImageView imageView) {

@@ -3,9 +3,8 @@ package com.hcyzz1company.skybattle.entity.projectiles;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 
 /**
- * The Projectile class represents a general projectile object in the game,
- * which is fired by various actors such as planes. It extends from ActiveActorDestructible
- * and includes basic functionality for managing damage and movement.
+ * Represents a general projectile in the game, fired by actors like planes.
+ * Extends ActiveActorDestructible for damage and movement functionality.
  */
 public abstract class Projectile extends ActiveActorDestructible {
 
@@ -13,12 +12,13 @@ public abstract class Projectile extends ActiveActorDestructible {
     private final int horizontalVelocity;
 
     /**
-     * Constructs a Projectile object with the specified image, size, and position.
+     * Constructs a Projectile with specified image, size, and position.
      *
-     * @param imageName   the name of the image file for the projectile.
-     * @param imageHeight the height of the projectile image.
-     * @param initialXPos the initial horizontal position of the projectile.
-     * @param initialYPos the initial vertical position of the projectile.
+     * @param imageName          The projectile's image file name.
+     * @param imageHeight        The projectile's height.
+     * @param initialXPos        Initial horizontal position.
+     * @param initialYPos        Initial vertical position.
+     * @param horizontalVelocity Horizontal movement speed.
      */
     public Projectile(String imageName, int imageHeight, double initialXPos, double initialYPos, int horizontalVelocity) {
         super(imageName, imageHeight, initialXPos, initialYPos);
@@ -26,8 +26,7 @@ public abstract class Projectile extends ActiveActorDestructible {
     }
 
     /**
-     * Handles the damage taken by the projectile. Once a projectile takes damage,
-     * it is destroyed.
+     * Destroys the projectile when it takes damage.
      */
     @Override
     public void takeDamage() {
@@ -35,8 +34,8 @@ public abstract class Projectile extends ActiveActorDestructible {
     }
 
     /**
-     * Abstract method to update the position of the projectile.
-     * This method must be implemented by subclasses to define how the projectile moves.
+     * Updates the projectile's position horizontally.
+     * Subclasses define specific movement behavior.
      */
     @Override
     public void updatePosition() {

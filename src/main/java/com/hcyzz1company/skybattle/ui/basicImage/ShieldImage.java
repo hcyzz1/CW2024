@@ -1,12 +1,11 @@
 package com.hcyzz1company.skybattle.ui.basicImage;
 
 import com.hcyzz1company.skybattle.constants.ImageConstants;
-import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
+import com.hcyzz1company.skybattle.utils.ImageUtil;
 import javafx.scene.image.ImageView;
 
 /**
- * The ShieldImage class represents the shield of the actors.
- * It uses ImageUtil to create and display the image on the screen.
+ * Represents the shield image of actors in the game.
  */
 public class ShieldImage extends ImageView {
     private static final String SHIELD_PATH = ImageConstants.IMAGE_ROOT_PATH + "shield.png";
@@ -16,8 +15,7 @@ public class ShieldImage extends ImageView {
     private static final int SHIELD_HEIGHT = 200;
 
     /**
-     * Constructs a WinImage object.
-     * Set the width & height & position of the Pic.
+     * Initializes the shield image with position, size, and opacity.
      */
     public ShieldImage() {
         super(ImageUtil.creteImage(SHIELD_PATH));
@@ -29,16 +27,14 @@ public class ShieldImage extends ImageView {
     }
 
     /**
-     * Makes the shield visible on the screen.
-     * This method is called when the shield is activated.
+     * Makes the shield visible.
      */
     public void showShield() {
         this.setVisible(true);
     }
 
     /**
-     * Hides the shield from the screen.
-     * This method is called when the shield is deactivated.
+     * Hides the shield.
      */
     public void hideShield() {
         this.setVisible(false);

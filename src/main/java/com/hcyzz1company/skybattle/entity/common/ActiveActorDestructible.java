@@ -3,9 +3,7 @@ package com.hcyzz1company.skybattle.entity.common;
 import javafx.scene.image.ImageView;
 
 /**
- * The ActiveActorDestructible class extends the ActiveActor class and implements
- * the Destructible interface, representing an actor that can be destroyed in the game.
- * It adds functionality for damage handling and destruction state.
+ * Represents a destructible actor that can be destroyed in the game.
  */
 public abstract class ActiveActorDestructible extends ActiveActor implements Destructible {
 
@@ -26,19 +24,19 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
     }
 
     /**
-     * Abstract method to update the position of the actor.
+     * Updates the actor's position.
      */
     @Override
     public abstract void updatePosition();
 
     /**
-     * Abstract method for handling damage taken by the actor. The actor's state should be changed accordingly.
+     * Handles damage taken by the actor.
      */
     @Override
     public abstract void takeDamage();
 
     /**
-     * Destroys the actor by setting its destroyed state to true.
+     * Marks the actor as destroyed.
      */
     @Override
     public void destroy() {
@@ -46,18 +44,14 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
     }
 
     /**
-     * Sets the destroyed state of the actor.
-     *
-     * @param isDestroyed The new destroyed state of the actor.
+     * Sets the actor's destroyed state.
      */
     protected void setDestroyed(boolean isDestroyed) {
         this.isDestroyed = isDestroyed;
     }
 
     /**
-     * Returns whether the actor is destroyed or not.
-     *
-     * @return true if the actor is destroyed, false otherwise.
+     * Returns if the actor is destroyed.
      */
     public boolean isDestroyed() {
         return isDestroyed;
