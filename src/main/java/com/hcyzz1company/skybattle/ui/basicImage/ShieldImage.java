@@ -18,7 +18,7 @@ public class ShieldImage extends ImageView {
      * Initializes the shield image with position, size, and opacity.
      */
     public ShieldImage() {
-        super(ImageUtil.creteImage(SHIELD_PATH));
+        super(ImageUtil.createImage(SHIELD_PATH));
         ImageUtil.setImageViewRatio(this, SHIELD_WIDTH, SHIELD_HEIGHT);
         ImageUtil.setImagePositon(this, SHIELD_X_POSITION, SHIELD_Y_POSITION);
         this.setOpacity(0.5);

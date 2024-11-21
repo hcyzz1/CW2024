@@ -8,7 +8,7 @@ public class EnemyProjectile extends Projectile {
 
     //Image Information
     private static final String IMAGE_NAME = "enemyFire.png";
-    private static final int IMAGE_HEIGHT = 50;
+    private static final int IMAGE_HEIGHT = 20;
     
     //Projectile Action Information
     private static final int HORIZONTAL_VELOCITY = -10;

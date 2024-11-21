@@ -1,5 +1,6 @@
 package com.hcyzz1company.skybattle.entity.actors;
 
+import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.entity.projectiles.UserProjectile;
 
@@ -11,7 +12,7 @@ public class UserPlane extends Plane {
 
     //Image Information
     private static final String IMAGE_NAME = "userplane.png";
-    private static final int IMAGE_HEIGHT = 150;
+    private static final int IMAGE_HEIGHT = 50;
     //Projectile offset from Plane --- Image Information
     private static final int PROJECTILE_X_POSITION_OFFSET = 110;
     private static final int PROJECTILE_Y_POSITION_OFFSET = 20;
@@ -19,8 +20,8 @@ public class UserPlane extends Plane {
     // Move Range Information
     private static final double X_UPPER_BOUND = 0;
     private static final double X_LOWER_BOUND = 600.0;
-    private static final double Y_UPPER_BOUND = -40;
-    private static final double Y_LOWER_BOUND = 600.0;
+    private static final double Y_UPPER_BOUND = AppConstants.SCREEN_HEIGHT_UPPER_ADJUSTED;
+    private static final double Y_LOWER_BOUND = AppConstants.SCREEN_HEIGHT_LOWER_ADJUSTED;
     // Init Postion Information
     private static final double INITIAL_X_POSITION = 5.0;
     private static final double INITIAL_Y_POSITION = 300.0;

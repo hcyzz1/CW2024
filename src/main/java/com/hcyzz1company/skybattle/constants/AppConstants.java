@@ -26,9 +26,14 @@ public class AppConstants {
     public static final String TITLE = "Sky Battle";
 
     /**
-     * The height adjustment value used for Actors.
+     * The upper height adjusted value used for Actors.
      */
-    public static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
+    public static final double SCREEN_HEIGHT_UPPER_ADJUSTED = 50;
+
+    /**
+     * The lower height adjusted value used for Actors.
+     */
+    public static final double SCREEN_HEIGHT_LOWER_ADJUSTED = 650;
 
     /**
      * The delay between game updates in milliseconds.

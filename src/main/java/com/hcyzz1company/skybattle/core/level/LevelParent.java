@@ -53,7 +53,7 @@ public abstract class LevelParent extends Observable {
         this.enemyUnits = new ArrayList<>();
         this.userProjectiles = new ArrayList<>();
         this.enemyProjectiles = new ArrayList<>();
-        this.background = new ImageView(ImageUtil.creteImage(backgroundImageName));
+        this.background = new ImageView(ImageUtil.createImage(backgroundImageName));
         this.levelView = instantiateLevelView();
         this.currentNumberOfEnemies = 0;
         initializeTimeline();
@@ -381,13 +381,22 @@ public abstract class LevelParent extends Observable {
     }
 
     /**
+     * Returns the min Y position where enemies can spawn.
+     *
+     * @return the min Y position for enemy spawn
+     */
+    protected double getEnemyMinimumYPosition() {
+        return AppConstants.SCREEN_HEIGHT_UPPER_ADJUSTED;
+    }
+
+    /**
      * Returns the maximum Y position where enemies can spawn.
      * This position is determined by the screen height and any necessary adjustments.
      *
      * @return the maximum Y position for enemy spawn
      */
     protected double getEnemyMaximumYPosition() {
-        return AppConstants.SCREEN_HEIGHT - AppConstants.SCREEN_HEIGHT_ADJUSTMENT;
+        return AppConstants.SCREEN_HEIGHT_LOWER_ADJUSTED;
     }
 
     /**

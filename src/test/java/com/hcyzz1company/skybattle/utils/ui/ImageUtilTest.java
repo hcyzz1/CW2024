@@ -81,7 +81,8 @@ class ImageUtilTest extends ApplicationTest {
     void testShowImageInContainerWithGroup() {
         Platform.runLater(() -> {
             Group group = new Group();
-            Image image = new Image(getClass().getResource(ImageConstants.IMAGE_ROOT_PATH + "loadFailImage.jpg").toExternalForm());
+            String path = ImageConstants.IMAGE_ROOT_PATH + "loadFailImage.jpg";
+            Image image = ImageUtil.createImage(path);
             ImageView imageView = new ImageView(image);
 
             ImageUtil.showImageInContainer(group, imageView);
@@ -97,7 +98,8 @@ class ImageUtilTest extends ApplicationTest {
     public void testShowImageInContainerWithHBox() {
         Platform.runLater(() -> {
             HBox hbox = new HBox();
-            Image image = new Image(getClass().getResource(ImageConstants.IMAGE_ROOT_PATH + "loadFailImage.jpg").toExternalForm());
+            String path = ImageConstants.IMAGE_ROOT_PATH + "loadFailImage.jpg";
+            Image image = ImageUtil.createImage(path);
             ImageView imageView = new ImageView(image);
 
             ImageUtil.showImageInContainer(hbox, imageView);

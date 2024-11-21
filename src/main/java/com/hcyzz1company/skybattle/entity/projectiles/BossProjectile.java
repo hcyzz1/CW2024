@@ -7,7 +7,7 @@ package com.hcyzz1company.skybattle.entity.projectiles;
 public class BossProjectile extends Projectile {
     //Image Information
     private static final String IMAGE_NAME = "fireball.png";
-    private static final int IMAGE_HEIGHT = 75;
+    private static final int IMAGE_HEIGHT = 20;
     
     //Projectile Action Information
     private static final int HORIZONTAL_VELOCITY = -15;

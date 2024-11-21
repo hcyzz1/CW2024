@@ -1,5 +1,6 @@
 package com.hcyzz1company.skybattle.entity.actors;
 
+import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.entity.projectiles.BossProjectile;
 import com.hcyzz1company.skybattle.ui.basicImage.ShieldImage;
@@ -14,12 +15,12 @@ import java.util.*;
 public class BossPlane extends Plane {
     // Image Information
     private static final String IMAGE_NAME = "bossplane.png";
-    private static final int IMAGE_HEIGHT = 300;
+    private static final int IMAGE_HEIGHT = 70;
     private static final double INITIAL_X_POSITION = 1000.0;
     private static final double INITIAL_Y_POSITION = 400;
 
     //Projectile Information
-    private static final double PROJECTILE_Y_POSITION_OFFSET = 75.0;
+    private static final double PROJECTILE_Y_POSITION_OFFSET = 55.0;
     private static final double BOSS_FIRE_RATE = .04;
 
     // Health Information
@@ -29,10 +30,10 @@ public class BossPlane extends Plane {
     private static final double BOSS_SHIELD_PROBABILITY = .01;
     private static final int MAX_FRAMES_WITH_SHIELD = 100;
     private static final int SHIELD_POSITION_X_OFFSET = -30;
-    private static final int SHIELD_POSITION_Y_OFFSET = 80;
+    private static final int SHIELD_POSITION_Y_OFFSET = -50;
     // Move Information
-    private static final int Y_POSITION_UPPER_BOUND = -100;
-    private static final int Y_POSITION_LOWER_BOUND = 475;
+    private static final double Y_POSITION_UPPER_BOUND = AppConstants.SCREEN_HEIGHT_UPPER_ADJUSTED;
+    private static final double Y_POSITION_LOWER_BOUND = AppConstants.SCREEN_HEIGHT_LOWER_ADJUSTED;
     private static final int VERTICAL_VELOCITY = 8;
     private static final int MOVE_FREQUENCY_PER_CYCLE = 5;
     private static final int ZERO = 0;

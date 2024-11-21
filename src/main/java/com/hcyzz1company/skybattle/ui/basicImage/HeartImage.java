@@ -18,7 +18,7 @@ public class HeartImage extends ImageView {
      * Initializes the heart image with default size and position.
      */
     public HeartImage() {
-        super(ImageUtil.creteImage(HEART_PATH));
+        super(ImageUtil.createImage(HEART_PATH));
         ImageUtil.setImageViewRatio(this, -1, HEART_HEIGHT);
         ImageUtil.setImagePositon(this, HEART_X_POSITION, HEART_Y_POSITION);
     }
