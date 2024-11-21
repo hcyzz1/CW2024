@@ -1,4 +1,4 @@
-package com.hcyzz1company.skybattle.utils.ui;
+package com.hcyzz1company.skybattle.utils;
 
 import com.hcyzz1company.skybattle.constants.ImageConstants;
 import com.hcyzz1company.skybattle.utils.ImageUtil;
