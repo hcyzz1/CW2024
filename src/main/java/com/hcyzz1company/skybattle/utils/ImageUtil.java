@@ -12,6 +12,14 @@ import javafx.scene.paint.Color;
 public class ImageUtil {
 
     /**
+     * Private constructor to prevent instantiation of the utility class.
+     * Since this class only provides static methods, it should not be instantiated.
+     */
+    private ImageUtil() {
+        // Prevent instantiation
+    }
+
+    /**
      * Creates an Image instance from the specified image path.
      * Uses the ImageFactory class to load the image.
      *

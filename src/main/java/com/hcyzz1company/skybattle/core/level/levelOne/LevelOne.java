@@ -25,7 +25,7 @@ public class LevelOne extends LevelParent {
     /**
      * Constructs the LevelOne instance.
      *
-     * <p>Sets up the background image and initializes the player's health to the level's starting value.</p>
+     * Sets up the background image and initializes the player's health to the level's starting value.
      */
     public LevelOne() {
         super(BACKGROUND_IMAGE_NAME, PLAYER_INITIAL_HEALTH);
@@ -44,8 +44,8 @@ public class LevelOne extends LevelParent {
     /**
      * Spawns enemy planes based on the spawn probability and the current number of enemies on the screen.
      *
-     * <p>This method ensures that the total number of enemies does not exceed the limit defined by {TOTAL_ENEMIES}.
-     * Each new enemy's vertical position is randomized.</p>
+     * This method ensures that the total number of enemies does not exceed the limit defined by {TOTAL_ENEMIES}.
+     * Each new enemy's vertical position is randomized.
      */
     @Override
     protected void spawnEnemyUnits() {

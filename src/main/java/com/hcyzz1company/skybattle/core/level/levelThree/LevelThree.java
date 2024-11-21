@@ -6,7 +6,7 @@ import com.hcyzz1company.skybattle.entity.actors.BossPlane;
 
 /**
  * Represents the third level in the Sky Battle game.
- * <p>This level involves defeating a boss enemy with a shield. The level ends when the boss is destroyed.</p>
+ * This level involves defeating a boss enemy with a shield. The level ends when the boss is destroyed.
  */
 public class LevelThree extends LevelParent {
 
@@ -19,7 +19,7 @@ public class LevelThree extends LevelParent {
 
     /**
      * Constructs the LevelThree instance.
-     * <p>Initializes the level with the background image, player health, and creates the boss enemy.</p>
+     * Initializes the level with the background image, player health, and creates the boss enemy.
      */
     public LevelThree() {
         super(BACKGROUND_IMAGE_NAME, PLAYER_INITIAL_HEALTH);
@@ -38,7 +38,7 @@ public class LevelThree extends LevelParent {
 
     /**
      * Spawns the boss enemy when no enemies are currently on the screen.
-     * <p>Adds the boss to the screen and displays its shield.</p>
+     * Adds the boss to the screen and displays its shield.
      */
     @Override
     protected void spawnEnemyUnits() {

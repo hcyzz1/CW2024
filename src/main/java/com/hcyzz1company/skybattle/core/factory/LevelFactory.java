@@ -7,17 +7,25 @@ import java.lang.reflect.Constructor;
 /**
  * A factory class for creating instances of game levels.
  *
- * <p>This class uses the Factory Design Pattern to instantiate level objects dynamically
- * based on their class names. It leverages Java reflection to load and initialize level classes.</p>
+ * This class uses the Factory Design Pattern to instantiate level objects dynamically
+ * based on their class names. It leverages Java reflection to load and initialize level classes.
  */
 public class LevelFactory {
 
     /**
+     * Private constructor to prevent instantiation of the factory class.
+     * Since this class only provides static methods, it should not be instantiated.
+     */
+    private LevelFactory() {
+        // Prevent instantiation
+    }
+
+    /**
      * Creates a new instance of a level based on the specified class name.
      *
-     * <p>This method dynamically loads the class, retrieves its default constructor,
+     * This method dynamically loads the class, retrieves its default constructor,
      * and instantiates the object. The level class must extend {@link LevelParent}
-     * and have a no-argument constructor.</p>
+     * and have a no-argument constructor.
      *
      * @param className the fully qualified name of the level class (e.g., "com.example.levels.LevelOne").
      * @return an instance of the specified level class.
