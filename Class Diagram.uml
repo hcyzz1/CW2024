@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/encyclopedia/OoAkira6w6oO/WorkSpace-Java/CW2024</OriginalElement>
+  <nodes>
+    <node x="0.0" y="240.0">com.hcyzz1company.skybattle.entity.projectiles.UserProjectile</node>
+    <node x="543.5" y="480.4827915869981">com.hcyzz1company.skybattle.core.factory.ImageFactory</node>
+    <node x="177.0" y="240.0">com.hcyzz1company.skybattle.entity.projectiles.BossProjectile</node>
+    <node x="707.0" y="240.0">com.hcyzz1company.skybattle.entity.actors.UserPlane</node>
+    <node x="202.46153846153845" y="160.0">com.hcyzz1company.skybattle.entity.projectiles.Projectile</node>
+    <node x="880.3690248565963" y="653.1787762906309">com.hcyzz1company.skybattle.exceptions.LevelLoadingException</node>
+    <node x="0.0" y="862.2657743785851">com.hcyzz1company.skybattle.constants.AppConstants</node>
+    <node x="543.5" y="519.359464627151">com.hcyzz1company.skybattle.ui.LevelView</node>
+    <node x="524.25" y="0.0">com.hcyzz1company.skybattle.entity.common.ActiveActor</node>
+    <node x="153.0" y="395.0">com.hcyzz1company.skybattle.core.level.levelTwo.LevelTwo</node>
+    <node x="143.5" y="315.0">com.hcyzz1company.skybattle.core.level.LevelParent</node>
+    <node x="545.0" y="560.4827915869981">com.hcyzz1company.skybattle.utils.ImageUtil</node>
+    <node x="544.0" y="707.8871892925431">com.hcyzz1company.skybattle.ui.basicImage.WinImage</node>
+    <node x="543.5" y="799.0535372848949">com.hcyzz1company.skybattle.ui.specialElements.HeartDisplay</node>
+    <node x="185.4273422562141" y="862.2657743785851">com.hcyzz1company.skybattle.constants.ImageConstants</node>
+    <node x="0.0" y="519.359464627151">com.hcyzz1company.skybattle.core.GameController</node>
+    <node x="725.4615384615385" y="160.0">com.hcyzz1company.skybattle.entity.actors.Plane</node>
+    <node x="0.0" y="610.0956022944551">com.hcyzz1company.skybattle.utils.LevelUtil</node>
+    <node x="1.0" y="662.3040152963672">com.hcyzz1company.skybattle.utils.AlertUtil</node>
+    <node x="361.25" y="0.0">com.hcyzz1company.skybattle.entity.common.Destructible</node>
+    <node x="354.0" y="240.0">com.hcyzz1company.skybattle.entity.projectiles.EnemyProjectile</node>
+    <node x="0.0" y="762.2848948374761">com.hcyzz1company.skybattle.core.handle.UserInputHandle</node>
+    <node x="855.0" y="240.0">com.hcyzz1company.skybattle.entity.actors.BossPlane</node>
+    <node x="880.3690248565963" y="519.359464627151">com.hcyzz1company.skybattle.utils.ImageUtilTest</node>
+    <node x="545.0" y="240.0">com.hcyzz1company.skybattle.entity.actors.EnemyPlane</node>
+    <node x="544.0" y="662.3040152963672">com.hcyzz1company.skybattle.ui.basicImage.ShieldImage</node>
+    <node x="544.0" y="753.470363288719">com.hcyzz1company.skybattle.ui.basicImage.GameOverImage</node>
+    <node x="398.25" y="80.0">com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible</node>
+    <node x="212.4273422562141" y="762.2848948374761">com.hcyzz1company.skybattle.core.factory.LevelFactory</node>
+    <node x="0.0" y="476.1950286806883">com.hcyzz1company.skybattle.Main</node>
+    <node x="545.5" y="618.8575525812621">com.hcyzz1company.skybattle.ui.basicImage.HeartImage</node>
+    <node x="293.0" y="395.0">com.hcyzz1company.skybattle.core.level.levelOne.LevelOne</node>
+    <node x="0.0" y="395.0">com.hcyzz1company.skybattle.core.level.levelThree.LevelThree</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.hcyzz1company.skybattle.entity.actors.Plane" target="com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="771.9615384615385" y="135.0" />
+      <point x="513.25" y="135.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.projectiles.EnemyProjectile" target="com.hcyzz1company.skybattle.entity.projectiles.Projectile" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="439.5" y="215.0" />
+      <point x="263.46153846153845" y="215.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.projectiles.UserProjectile" target="com.hcyzz1company.skybattle.entity.projectiles.Projectile" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="78.5" y="215.0" />
+      <point x="263.46153846153845" y="215.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible" target="com.hcyzz1company.skybattle.entity.common.Destructible" relationship="REALIZATION">
+      <point x="-57.5" y="-15.0" />
+      <point x="455.75" y="55.0" />
+      <point x="432.75" y="55.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.actors.UserPlane" target="com.hcyzz1company.skybattle.entity.actors.Plane" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.projectiles.BossProjectile" target="com.hcyzz1company.skybattle.entity.projectiles.Projectile" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="255.5" y="215.0" />
+      <point x="263.46153846153845" y="215.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.core.level.levelOne.LevelOne" target="com.hcyzz1company.skybattle.core.level.LevelParent" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="353.5" y="370.0" />
+      <point x="213.0" y="370.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.core.level.levelThree.LevelThree" target="com.hcyzz1company.skybattle.core.level.LevelParent" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="66.5" y="370.0" />
+      <point x="213.0" y="370.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.core.level.levelTwo.LevelTwo" target="com.hcyzz1company.skybattle.core.level.LevelParent" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.projectiles.Projectile" target="com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="263.46153846153845" y="135.0" />
+      <point x="513.25" y="135.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.actors.EnemyPlane" target="com.hcyzz1company.skybattle.entity.actors.Plane" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="616.0" y="215.0" />
+      <point x="771.9615384615385" y="215.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible" target="com.hcyzz1company.skybattle.entity.common.ActiveActor" relationship="GENERALIZATION">
+      <point x="57.5" y="-15.0" />
+      <point x="570.75" y="55.0" />
+      <point x="593.75" y="55.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="com.hcyzz1company.skybattle.entity.actors.BossPlane" target="com.hcyzz1company.skybattle.entity.actors.Plane" relationship="GENERALIZATION">
+      <point x="0.0" y="-15.0" />
+      <point x="919.0" y="215.0" />
+      <point x="771.9615384615385" y="215.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.702013422818792" showDependencies="false" x="621.8393881453155" y="492.1271510516252" />
+  <SelectedNodes>
+    <node>com.hcyzz1company.skybattle.utils.ImageUtilTest</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
