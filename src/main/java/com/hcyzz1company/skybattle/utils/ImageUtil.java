@@ -2,9 +2,9 @@ package com.hcyzz1company.skybattle.utils;
 
 import com.hcyzz1company.skybattle.core.factory.ImageFactory;
 import javafx.scene.Group;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * Utility class providing methods for creating and displaying images.
@@ -18,9 +18,9 @@ public class ImageUtil {
      * @param imagePath the path to the image file to be loaded.
      * @return an Image object.
      */
-    public static Image creteImage(String imagePath) {
+    public static Image createImage(String imagePath) {
         Image image = ImageFactory.createImage(imagePath);
-        return image;
+        return removeTransparentPixels(image);
     }
 
     /**
@@ -79,5 +79,53 @@ public class ImageUtil {
         imageView.setVisible(true);
     }
 
+    /**
+     * Removes transparent pixels from the given image
+     * and returns a smaller cropped image containing only the non-transparent pixels.
+     *
+     * @param image the Image to be processed. Must not be null.
+     * @return a new Image without transparent pixels.
+     */
+    private static Image removeTransparentPixels(Image image) {
+        if (image == null) {
+            WritableImage emptyImage = new WritableImage(1, 1);
+            emptyImage.getPixelWriter().setColor(0, 0, Color.TRANSPARENT);
+            return emptyImage;
+        }
+
+        PixelReader pixelReader = image.getPixelReader();
+        if (pixelReader == null) {
+            return image; // Return the original image if it has no pixel reader
+        }
+
+        int width = (int) image.getWidth();
+        int height = (int) image.getHeight();
+
+        // Initialize bounds for non-transparent pixels
+        int minX = width, minY = height, maxX = 0, maxY = 0;
+
+        // Scan the image to find the bounds of non-transparent pixels
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Color color = pixelReader.getColor(x, y);
+                if (color.getOpacity() > 0) {
+                    if (x < minX) minX = x;
+                    if (y < minY) minY = y;
+                    if (x > maxX) maxX = x;
+                    if (y > maxY) maxY = y;
+                }
+            }
+        }
+
+        // If no non-transparent pixels were found, return a 1x1 transparent image
+        if (minX > maxX || minY > maxY) {
+            return new WritableImage(1, 1);
+        }
+
+        // Crop the image to the bounds of non-transparent pixels
+        int newWidth = maxX - minX + 1;
+        int newHeight = maxY - minY + 1;
+        return new WritableImage(pixelReader, minX, minY, newWidth, newHeight);
+    }
 
 }

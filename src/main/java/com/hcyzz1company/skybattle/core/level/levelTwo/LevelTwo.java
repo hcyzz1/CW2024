@@ -51,6 +51,9 @@ public class LevelTwo extends LevelParent {
         for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
             if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
                 double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
+                if (newEnemyInitialYPosition < getEnemyMinimumYPosition()) {
+                    newEnemyInitialYPosition = getEnemyMinimumYPosition();
+                }
                 ActiveActorDestructible newEnemy = new EnemyPlane(AppConstants.SCREEN_WIDTH, newEnemyInitialYPosition);
                 addEnemyUnit(newEnemy);
             }

@@ -19,7 +19,7 @@ public abstract class ActiveActor extends ImageView {
      * @param initialYPos The initial vertical position.
      */
     public ActiveActor(String imageName, int imageHeight, double initialXPos, double initialYPos) {
-        Image image = ImageFactory.createImage(ImageConstants.IMAGE_ROOT_PATH + imageName);
+        Image image = ImageUtil.createImage(ImageConstants.IMAGE_ROOT_PATH + imageName);
         this.setImage(image);
         ImageUtil.setImageViewRatio(this, -1, imageHeight);
         ImageUtil.setImagePositon(this, initialXPos, initialYPos);
