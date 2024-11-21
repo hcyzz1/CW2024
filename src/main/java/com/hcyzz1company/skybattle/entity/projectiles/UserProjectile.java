@@ -3,8 +3,7 @@ package com.hcyzz1company.skybattle.entity.projectiles;
 import com.hcyzz1company.skybattle.entity.projectiles.Projectile;
 
 /**
- * The UserProjectile class represents a projectile fired by the user's plane.
- * It extends the Projectile class and handles the movement and state updates for the projectile.
+ * Represents a projectile fired by the user's plane.
  */
 public class UserProjectile extends Projectile {
 
@@ -16,11 +15,10 @@ public class UserProjectile extends Projectile {
     private static final int HORIZONTAL_VELOCITY = 15;
 
     /**
-     * Constructs a UserProjectile object with the specified initial position.
-     * Initializes the projectile with an image, height, and position.
+     * Creates a UserProjectile with the given position.
      *
-     * @param initialXPos the initial X position of the projectile.
-     * @param initialYPos the initial Y position of the projectile.
+     * @param initialXPos Initial horizontal position.
+     * @param initialYPos Initial vertical position.
      */
     public UserProjectile(double initialXPos, double initialYPos) {
         super(IMAGE_NAME, IMAGE_HEIGHT,

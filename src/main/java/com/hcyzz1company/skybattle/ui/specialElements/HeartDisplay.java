@@ -1,15 +1,12 @@
 package com.hcyzz1company.skybattle.ui.specialElements;
 
 import com.hcyzz1company.skybattle.ui.basicImage.HeartImage;
-import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
+import com.hcyzz1company.skybattle.utils.ImageUtil;
 import javafx.scene.Group;
 import javafx.scene.layout.HBox;
 
 /**
- * The HeartDisplay class is responsible for managing and displaying a set of heart images
- * to represent the player's remaining lives or health in the game.
- * It creates a container (HBox) that holds the heart images and provides methods to initialize,
- * display, and update the heart display.
+ * Manages and displays heart images representing the player's health.
  */
 public class HeartDisplay {
 	private static final double HEART_DISPLAY_X_POSITION = 5;
@@ -18,10 +15,9 @@ public class HeartDisplay {
 	private HBox container;
 
 	/**
-	 * Constructs a HeartDisplay object with a specified number of hearts to display.
-	 * Initializes the container and populates it with the specified number of heart images.
+	 * Constructs the HeartDisplay with a specified number of hearts.
 	 *
-	 * @param heartsToDisplay the initial number of hearts to display in the heart container
+	 * @param heartsToDisplay the initial number of hearts
 	 */
 	public HeartDisplay(int heartsToDisplay) {
 		this.container = new HBox();
@@ -30,10 +26,7 @@ public class HeartDisplay {
 	}
 
 	/**
-	 * Initializes the container (HBox) for the heart images and sets its position on the screen.
-	 * The container holds all the heart images.
-	 *
-	 * @param container the HBox that holds the heart images
+	 * Initializes the container for heart images and sets its position.
 	 */
 	private void initializeContainer(HBox container) {
 		container.setLayoutX(HEART_DISPLAY_X_POSITION);
@@ -41,10 +34,9 @@ public class HeartDisplay {
 	}
 
 	/**
-	 * Initializes the specified number of heart images and adds them to the container (HBox).
-	 * Each heart is represented by a HeartImage object, and the ImageUtil is used to display it.
+	 * Adds the specified number of heart images to the container.
 	 *
-	 * @param heartsToDisplay the number of heart images to display
+	 * @param heartsToDisplay the number of hearts to display
 	 */
 	private void initializeHearts(int heartsToDisplay) {
 		for (int i = 0; i < heartsToDisplay; i++) {
@@ -54,10 +46,9 @@ public class HeartDisplay {
 	}
 
 	/**
-	 * Removes heart images from the display to reflect the current number of remaining hearts.
-	 * The hearts are removed starting from the leftmost image, as the player loses health.
+	 * Removes heart images to match the current number of remaining hearts.
 	 *
-	 * @param heartsRemaining the number of hearts remaining to display
+	 * @param heartsRemaining the number of hearts remaining
 	 */
 	public void removeHeart(int heartsRemaining) {
 		int currentNumberOfHearts = container.getChildren().size();
@@ -69,11 +60,9 @@ public class HeartDisplay {
 	}
 
 	/**
-	 * Displays the heart container in the specified container (Group).
-	 * This method adds the heart container (HBox) to the root container (Group),
-	 * making the heart display visible on the screen.
+	 * Displays the heart container in the specified root container.
 	 *
-	 * @param root the container (Group) where the heart display should be shown
+	 * @param root the container where the hearts should be displayed
 	 */
 	public void showHeartDisplayInContainer(Group root){
 		root.getChildren().add(container);

@@ -4,8 +4,8 @@ import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.entity.projectiles.EnemyProjectile;
 
 /**
- * The EnemyPlane class represents an enemy aircraft in the game.
- * It extends the Plane class and includes functionality for movement, firing projectiles, and taking damage.
+ * The EnemyPlane class represents an enemy aircraft.
+ * It extends the Plane class and includes movement, firing projectiles, and taking damage.
  */
 public class EnemyPlane extends Plane {
 

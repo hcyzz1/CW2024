@@ -1,40 +1,49 @@
-package com.hcyzz1company.skybattle.core.levelTwo;
+package com.hcyzz1company.skybattle.core.level.levelTwo;
 
 import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.constants.ImageConstants;
-import com.hcyzz1company.skybattle.core.LevelParent;
+import com.hcyzz1company.skybattle.core.level.LevelParent;
 import com.hcyzz1company.skybattle.entity.actors.EnemyPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
-import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 
 /**
- * The LevelTwo class represents the second level in the game, which introduces a boss enemy.
- * It handles the initialization of friendly and enemy units, checks for game over conditions,
- * and manages the transition between winning or losing the game.
+ * Represents the second level of the game, which introduces a boss enemy.
+ * <p>Handles the initialization of friendly and enemy units, checks for game over conditions,
+ * and manages level progression based on the player's kills.</p>
  */
 public class LevelTwo extends LevelParent {
+    // Path to the background image for this level
     private static final String BACKGROUND_IMAGE_NAME = ImageConstants.IMAGE_ROOT_PATH + "background3.jpg";
+    // Total number of enemies to spawn in the level
     private static final int TOTAL_ENEMIES = 5;
+    // Number of kills required to advance to the next level
     private static final int KILLS_TO_ADVANCE = 20;
+    // Probability of spawning an enemy
     private static final double ENEMY_SPAWN_PROBABILITY = .20;
+    // Initial health of the player's plane
     private static final int PLAYER_INITIAL_HEALTH = 5;
 
     /**
-     * Constructs a LevelOne instance with the specified screen dimensions.
+     * Constructs the LevelTwo instance.
+     * <p>Initializes the level with the specified background image and player health.</p>
      */
     public LevelTwo() {
         super(BACKGROUND_IMAGE_NAME, PLAYER_INITIAL_HEALTH);
     }
 
+    /**
+     * Checks if the player has won the level by reaching the kill target.
+     *
+     * @return {@code true} if the player has reached the kill target, {@code false} otherwise
+     */
     @Override
     protected boolean winLevel() {
         return userHasReachedKillTarget();
     }
 
     /**
-     * Spawns enemy units for this level. The method randomly generates enemy planes based on
-     * a predefined spawn probability and ensures that the total number of enemies does not exceed
-     * the limit.
+     * Spawns enemy units based on a predefined spawn probability.
+     * <p>The method ensures that the total number of enemies does not exceed the limit.</p>
      */
     @Override
     protected void spawnEnemyUnits() {
@@ -50,9 +59,9 @@ public class LevelTwo extends LevelParent {
 
 
     /**
-     * Checks if the user has reached the target number of kills required to advance to the next level.
+     * Checks if the player has reached the required number of kills to advance to the next level.
      *
-     * @return true if the user has reached the kill target, false otherwise
+     * @return {@code true} if the player's kill count is greater than or equal to the target, {@code false} otherwise
      */
     private boolean userHasReachedKillTarget() {
         return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;

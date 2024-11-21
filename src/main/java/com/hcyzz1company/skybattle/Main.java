@@ -1,7 +1,7 @@
-package com.hcyzz1company.skybattle.boot;
+package com.hcyzz1company.skybattle;
 
 import com.hcyzz1company.skybattle.constants.AppConstants;
-import com.hcyzz1company.skybattle.logic.Controller;
+import com.hcyzz1company.skybattle.core.GameController;
 import com.hcyzz1company.skybattle.utils.AlertUtil;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -13,11 +13,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Controller myController;
+    private GameController myGameController;
 
     /**
      * Initial Method for Loading the JavaFX Program.
-     * This method will load the main window of the JavaFX program —— [Stage] .
+     * This method will load the main window of the JavaFX program —— [Stage].
      * If any exception occurs, we will show an [Alert] to tell users.
      * And you can check the error Message in the stack. (in the console Where run this JavaFX Application)
      *
@@ -31,8 +31,8 @@ public class Main extends Application {
             stage.setHeight(AppConstants.SCREEN_HEIGHT);
             stage.setWidth(AppConstants.SCREEN_WIDTH);
 
-            myController = new Controller(stage);
-            myController.launchGame();
+            myGameController = new GameController(stage);
+            myGameController.launchGame();
         } catch (Exception e) {
             e.printStackTrace();
 

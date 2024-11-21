@@ -1,24 +1,25 @@
-package com.hcyzz1company.skybattle.core.levelThree;
+package com.hcyzz1company.skybattle.core.level.levelThree;
 
 import com.hcyzz1company.skybattle.constants.ImageConstants;
-import com.hcyzz1company.skybattle.core.LevelParent;
+import com.hcyzz1company.skybattle.core.level.LevelParent;
 import com.hcyzz1company.skybattle.entity.actors.BossPlane;
-import com.hcyzz1company.skybattle.ui.screenView.LevelView;
 
 /**
- * The LevelOne class represents the first level of the game. It inherits from LevelParent and
- * handles the initialization of the game environment, the spawning of enemies, and the conditions
- * for advancing to the next level or losing the game. It also manages the user's progress in terms
- * of kills and health.
+ * Represents the third level in the Sky Battle game.
+ * <p>This level involves defeating a boss enemy with a shield. The level ends when the boss is destroyed.</p>
  */
 public class LevelThree extends LevelParent {
 
+    // Path to the background image for this level
     private static final String BACKGROUND_IMAGE_NAME = ImageConstants.IMAGE_ROOT_PATH + "background2.jpg";
+    // Initial health of the player's plane
     private static final int PLAYER_INITIAL_HEALTH = 5;
+    // The boss enemy for this level
     private final BossPlane boss;
 
     /**
-     * Constructor to initialize LevelTwo with the given screen dimensions.
+     * Constructs the LevelThree instance.
+     * <p>Initializes the level with the background image, player health, and creates the boss enemy.</p>
      */
     public LevelThree() {
         super(BACKGROUND_IMAGE_NAME, PLAYER_INITIAL_HEALTH);
@@ -26,7 +27,9 @@ public class LevelThree extends LevelParent {
     }
 
     /**
-     * Check win the level or not
+     * Checks if the player has won the level.
+     *
+     * @return {@code true} if the boss is destroyed, {@code false} otherwise.
      */
     @Override
     protected boolean winLevel() {
@@ -34,8 +37,8 @@ public class LevelThree extends LevelParent {
     }
 
     /**
-     * Spawns enemy units for the level. In LevelTwo, the boss is the only enemy unit.
-     * The boss is only spawned once there are no remaining enemies in the level.
+     * Spawns the boss enemy when no enemies are currently on the screen.
+     * <p>Adds the boss to the screen and displays its shield.</p>
      */
     @Override
     protected void spawnEnemyUnits() {
@@ -45,10 +48,16 @@ public class LevelThree extends LevelParent {
         }
     }
 
+    /**
+     * Adds the boss's shield view to the screen.
+     */
     private void addShieldView() {
         super.getLevelView().addElement(this.boss.getSheildImageView());
     }
 
+    /**
+     * Updates the boss's shield view on the screen.
+     */
     @Override
     protected void updateExtraLevelView() {
         this.boss.updateShieldView();

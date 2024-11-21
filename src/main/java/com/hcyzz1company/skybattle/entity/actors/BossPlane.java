@@ -8,9 +8,8 @@ import javafx.scene.image.ImageView;
 import java.util.*;
 
 /**
- * The BossPlane class represents a powerful boss fighter plane in the game. It extends
- * the Plane class and introduces additional behavior like movement patterns,
- * projectile firing, and shield management.
+ * The BossPlane class represents a powerful boss fighter plane.
+ * It introduces movement patterns, projectile firing, and shield mechanics.
  */
 public class BossPlane extends Plane {
     // Image Information
@@ -62,8 +61,7 @@ public class BossPlane extends Plane {
     }
 
     /**
-     * Updates the position of the boss based on its movement pattern.
-     * Ensures the boss stays within vertical bounds.
+     * Updates the position of the boss based on its movement pattern and vertical bounds.
      */
     @Override
     public void updatePosition() {
@@ -76,13 +74,16 @@ public class BossPlane extends Plane {
         updateShieldPosition();
     }
 
+    /**
+     * Updates the shield's position relative to the boss's current position.
+     */
     public void updateShieldPosition() {
         shieldImage.setLayoutX(this.getLayoutX() + this.getTranslateX() + SHIELD_POSITION_X_OFFSET);
         shieldImage.setLayoutY(this.getLayoutY() + this.getTranslateY() + SHIELD_POSITION_Y_OFFSET);
     }
 
     /**
-     * Fires a projectile if the boss decides to fire in the current frame.
+     * Fires a projectile if the boss decides to fire.
      *
      * @return A new BossProjectile if the boss fires, otherwise null.
      */
@@ -102,7 +103,8 @@ public class BossPlane extends Plane {
     }
 
     /**
-     * Initializes the boss's movement pattern, alternating between vertical movement up, down, and stationary.
+     * Initializes the boss's movement pattern.
+     * The pattern alternates between vertical movements up, down, and stationary.
      */
     private void initializeMovePattern() {
         for (int i = 0; i < MOVE_FREQUENCY_PER_CYCLE; i++) {
@@ -114,7 +116,7 @@ public class BossPlane extends Plane {
     }
 
     /**
-     * Updates the shield state, activating or deactivating it based on certain conditions.
+     * Updates the shield state: activates or deactivates based on certain conditions.
      */
     public void updateShieldView() {
         if (isShielded) framesWithShieldActivated++;
@@ -125,8 +127,8 @@ public class BossPlane extends Plane {
     }
 
     /**
-     * Gets the next vertical move for the boss from the movement pattern.
-     * If the boss moves the same direction for too long, the pattern is reshuffled.
+     * Gets the next vertical move for the boss from its movement pattern.
+     * Reshuffles the pattern after moving in the same direction too long.
      *
      * @return The next vertical move value.
      */
@@ -145,7 +147,7 @@ public class BossPlane extends Plane {
     }
 
     /**
-     * Determines whether the boss fires a projectile based on its fire rate.
+     * Determines if the boss fires a projectile in the current frame based on its fire rate.
      *
      * @return true if the boss fires, false otherwise.
      */
@@ -163,7 +165,7 @@ public class BossPlane extends Plane {
     }
 
     /**
-     * Determines whether the boss should activate its shield in the current frame.
+     * Determines if the boss should activate its shield in the current frame.
      *
      * @return true if the shield should be activated, false otherwise.
      */
@@ -173,9 +175,9 @@ public class BossPlane extends Plane {
     }
 
     /**
-     * Checks if the boss's shield has been active for too long and should be deactivated.
+     * Checks if the boss's shield has been active for the maximum allowed frames.
      *
-     * @return true if the shield has been active for the maximum allowed frames, false otherwise.
+     * @return true if the shield has been active for too long, false otherwise.
      */
     private boolean shieldExhausted() {
         return framesWithShieldActivated == MAX_FRAMES_WITH_SHIELD;
@@ -198,6 +200,11 @@ public class BossPlane extends Plane {
         shieldImage.hideShield();
     }
 
+    /**
+     * Returns the shield ImageView for the boss.
+     *
+     * @return the shield ImageView
+     */
     public ImageView getSheildImageView() {
         return this.shieldImage;
     }

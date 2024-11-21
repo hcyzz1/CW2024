@@ -1,8 +1,8 @@
 package com.hcyzz1company.skybattle.entity.projectiles;
 
 /**
- * The BossProjectile class represents a projectile fired by the BossPlane in the game.
- * It extends the Projectile class and handles its movement and update logic.
+ * Represents a projectile fired by the BossPlane.
+ * Extends Projectile to handle movement and updates.
  */
 public class BossProjectile extends Projectile {
     //Image Information

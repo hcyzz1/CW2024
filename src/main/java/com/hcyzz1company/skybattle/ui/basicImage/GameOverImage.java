@@ -1,12 +1,11 @@
 package com.hcyzz1company.skybattle.ui.basicImage;
 
 import com.hcyzz1company.skybattle.constants.ImageConstants;
-import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
+import com.hcyzz1company.skybattle.utils.ImageUtil;
 import javafx.scene.image.ImageView;
 
 /**
- * The GameOverImage class represents the "Game Over" image that is displayed when the player wins the game.
- * It uses ImageUtil to create and display the image on the screen.
+ * Displays the "Game Over" image when the game ends.
  */
 public class GameOverImage extends ImageView {
 
@@ -17,8 +16,7 @@ public class GameOverImage extends ImageView {
 
 
     /**
-     * Constructs a WinImage object.
-     * Set the width & height & position of the Pic.
+     * Initializes the "Game Over" image with default size and position.
      */
     public GameOverImage() {
         super(ImageUtil.creteImage(GAME_OVER_IMAGE_PATH));

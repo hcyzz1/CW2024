@@ -1,16 +1,14 @@
-package com.hcyzz1company.skybattle.ui.screenView;
+package com.hcyzz1company.skybattle.ui;
 
 import com.hcyzz1company.skybattle.ui.basicImage.GameOverImage;
-import com.hcyzz1company.skybattle.ui.basicImage.ShieldImage;
 import com.hcyzz1company.skybattle.ui.specialElements.HeartDisplay;
 import com.hcyzz1company.skybattle.ui.basicImage.WinImage;
-import com.hcyzz1company.skybattle.utils.ui.ImageUtil;
+import com.hcyzz1company.skybattle.utils.ImageUtil;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
 
 /**
- * The LevelView class handles the graphical display elements for a specific game level.
- * It manages the heart display (for showing player health), the win image, and the game over image.
+ * Manages graphical elements for a game level, including health display, win, and game over images.
  */
 public class LevelView {
 
@@ -18,10 +16,10 @@ public class LevelView {
 	private final HeartDisplay heartDisplay;
 
 	/**
-	 * Constructor to initialize the LevelView.
+	 * Initializes LevelView with root container and heart display.
 	 *
-	 * @param root the root Group in which the UI elements will be added
-	 * @param heartsToDisplay the initial number of hearts to display (based on player health)
+	 * @param root            the root container for UI elements
+	 * @param heartsToDisplay the initial number of hearts to show
 	 */
 	public LevelView(Group root, int heartsToDisplay) {
 		this.root = root;
@@ -29,42 +27,49 @@ public class LevelView {
 	}
 
 	/**
-	 * Adds the heart display (showing the player's current health) to the scene.
+	 * Adds the heart display to the scene.
 	 */
 	public void showHeartDisplay() {
 		heartDisplay.showHeartDisplayInContainer(root);
 	}
 
 	/**
-	 * Displays the win image (typically shown when the player wins the level).
+	 * Displays the win image.
 	 */
 	public void showWinImage() {
 		ImageUtil.showImageInContainer(root, new WinImage());
 	}
 
 	/**
-	 * Displays the game over image (shown when the player loses).
+	 * Displays the game over image.
 	 */
 	public void showGameOverImage() {
 		ImageUtil.showImageInContainer(root, new GameOverImage());
 	}
 
 	/**
-	 * Updates the heart display by removing hearts based on the remaining health.
+	 * Updates the heart display by removing hearts.
 	 *
-	 * @param heartsRemaining the current number of hearts to be displayed (based on player health)
+	 * @param heartsRemaining the current number of hearts
 	 */
 	public void removeHearts(int heartsRemaining) {
 		heartDisplay.removeHeart(heartsRemaining);
 	}
 
 	/**
-	 * Shows the shield image (make it visible).
+	 * Adds an element (like a shield) to the scene.
+	 *
+	 * @param imageView the image element to add
 	 */
 	public void addElement(ImageView imageView) {
 		root.getChildren().add(imageView);
 	}
 
+	/**
+	 * Removes an element from the scene.
+	 *
+	 * @param imageView the image element to remove
+	 */
 	public void removeElement(ImageView imageView) {
 		root.getChildren().remove(imageView);
 	}

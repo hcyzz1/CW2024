@@ -1,20 +1,17 @@
 package com.hcyzz1company.skybattle.entity.common;
 
 /**
- * The Destructible interface represents an entity that can take damage and be destroyed.
- * Any class that implements this interface should define the behavior for taking damage and being destroyed.
+ * Interface for entities that can take damage and be destroyed.
  */
 public interface Destructible {
 
 	/**
-	 * This method is used to handle the damage taken by the destructible object.
-	 * The exact behavior of this method depends on the implementation in the class.
+	 * Handles damage taken by the object.
 	 */
 	void takeDamage();
 
 	/**
-	 * This method is used to destroy the destructible object.
-	 * Once an object is destroyed, it cannot be used further.
+	 * Destroys the object.
 	 */
 	void destroy();
 	

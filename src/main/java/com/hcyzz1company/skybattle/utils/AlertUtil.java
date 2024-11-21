@@ -2,20 +2,19 @@ package com.hcyzz1company.skybattle.utils;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 
 /**
- * Utility class to show different types of alerts in the JavaFX application.
- * You can choose the Alert type from "information", "warning", "error", and "confirmation".
+ * Utility class to show various types of alerts in a JavaFX application.
+ * You can choose the alert type from "information", "warning", "error", and "confirmation".
  */
 public class AlertUtil {
 
     /**
      * Shows an alert with the specified type, title, header, and content.
-     * This is a common private method for the Util class.
+     * This is a common private method used by other alert types.
      *
-     * @param alertType The type of the alert (e.g., INFORMATION, WARNING, ERROR, CONFIRMATION.).
+     * @param alertType The type of the alert (e.g., INFORMATION, WARNING, ERROR, CONFIRMATION).
      * @param title     The title of the alert window.
      * @param header    The header text of the alert window.
      * @param content   The content of the alert window.
@@ -67,22 +66,6 @@ public class AlertUtil {
      */
     public static void showError(String title, String header, String content) {
         showAlert(AlertType.ERROR, title, header, content);
-    }
-
-    /**
-     * Displays an CONFIRMATION alert with the given title, header, and content.
-     *
-     * @param title   The title of the alert.
-     * @param header  The header text of the alert.
-     * @param content The content of the alert.
-     */
-    public static boolean showConfirmation(String title, String header, String content) {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-
-        return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
     }
 
 }

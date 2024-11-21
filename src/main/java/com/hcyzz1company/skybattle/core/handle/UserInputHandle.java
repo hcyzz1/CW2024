@@ -1,7 +1,7 @@
 package com.hcyzz1company.skybattle.core.handle;
 
 import com.hcyzz1company.skybattle.constants.AppConstants;
-import com.hcyzz1company.skybattle.core.LevelParent;
+import com.hcyzz1company.skybattle.core.level.LevelParent;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import javafx.event.EventHandler;
@@ -17,25 +17,23 @@ public class UserInputHandle {
     private LevelParent level;
 
     /**
-     * Constructs a UserInputHandle instance for a given level.
+     * Creates a UserInputHandle for a specified game level.
      *
-     * @param level The level for which the user input is being handled.
+     * @param level the current level for which user input will be handled.
      */
     public UserInputHandle(LevelParent level) {
         this.level = level;
     }
 
     /**
-     * Initializes the background image and sets up key event handlers for user input.
-     * This includes setting up handlers for moving the plane and firing projectiles.
+     * Initializes key event handlers for user input.
      *
-     * <p>This method attaches event handlers to the background to listen for key presses and releases:
+     * <p>The background acts as the input receiver and listens for key presses to control the player:
      * <ul>
-     *     <li>Up Arrow: Moves the plane up.</li>
-     *     <li>Down Arrow: Moves the plane down.</li>
-     *     <li>Spacebar: Fires a projectile from the user's plane.</li>
+     *   <li><b>Arrow Keys:</b> Move the player's plane in the respective direction (Up, Down, Left, Right).</li>
+     *   <li><b>Spacebar:</b> Fires a projectile from the player's plane.</li>
      * </ul>
-     * </p>
+     * Key releases stop the movement of the plane.</p>
      */
     public void initializeBackground() {
         ImageView background = this.level.getBackground();
@@ -66,10 +64,12 @@ public class UserInputHandle {
     }
 
     /**
-     * Fires a projectile from the player's plane and adds it to the scene.
-     * The projectile is added to the level's root and to the list of user projectiles.
+     * Fires a projectile from the player's plane.
      *
-     * @param level The current game level, which contains the user plane and root scene.
+     * <p>This method creates a new projectile, adds it to the game scene,
+     * and tracks it in the level's list of user projectiles.</p>
+     *
+     * @param level the current level where the projectile is fired.
      */
     private void fireProjectile(LevelParent level) {
         ActiveActorDestructible projectile = level.getUser().fireProjectile();
