@@ -11,6 +11,14 @@ import javafx.scene.control.TextArea;
 public class AlertUtil {
 
     /**
+     * Private constructor to prevent instantiation of this utility class.
+     * This class should not be instantiated as it only contains static methods.
+     */
+    private AlertUtil() {
+        // Private constructor to prevent instantiation
+    }
+
+    /**
      * Shows an alert with the specified type, title, header, and content.
      * This is a common private method used by other alert types.
      *

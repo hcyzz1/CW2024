@@ -28,12 +28,12 @@ public class UserInputHandle {
     /**
      * Initializes key event handlers for user input.
      *
-     * <p>The background acts as the input receiver and listens for key presses to control the player:
+     * The background acts as the input receiver and listens for key presses to control the player:
      * <ul>
      *   <li><b>Arrow Keys:</b> Move the player's plane in the respective direction (Up, Down, Left, Right).</li>
      *   <li><b>Spacebar:</b> Fires a projectile from the player's plane.</li>
      * </ul>
-     * Key releases stop the movement of the plane.</p>
+     * Key releases stop the movement of the plane.
      */
     public void initializeBackground() {
         ImageView background = this.level.getBackground();
@@ -66,8 +66,8 @@ public class UserInputHandle {
     /**
      * Fires a projectile from the player's plane.
      *
-     * <p>This method creates a new projectile, adds it to the game scene,
-     * and tracks it in the level's list of user projectiles.</p>
+     * This method creates a new projectile, adds it to the game scene,
+     * and tracks it in the level's list of user projectiles.
      *
      * @param level the current level where the projectile is fired.
      */

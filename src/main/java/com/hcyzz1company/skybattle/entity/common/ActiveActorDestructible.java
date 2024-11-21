@@ -36,7 +36,7 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
     public abstract void takeDamage();
 
     /**
-     * Marks the actor as destroyed.
+     * Marks the actor as destroyed.    
      */
     @Override
     public void destroy() {
@@ -45,6 +45,7 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 
     /**
      * Sets the actor's destroyed state.
+     * @param isDestroyed a boolean indicating whether the actor is destroyed
      */
     protected void setDestroyed(boolean isDestroyed) {
         this.isDestroyed = isDestroyed;
@@ -52,6 +53,8 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 
     /**
      * Returns if the actor is destroyed.
+     * 
+     * @return true if the actor is destroyed, false otherwise
      */
     public boolean isDestroyed() {
         return isDestroyed;

@@ -8,8 +8,8 @@ import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 
 /**
  * Represents the second level of the game, which introduces a boss enemy.
- * <p>Handles the initialization of friendly and enemy units, checks for game over conditions,
- * and manages level progression based on the player's kills.</p>
+ * Handles the initialization of friendly and enemy units, checks for game over conditions,
+ * and manages level progression based on the player's kills.
  */
 public class LevelTwo extends LevelParent {
     // Path to the background image for this level
@@ -25,7 +25,7 @@ public class LevelTwo extends LevelParent {
 
     /**
      * Constructs the LevelTwo instance.
-     * <p>Initializes the level with the specified background image and player health.</p>
+     * Initializes the level with the specified background image and player health.
      */
     public LevelTwo() {
         super(BACKGROUND_IMAGE_NAME, PLAYER_INITIAL_HEALTH);
@@ -43,7 +43,7 @@ public class LevelTwo extends LevelParent {
 
     /**
      * Spawns enemy units based on a predefined spawn probability.
-     * <p>The method ensures that the total number of enemies does not exceed the limit.</p>
+     * The method ensures that the total number of enemies does not exceed the limit.
      */
     @Override
     protected void spawnEnemyUnits() {

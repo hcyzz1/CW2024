@@ -6,6 +6,14 @@ package com.hcyzz1company.skybattle.constants;
  */
 public class AppConstants {
     /**
+     * Private constructor to prevent instantiation of this utility class.
+     * This class is only meant to store constant values and should not be instantiated.
+     */
+    private AppConstants() {
+        // Private constructor to prevent instantiation
+    }
+    
+    /**
      * The width of the game window.
      */
     public static final int SCREEN_WIDTH = 1300;
