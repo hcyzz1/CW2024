@@ -46,6 +46,6 @@ public class AppConstants {
     /**
      * The delay between game updates in milliseconds.
      */
-    public static final int MILLISECOND_DELAY = 50;
+    public static final int MILLISECOND_DELAY = 16;
 
 }

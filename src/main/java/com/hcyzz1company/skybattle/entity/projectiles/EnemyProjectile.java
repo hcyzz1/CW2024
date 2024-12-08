@@ -11,7 +11,7 @@ public class EnemyProjectile extends Projectile {
     private static final int IMAGE_HEIGHT = 20;
     
     //Projectile Action Information
-    private static final int HORIZONTAL_VELOCITY = -10;
+    private static final int HORIZONTAL_VELOCITY = -8;
 
     /**
      * Constructs an EnemyProjectile with the given initial position.

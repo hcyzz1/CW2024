@@ -16,7 +16,7 @@ public class LevelOne extends LevelParent {
     // Maximum number of enemies allowed on the screen
     private static final int TOTAL_ENEMIES = 5;
     // Number of kills required to win the level
-    private static final int KILLS_TO_ADVANCE = 10;
+    private static final int KILLS_TO_ADVANCE = 5;
     // Probability of spawning a new enemy in each spawn cycle
     private static final double ENEMY_SPAWN_PROBABILITY = .20;
     // Initial health of the player's plane
@@ -41,6 +41,11 @@ public class LevelOne extends LevelParent {
         return userHasReachedKillTarget();
     }
 
+    @Override
+    protected int getKills() {
+        return KILLS_TO_ADVANCE;
+    }
+
     /**
      * Spawns enemy planes based on the spawn probability and the current number of enemies on the screen.
      *
@@ -61,6 +66,7 @@ public class LevelOne extends LevelParent {
             }
         }
     }
+
 
     /**
      * Checks if the player has achieved the required number of kills to advance to the next level.

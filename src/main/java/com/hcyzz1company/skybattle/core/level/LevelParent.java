@@ -1,21 +1,31 @@
 package com.hcyzz1company.skybattle.core.level;
 
-import java.util.*;
-import java.util.stream.Collectors;
-
 import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.core.handle.UserInputHandle;
+import com.hcyzz1company.skybattle.entity.actors.EnemyPlane1;
 import com.hcyzz1company.skybattle.entity.actors.Plane;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.entity.common.ExplosionEffect;
+import com.hcyzz1company.skybattle.entity.item.HeartPowerUp;
+import com.hcyzz1company.skybattle.entity.item.PowerUpItem;
+import com.hcyzz1company.skybattle.entity.item.PowerUpManager;
 import com.hcyzz1company.skybattle.ui.LevelView;
-import com.hcyzz1company.skybattle.utils.LevelUtil;
 import com.hcyzz1company.skybattle.utils.ImageUtil;
-import javafx.animation.*;
+import com.hcyzz1company.skybattle.utils.LevelUtil;
+import com.hcyzz1company.skybattle.utils.MusicUtil;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.*;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.stream.Collectors;
 
 /**
  * Abstract class that represents a game level.
@@ -32,6 +42,9 @@ public abstract class LevelParent extends Observable {
     private final List<ActiveActorDestructible> enemyUnits;
     private final List<ActiveActorDestructible> userProjectiles;
     private final List<ActiveActorDestructible> enemyProjectiles;
+
+    private final List<ActiveActorDestructible> itemProjectiles;
+
 
     private int currentNumberOfEnemies;
     private LevelView levelView;
@@ -53,6 +66,7 @@ public abstract class LevelParent extends Observable {
         this.enemyUnits = new ArrayList<>();
         this.userProjectiles = new ArrayList<>();
         this.enemyProjectiles = new ArrayList<>();
+        this.itemProjectiles = new ArrayList<>();
         this.background = new ImageView(ImageUtil.createImage(backgroundImageName));
         this.levelView = instantiateLevelView();
         this.currentNumberOfEnemies = 0;
@@ -78,11 +92,22 @@ public abstract class LevelParent extends Observable {
             String currentLevelClassName = this.getClass().getName();
             //If is already the final level, winGame
             if (LevelUtil.isFinalLevel(currentLevelClassName)) {
+                removeAllDestroyedActors();
                 winGame();
             } else {
                 // If is not the final level, go to the next level.
                 String nextLevel = LevelUtil.getNextLevel(currentLevelClassName);
-                goToNextLevel(nextLevel);
+                loadingGame();
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(2000);
+                        Platform.runLater(() -> {
+                            goToNextLevel(nextLevel);
+                        });
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).start();
             }
         }
     }
@@ -93,6 +118,8 @@ public abstract class LevelParent extends Observable {
      * @return true if the level is won, false otherwise
      */
     protected abstract boolean winLevel();
+
+    protected abstract int getKills();
 
     /**
      * Abstract method to spawn enemy units for the level.
@@ -117,6 +144,10 @@ public abstract class LevelParent extends Observable {
         new UserInputHandle(this).initializeBackground();
         initializeFriendlyUnits();
         levelView.showHeartDisplay();
+        if (this.getClass().getName().equals(LevelUtil.getFirstLevel())
+                || this.getClass().getName().equals(LevelUtil.getSecondLevel())) {
+            levelView.showTargetDisplay();
+        }
         return scene;
     }
 
@@ -144,6 +175,8 @@ public abstract class LevelParent extends Observable {
 
         stopCurrentLevelActivities();
         levelChanging = false;
+
+        user.resetKillEnemyNumber();
     }
 
     /**
@@ -159,11 +192,20 @@ public abstract class LevelParent extends Observable {
         handleEnemyProjectileCollisions();
         handleProjectileCollisions();
         handlePlaneCollisions();
+        handleItem(itemProjectiles, this.user);
         removeAllDestroyedActors();
         updateKillCount();
         updateLevelView();
         updateExtraLevelView();
         checkIfGameOver();
+
+        if (this.getClass().getName().equals(LevelUtil.getFirstLevel())) {
+            updateTarget();
+        }
+    }
+
+    private void updateTarget() {
+        levelView.updateTarget(getKills(), getUser().getNumberOfKills());
     }
 
     /**
@@ -205,12 +247,14 @@ public abstract class LevelParent extends Observable {
     /**
      * Adds an enemy projectile to the scene if it is not null.
      *
-     * @param projectile the enemy projectile to spawn
+     * @param projectiles the enemy projectiles to spawn
      */
-    private void spawnEnemyProjectile(ActiveActorDestructible projectile) {
-        if (projectile != null) {
-            root.getChildren().add(projectile);
-            enemyProjectiles.add(projectile);
+    private void spawnEnemyProjectile(List<ActiveActorDestructible> projectiles) {
+        if (projectiles!=null && projectiles.size()>0) {
+            for (ActiveActorDestructible projectile : projectiles) {
+                root.getChildren().add(projectile);
+                enemyProjectiles.add(projectile);
+            }
         }
     }
 
@@ -222,6 +266,7 @@ public abstract class LevelParent extends Observable {
         updateActorPositions(enemyUnits);
         updateActorPositions(userProjectiles);
         updateActorPositions(enemyProjectiles);
+        updateActorPositions(itemProjectiles);
     }
 
     private <T extends ActiveActorDestructible> void updateActorPositions(List<T> actors) {
@@ -236,6 +281,7 @@ public abstract class LevelParent extends Observable {
         removeDestroyedActors(enemyUnits);
         removeDestroyedActors(userProjectiles);
         removeDestroyedActors(enemyProjectiles);
+        removeDestroyedActors(itemProjectiles);
     }
 
     /**
@@ -246,9 +292,45 @@ public abstract class LevelParent extends Observable {
     private void removeDestroyedActors(List<ActiveActorDestructible> actors) {
         List<ActiveActorDestructible> destroyedActors = actors.stream().filter(actor -> actor.isDestroyed())
                 .collect(Collectors.toList());
+
+        for (ActiveActorDestructible destroyedActor : destroyedActors) {
+
+            if (destroyedActor instanceof Plane) {
+                // 获取飞机的位置
+                double explosionX = destroyedActor.getLayoutX() + destroyedActor.getTranslateX();
+                double explosionY = destroyedActor.getLayoutY() + destroyedActor.getTranslateY();
+
+                // 获取飞机的宽度和高度
+                double planeWidth = destroyedActor.getBoundsInLocal().getWidth();
+                double planeHeight = destroyedActor.getBoundsInLocal().getHeight();
+
+                // 创建爆炸特效
+                ExplosionEffect explosion = new ExplosionEffect(explosionX, explosionY, planeWidth, planeHeight);
+
+                // 将爆炸效果添加到父节点 (root 是您的 Group 或 Pane)
+                root.getChildren().add(explosion);
+
+                //随机掉落物品
+                PowerUpManager powerUpManager = new PowerUpManager();
+                PowerUpItem powerUpItem = powerUpManager.dropPowerUp(explosionX, explosionY);
+                if (powerUpItem!=null){
+                    itemProjectiles.add(powerUpItem);
+                    root.getChildren().add(powerUpItem);
+                }
+            }
+
+        }
+
         root.getChildren().removeAll(destroyedActors);
         actors.removeAll(destroyedActors);
+        for (ActiveActorDestructible destroyedActor : destroyedActors) {
+            if (destroyedActor instanceof EnemyPlane1){
+                user.incrementKillEnemyNumber();
+            }
+        }
+
     }
+
 
     /**
      * Handles collisions between friendly units and enemy units.
@@ -291,9 +373,27 @@ public abstract class LevelParent extends Observable {
                 if (actor.getBoundsInParent().intersects(otherActor.getBoundsInParent())) {
                     actor.takeDamage();
                     otherActor.takeDamage();
+
                 }
             }
         }
+    }
+
+    // improve the user
+    private void handleItem(List<ActiveActorDestructible> actors1 , Plane plane) {
+
+            for (ActiveActorDestructible otherActor : actors1) {
+                if (plane.getBoundsInParent().intersects(otherActor.getBoundsInParent())) {
+                    otherActor.takeDamage();
+                    if (otherActor instanceof HeartPowerUp){
+                        plane.addHealth();
+                    }else{
+                        user.increaseProjectileLevel();
+                    }
+
+                }
+            }
+
     }
 
     /**
@@ -302,7 +402,6 @@ public abstract class LevelParent extends Observable {
     private void handleEnemyPenetration() {
         for (ActiveActorDestructible enemy : enemyUnits) {
             if (enemyHasPenetratedDefenses(enemy)) {
-                user.takeDamage();
                 enemy.destroy();
             }
         }
@@ -312,7 +411,7 @@ public abstract class LevelParent extends Observable {
      * Updates the level view by removing hearts corresponding to the player's health.
      */
     private void updateLevelView() {
-        levelView.removeHearts(user.getHealth());
+        levelView.updateHeartDisplay(user.getHealth());
     }
 
     /**
@@ -340,6 +439,14 @@ public abstract class LevelParent extends Observable {
     protected void winGame() {
         timeline.stop();
         levelView.showWinImage();
+    }
+
+    /**
+     * Stops the game and shows a win image when the user wins.
+     */
+    protected void loadingGame() {
+        timeline.stop();
+        levelView.showLoadingImage();
     }
 
     /**

@@ -8,6 +8,7 @@ import com.hcyzz1company.skybattle.core.level.LevelParent;
 import com.hcyzz1company.skybattle.exceptions.LevelLoadingException;
 import com.hcyzz1company.skybattle.utils.AlertUtil;
 import com.hcyzz1company.skybattle.utils.LevelUtil;
+import com.hcyzz1company.skybattle.utils.MusicUtil;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -35,9 +36,33 @@ public class GameController implements Observer {
 	 */
 	public void launchGame() {
 		try {
+			// Show the game start screen
+			showStartScreen();
 			// Show the game window
 			stage.show();
-			// Start the game by going to the first level
+			// defalut start music background
+			MusicUtil.playBackGroundSound();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			AlertUtil.showError("ERROR",
+					"Failed to launch the Game.",
+					"An error occurred while starting the game. <br>" +
+							"Please check the stack information");
+			Platform.exit();
+		}
+	}
+
+	private void showStartScreen() {
+		GameStartScreen startScreen = new GameStartScreen(
+				stage,
+				this::startFirstLevel
+		);
+		startScreen.show();
+	}
+
+	private void startFirstLevel() {
+		try {
 			goToLevel(LevelUtil.getFirstLevel());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,6 +73,7 @@ public class GameController implements Observer {
 			Platform.exit();
 		}
 	}
+
 
 	/**
 	 * Switches to a specified level.

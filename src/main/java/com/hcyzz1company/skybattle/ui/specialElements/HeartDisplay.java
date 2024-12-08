@@ -60,6 +60,30 @@ public class HeartDisplay {
 	}
 
 	/**
+	 * Updates the heart display to match the current number of remaining hearts.
+	 *
+	 * @param heartsRemaining the number of hearts remaining
+	 */
+	public void updateHeartDisplay(int heartsRemaining) {
+		// 限制最大显示为 10 个
+		heartsRemaining = Math.min(heartsRemaining, 10);
+
+		int currentHearts = container.getChildren().size();
+
+		// 如果当前显示的爱心数量少于剩余数量，则添加爱心
+		if (currentHearts < heartsRemaining) {
+			for (int i = currentHearts; i < heartsRemaining; i++) {
+				HeartImage heartImage = new HeartImage();
+				ImageUtil.showImageInContainer(container, heartImage);
+			}
+		}
+		// 如果当前显示的爱心数量多于剩余数量，则移除多余的爱心
+		else if (currentHearts > heartsRemaining) {
+			container.getChildren().remove(currentHearts - heartsRemaining, currentHearts);
+		}
+	}
+
+	/**
 	 * Displays the heart container in the specified root container.
 	 *
 	 * @param root the container where the hearts should be displayed

@@ -5,6 +5,7 @@
 module skyBattle {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.media;
 
     exports com.hcyzz1company.skybattle;
     exports com.hcyzz1company.skybattle.constants;

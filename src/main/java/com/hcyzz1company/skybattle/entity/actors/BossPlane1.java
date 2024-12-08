@@ -3,7 +3,8 @@ package com.hcyzz1company.skybattle.entity.actors;
 import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.entity.projectiles.BossProjectile;
-import com.hcyzz1company.skybattle.entity.projectiles.UserProjectile;
+import com.hcyzz1company.skybattle.entity.projectiles.BossProjectile1;
+import com.hcyzz1company.skybattle.entity.projectiles.BossProjectile2;
 import com.hcyzz1company.skybattle.ui.basicImage.ShieldImage;
 import com.hcyzz1company.skybattle.ui.specialElements.HealthBar;
 import javafx.scene.image.ImageView;
@@ -16,10 +17,10 @@ import java.util.List;
  * The BossPlane class represents a powerful boss fighter plane.
  * It introduces movement patterns, projectile firing, and shield mechanics.
  */
-public class BossPlane extends Plane {
+public class BossPlane1 extends Plane {
     // Image Information
-    private static final String IMAGE_NAME = "bossplane.png";
-    private static final int IMAGE_HEIGHT = 70;
+    private static final String IMAGE_NAME = "boss1.png";
+    private static final int IMAGE_HEIGHT = 200;
     private static final double INITIAL_X_POSITION = 1000.0;
     private static final double INITIAL_Y_POSITION = 400;
 
@@ -28,7 +29,7 @@ public class BossPlane extends Plane {
     private static final double BOSS_FIRE_RATE = .04;
 
     // Health Information
-    private static final int HEALTH = 10;
+    private static final int HEALTH = 100;
 
     // Shield Information
     private static final double BOSS_SHIELD_PROBABILITY = .01;
@@ -56,7 +57,7 @@ public class BossPlane extends Plane {
     /**
      * Constructs a BossPlane object with predefined image, position, health, and movement pattern.
      */
-    public BossPlane() {
+    public BossPlane1() {
         super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, HEALTH);
         movePattern = new ArrayList<>();
         consecutiveMovesInSameDirection = 0;
@@ -65,7 +66,6 @@ public class BossPlane extends Plane {
         isShielded = false;
         initializeMovePattern();
         shieldImage = new ShieldImage();
-
         healthBar = new HealthBar(HEALTH);  // 初始化血条
     }
 
@@ -81,8 +81,9 @@ public class BossPlane extends Plane {
             setTranslateY(initialTranslateY);
         }
         updateShieldPosition();
-        updateHealthBarPosition();  // 更新血条位置
+        updateHealthBarPosition();
     }
+
 
     // 更新血条位置
     private void updateHealthBarPosition() {
@@ -90,6 +91,7 @@ public class BossPlane extends Plane {
         double y = this.getLayoutY() + this.getTranslateY()+ SHIELD_POSITION_Y_OFFSET;  // 血条放置在Boss图片下方
         healthBar.updatePosition(x, y);  // 更新血条的位置
     }
+
 
     /**
      * Updates the shield's position relative to the boss's current position.
@@ -108,15 +110,12 @@ public class BossPlane extends Plane {
     public List<ActiveActorDestructible> fireProjectile() {
         List<ActiveActorDestructible> list = new ArrayList<>();
         if (bossFiresInCurrentFrame()) {
+            list.add(new BossProjectile1(getProjectileInitialPosition()));
             list.add(new BossProjectile(getProjectileInitialPosition()));
-            list.add(new BossProjectile(getProjectileInitialPosition()- 20));
+            list.add(new BossProjectile2(getProjectileInitialPosition()));
         }
         return list;
-
     }
-
-
-
 
     /**
      * Takes damage unless the boss is shielded.
@@ -138,6 +137,7 @@ public class BossPlane extends Plane {
     public HealthBar getHealthBar() {
         return healthBar;
     }
+
 
     /**
      * Initializes the boss's movement pattern.

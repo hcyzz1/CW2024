@@ -3,71 +3,116 @@ package com.hcyzz1company.skybattle.core.level.levelTwo;
 import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.constants.ImageConstants;
 import com.hcyzz1company.skybattle.core.level.LevelParent;
+import com.hcyzz1company.skybattle.entity.actors.BossPlane;
 import com.hcyzz1company.skybattle.entity.actors.EnemyPlane;
+import com.hcyzz1company.skybattle.entity.actors.EnemyPlane1;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.ui.specialElements.HealthBar;
+import javafx.application.Platform;
 
 /**
- * Represents the second level of the game, which introduces a boss enemy.
- * Handles the initialization of friendly and enemy units, checks for game over conditions,
- * and manages level progression based on the player's kills.
+ * Represents the third level in the Sky Battle game.
+ * This level involves defeating a boss enemy with a shield. The level ends when the boss is destroyed.
  */
 public class LevelTwo extends LevelParent {
+
     // Path to the background image for this level
-    private static final String BACKGROUND_IMAGE_NAME = ImageConstants.IMAGE_ROOT_PATH + "background3.jpg";
-    // Total number of enemies to spawn in the level
-    private static final int TOTAL_ENEMIES = 5;
-    // Number of kills required to advance to the next level
-    private static final int KILLS_TO_ADVANCE = 20;
-    // Probability of spawning an enemy
-    private static final double ENEMY_SPAWN_PROBABILITY = .20;
+    private static final String BACKGROUND_IMAGE_NAME = ImageConstants.IMAGE_ROOT_PATH + "background2.jpg";
     // Initial health of the player's plane
     private static final int PLAYER_INITIAL_HEALTH = 5;
+    private static final double ENEMY_SPAWN_PROBABILITY = .20;
+    // The boss enemy for this level
+    private final BossPlane boss;
 
     /**
-     * Constructs the LevelTwo instance.
-     * Initializes the level with the specified background image and player health.
+     * Constructs the LevelThree instance.
+     * Initializes the level with the background image, player health, and creates the boss enemy.
      */
     public LevelTwo() {
         super(BACKGROUND_IMAGE_NAME, PLAYER_INITIAL_HEALTH);
+        boss = new BossPlane();
     }
 
     /**
-     * Checks if the player has won the level by reaching the kill target.
+     * Checks if the player has won the level.
      *
-     * @return {@code true} if the player has reached the kill target, {@code false} otherwise
+     * @return {@code true} if the boss is destroyed, {@code false} otherwise.
      */
     @Override
     protected boolean winLevel() {
-        return userHasReachedKillTarget();
+        return boss.isDestroyed();
+    }
+
+    @Override
+    protected int getKills() {
+        return 0;
     }
 
     /**
-     * Spawns enemy units based on a predefined spawn probability.
-     * The method ensures that the total number of enemies does not exceed the limit.
+     * Spawns the boss enemy when no enemies are currently on the screen.
+     * Adds the boss to the screen and displays its shield.
      */
     @Override
     protected void spawnEnemyUnits() {
-        int currentNumberOfEnemies = getCurrentNumberOfEnemies();
-        for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
-            if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
-                double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
-                if (newEnemyInitialYPosition < getEnemyMinimumYPosition()) {
-                    newEnemyInitialYPosition = getEnemyMinimumYPosition();
+        if (getCurrentNumberOfEnemies() == 0) {
+            addEnemyUnit(boss);
+//            addShieldView();
+            addHealthBar();   // 添加 Boss 的血条
+
+            new Thread(() -> {
+                while (true){
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+
+//                    if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
+//                        double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
+//                        if (newEnemyInitialYPosition < getEnemyMinimumYPosition()) {
+//                            newEnemyInitialYPosition = getEnemyMinimumYPosition();
+//                        }
+//                        ActiveActorDestructible newEnemy = new EnemyPlane(AppConstants.SCREEN_WIDTH, newEnemyInitialYPosition);
+//                        Platform.runLater(() -> {
+//                            addEnemyUnit(newEnemy);
+//                        });
+//                    }
+//
+//                    if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
+//                        double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
+//                        if (newEnemyInitialYPosition < getEnemyMinimumYPosition()) {
+//                            newEnemyInitialYPosition = getEnemyMinimumYPosition();
+//                        }
+//                        ActiveActorDestructible newEnemy1 = new EnemyPlane1(AppConstants.SCREEN_WIDTH, newEnemyInitialYPosition);
+//                        Platform.runLater(() -> {
+//                            addEnemyUnit(newEnemy1);
+//                        });
+//                    }
                 }
-                ActiveActorDestructible newEnemy = new EnemyPlane(AppConstants.SCREEN_WIDTH, newEnemyInitialYPosition);
-                addEnemyUnit(newEnemy);
-            }
+            }).start();
         }
     }
 
+    /**
+     * Adds the boss's shield view to the screen.
+     */
+    private void addShieldView() {
+        super.getLevelView().addElement(this.boss.getSheildImageView());
+    }
 
     /**
-     * Checks if the player has reached the required number of kills to advance to the next level.
-     *
-     * @return {@code true} if the player's kill count is greater than or equal to the target, {@code false} otherwise
+     * Updates the boss's shield view on the screen.
      */
-    private boolean userHasReachedKillTarget() {
-        return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;
+    @Override
+    protected void updateExtraLevelView() {
+        this.boss.updateShieldView();
+        this.boss.updatePosition();
+    }
+
+    // 添加 Boss 的血条
+    private void addHealthBar() {
+        HealthBar bossHealthBar = boss.getHealthBar();
+        super.getRoot().getChildren().add(bossHealthBar);
     }
 
 }

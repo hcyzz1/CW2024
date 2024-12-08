@@ -1,8 +1,5 @@
 package com.hcyzz1company.skybattle.utils;
 
-import com.hcyzz1company.skybattle.exceptions.LevelLoadingException;
-import javafx.stage.Stage;
-
 /**
  * Manages the flow of levels in the game, including advancing to the next level and checking if it's the final level.
  */
@@ -11,7 +8,8 @@ public class LevelUtil {
     private static final String LEVEL_ONE = "com.hcyzz1company.skybattle.core.level.levelOne.LevelOne";
     private static final String LEVEL_TWO = "com.hcyzz1company.skybattle.core.level.levelTwo.LevelTwo";
     private static final String LEVEL_THREE = "com.hcyzz1company.skybattle.core.level.levelThree.LevelThree";
-    private static final String FINAL_LEVEL = LEVEL_THREE;
+    private static final String LEVEL_FOUR = "com.hcyzz1company.skybattle.core.level.levelFour.LevelFour";
+    private static final String FINAL_LEVEL = LEVEL_FOUR;
 
     /**
      * Get the next level class name based on the current level class name.
@@ -26,6 +24,8 @@ public class LevelUtil {
                 return LEVEL_TWO;
             case LEVEL_TWO:
                 return LEVEL_THREE;
+            case LEVEL_THREE:
+                return LEVEL_FOUR;
             default:
                 return null;
         }
@@ -51,5 +51,9 @@ public class LevelUtil {
      */
     public static String getFirstLevel() {
         return LEVEL_ONE;
+    }
+
+    public static String getSecondLevel() {
+        return LEVEL_TWO;
     }
 }

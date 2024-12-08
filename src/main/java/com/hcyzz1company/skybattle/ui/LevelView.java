@@ -1,8 +1,10 @@
 package com.hcyzz1company.skybattle.ui;
 
 import com.hcyzz1company.skybattle.ui.basicImage.GameOverImage;
-import com.hcyzz1company.skybattle.ui.specialElements.HeartDisplay;
+import com.hcyzz1company.skybattle.ui.basicImage.LoadingImage;
 import com.hcyzz1company.skybattle.ui.basicImage.WinImage;
+import com.hcyzz1company.skybattle.ui.specialElements.HeartDisplay;
+import com.hcyzz1company.skybattle.ui.specialElements.TargetDisplay;
 import com.hcyzz1company.skybattle.utils.ImageUtil;
 import javafx.scene.Group;
 import javafx.scene.image.ImageView;
@@ -14,6 +16,7 @@ public class LevelView {
 
 	private final Group root;
 	private final HeartDisplay heartDisplay;
+	private final TargetDisplay targetDisplay;
 
 	/**
 	 * Initializes LevelView with root container and heart display.
@@ -24,6 +27,7 @@ public class LevelView {
 	public LevelView(Group root, int heartsToDisplay) {
 		this.root = root;
 		this.heartDisplay = new HeartDisplay(heartsToDisplay);
+		this.targetDisplay = new TargetDisplay();
 	}
 
 	/**
@@ -34,10 +38,28 @@ public class LevelView {
 	}
 
 	/**
+	 * Adds the target display to the scene.
+	 */
+	public void showTargetDisplay() {
+		targetDisplay.showTargetDisplayInContainer(root);
+	}
+
+	public void updateTarget(int targetNumbers, int killNumbers) {
+		targetDisplay.updateTarget(targetNumbers, killNumbers);
+	}
+
+	/**
 	 * Displays the win image.
 	 */
 	public void showWinImage() {
 		ImageUtil.showImageInContainer(root, new WinImage());
+	}
+
+	/**
+	 * Displays the loading image.
+	 */
+	public void showLoadingImage() {
+		ImageUtil.showImageInContainer(root, new LoadingImage());
 	}
 
 	/**
@@ -52,8 +74,8 @@ public class LevelView {
 	 *
 	 * @param heartsRemaining the current number of hearts
 	 */
-	public void removeHearts(int heartsRemaining) {
-		heartDisplay.removeHeart(heartsRemaining);
+	public void updateHeartDisplay(int heartsRemaining) {
+		heartDisplay.updateHeartDisplay(heartsRemaining);
 	}
 
 	/**
