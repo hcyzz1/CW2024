@@ -1,6 +1,10 @@
 package com.hcyzz1company.skybattle.entity.actors;
 
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.entity.common.ExplosionEffect;
+import com.hcyzz1company.skybattle.utils.MusicUtil;
+
+import java.util.List;
 
 /**
  * The Plane class represents a fighter plane.
@@ -30,7 +34,7 @@ public abstract class Plane extends ActiveActorDestructible {
 	 *
 	 * @return the fired projectile.
 	 */
-	public abstract ActiveActorDestructible fireProjectile();
+	public abstract List<ActiveActorDestructible> fireProjectile();
 
 	/**
 	 * Reduces health by 1. If health reaches zero, the plane is destroyed.
@@ -39,6 +43,7 @@ public abstract class Plane extends ActiveActorDestructible {
 	public void takeDamage() {
 		health--;
 		if (healthAtZero()) {
+			MusicUtil.playExplosionSound();
 			this.destroy();
 		}
 	}
@@ -79,6 +84,11 @@ public abstract class Plane extends ActiveActorDestructible {
 	 */
 	public int getHealth() {
 		return health;
+	}
+
+
+	public void addHealth() {
+		health ++;
 	}
 		
 }

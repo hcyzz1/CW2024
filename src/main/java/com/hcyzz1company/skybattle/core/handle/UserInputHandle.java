@@ -4,10 +4,21 @@ import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.core.level.LevelParent;
 import com.hcyzz1company.skybattle.entity.actors.UserPlane;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
+import com.hcyzz1company.skybattle.utils.MusicUtil;
 import javafx.event.EventHandler;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URL;
+import java.util.List;
+
+import java.util.List;
 
 /**
  * Handles user input for the game, such as plane movement and projectile firing.
@@ -49,7 +60,10 @@ public class UserInputHandle {
                 if (kc == KeyCode.DOWN) user.moveDown();
                 if (kc == KeyCode.LEFT) user.moveLeft();
                 if (kc == KeyCode.RIGHT) user.moveRight();
-                if (kc == KeyCode.SPACE) fireProjectile(level);
+                if (kc == KeyCode.SPACE) {
+                    MusicUtil.playShootSound();
+                    fireProjectile(level);
+                }
             }
         });
         background.setOnKeyReleased(new EventHandler<KeyEvent>() {
@@ -72,8 +86,15 @@ public class UserInputHandle {
      * @param level the current level where the projectile is fired.
      */
     private void fireProjectile(LevelParent level) {
-        ActiveActorDestructible projectile = level.getUser().fireProjectile();
-        level.getRoot().getChildren().add(projectile);
-        level.getUserProjectiles().add(projectile);
+        List<ActiveActorDestructible> projectiles = level.getUser().fireProjectile();
+        for (ActiveActorDestructible projectile: projectiles) {
+            level.getRoot().getChildren().add(projectile);
+            level.getUserProjectiles().add(projectile);
+        }
     }
+
+
+
+
+
 }

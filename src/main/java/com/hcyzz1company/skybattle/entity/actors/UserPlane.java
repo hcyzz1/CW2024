@@ -4,16 +4,19 @@ import com.hcyzz1company.skybattle.constants.AppConstants;
 import com.hcyzz1company.skybattle.entity.common.ActiveActorDestructible;
 import com.hcyzz1company.skybattle.entity.projectiles.UserProjectile;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The UserPlane class represents the player's plane.
  * It handles movement, firing, and state updates for the player's plane.
  */
 public class UserPlane extends Plane {
 
-    //Image Information
+    // Image Information
     private static final String IMAGE_NAME = "userplane.png";
     private static final int IMAGE_HEIGHT = 50;
-    //Projectile offset from Plane --- Image Information
+    // Projectile offset from Plane --- Image Information
     private static final int PROJECTILE_X_POSITION_OFFSET = 110;
     private static final int PROJECTILE_Y_POSITION_OFFSET = 20;
 
@@ -22,17 +25,23 @@ public class UserPlane extends Plane {
     private static final double X_LOWER_BOUND = 600.0;
     private static final double Y_UPPER_BOUND = AppConstants.SCREEN_HEIGHT_UPPER_ADJUSTED;
     private static final double Y_LOWER_BOUND = AppConstants.SCREEN_HEIGHT_LOWER_ADJUSTED;
-    // Init Postion Information
+    // Init Position Information
     private static final double INITIAL_X_POSITION = 5.0;
     private static final double INITIAL_Y_POSITION = 300.0;
     // Speed Information
-    private static final int VERTICAL_VELOCITY = 8;
-    private static final int HORIZONTAL_VELOCITY = 8;
+    private static final int VERTICAL_VELOCITY = 4;
+    private static final int HORIZONTAL_VELOCITY = 4;
+
+    private int KILL_ENEMY_NUMBER = 0;
+    private final int TARGET_KILL_ENEMY_NUMBER = 5;
 
     private int velocityMultiplier;
     private int horizontalMultiplier;
 
     private int numberOfKills;
+
+    // 攻击层级（默认层级为1）
+    private int currentProjectileLevel = 1; 
 
     /**
      * Constructs a UserPlane with initial health, position, and other properties.
@@ -60,7 +69,7 @@ public class UserPlane extends Plane {
                 this.setTranslateY(initialTranslateY);
             }
 
-            //move horizontally
+            // move horizontally
             double initialTranslateX = getTranslateX();
             this.moveHorizontally(HORIZONTAL_VELOCITY * horizontalMultiplier);
             double newPositionX = getLayoutX() + getTranslateX();
@@ -73,11 +82,27 @@ public class UserPlane extends Plane {
     /**
      * Fires a projectile from the user's plane.
      *
-     * @return a new UserProjectile.
+     * @return a list of UserProjectile.
      */
     @Override
-    public ActiveActorDestructible fireProjectile() {
-        return new UserProjectile(getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET), getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET));
+    public List<ActiveActorDestructible> fireProjectile() {
+        List<ActiveActorDestructible> list = new ArrayList<>();
+
+        // 第一层弹道
+        list.add(new UserProjectile(getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET), getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET)));
+
+        // 双层弹道
+        if (currentProjectileLevel >= 2) {
+            list.add(new UserProjectile(getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET), getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET) - 20));
+        }
+
+        // 三层弹道
+        if (currentProjectileLevel >= 4) {
+            list.add(new UserProjectile(getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET), getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET) - 20));
+            list.add(new UserProjectile(getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET), getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET) - 40));
+        }
+
+        return list;
     }
 
     /**
@@ -147,4 +172,40 @@ public class UserPlane extends Plane {
         numberOfKills++;
     }
 
+    /**
+     * Increments the number of enemy kills and checks if player should get an upgrade.
+     */
+    public void incrementKillEnemyNumber() {
+        KILL_ENEMY_NUMBER++;
+//        if (KILL_ENEMY_NUMBER >= TARGET_KILL_ENEMY_NUMBER) {
+//            // 达到目标杀敌数后，增加攻击层级
+//            increaseProjectileLevel();
+//            resetKillEnemyNumber();
+//        }
+    }
+
+    /**
+     * 重置杀敌数
+     */
+    public void resetKillEnemyNumber() {
+        KILL_ENEMY_NUMBER = 0;
+    }
+
+    /**
+     * Increases the current projectile level (based on pickups).
+     */
+    public void increaseProjectileLevel() {
+
+        currentProjectileLevel++;
+
+    }
+
+    /**
+     * Gets the current projectile level.
+     *
+     * @return the current projectile level (1, 2, or 3).
+     */
+    public int getCurrentProjectileLevel() {
+        return currentProjectileLevel;
+    }
 }

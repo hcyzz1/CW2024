@@ -41,5 +41,4 @@ public abstract class Projectile extends ActiveActorDestructible {
     public void updatePosition() {
         moveHorizontally(this.horizontalVelocity);
     }
-
 }
