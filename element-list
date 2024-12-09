@@ -5,11 +5,13 @@ com.hcyzz1company.skybattle.core
 com.hcyzz1company.skybattle.core.factory
 com.hcyzz1company.skybattle.core.handle
 com.hcyzz1company.skybattle.core.level
+com.hcyzz1company.skybattle.core.level.levelFour
 com.hcyzz1company.skybattle.core.level.levelOne
 com.hcyzz1company.skybattle.core.level.levelThree
 com.hcyzz1company.skybattle.core.level.levelTwo
 com.hcyzz1company.skybattle.entity.actors
 com.hcyzz1company.skybattle.entity.common
+com.hcyzz1company.skybattle.entity.item
 com.hcyzz1company.skybattle.entity.projectiles
 com.hcyzz1company.skybattle.exceptions
 com.hcyzz1company.skybattle.ui
