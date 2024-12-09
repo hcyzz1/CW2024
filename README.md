@@ -328,6 +328,79 @@ I've also specified the relative file path clearly in the Location.
   - This will help with future functionality management and related expansions.
   - In the current modification, I have ensured that the plane can move left and right. However, I found that the logic for detecting when it stops is still not smooth enough. It may be possible for further improvements in the future. 
 
+
+### [MusicUtil.java](https://github.com/hcyzz1/CW2024/blob/master/src/main/java/com/hcyzz1company/skybattle/utils/MusicUtil.java)
+
+- **Location**
+  - `src/main/java/com/hcyzz1company/skybattle/utils/MusicUtil.java`
+- **Description**
+  - This utility class manages the playback of music and sound effects in the Sky Battle game. It provides methods to play background music, shooting sounds, and explosion sounds. It also allows toggling the enabling or disabling of these sound effects.
+- **Purpose**
+  - Centralizing audio management helps streamline the sound effect control process and makes it easier to manage and modify sound settings in the future. This contributes to a more immersive gameplay experience by ensuring consistent audio feedback.
+
+
+### [PowerUpItem.java](https://github.com/hcyzz1/CW2024/blob/master/src/main/java/com/hcyzz1company/skybattle/entity/item/PowerUpItem.java)
+
+- **Location**
+  - `src/main/java/com/hcyzz1company/skybattle/entity/item/PowerUpItem.java`
+- **Description**
+  - Represents a power-up item in the game. Power-up items are destructible entities that provide special effects when activated. The behavior of the power-up is defined by its subclasses.
+- **Purpose**
+  - Provides a base class for all power-up items, allowing for common functionality such as movement and destruction. Subclasses will implement specific effects and behaviors associated with different types of power-ups.
+
+---
+
+### [AttackSpeedPowerUp.java](https://github.com/hcyzz1/CW2024/blob/master/src/main/java/com/hcyzz1company/skybattle/entity/item/AttackSpeedPowerUp.java)
+
+- **Location**
+  - `src/main/java/com/hcyzz1company/skybattle/entity/item/AttackSpeedPowerUp.java`
+- **Description**
+  - Represents a power-up item that increases the attack speed of the player. This item moves at a fixed speed and is destroyed when it takes damage.
+- **Purpose**
+  - Implements the specific effect of increasing the player's attack speed when activated. It handles its own destruction upon taking damage.
+
+---
+
+### [HeartPowerUp.java](https://github.com/hcyzz1/CW2024/blob/master/src/main/java/com/hcyzz1company/skybattle/entity/item/HeartPowerUp.java)
+
+- **Location**
+  - `src/main/java/com/hcyzz1company/skybattle/entity/item/HeartPowerUp.java`
+- **Description**
+  - Represents a power-up item that increases the player's health. This item moves at a fixed speed and is destroyed when it takes damage.
+- **Purpose**
+  - Implements the effect of increasing the player's health upon activation. It also manages its destruction when it takes damage.
+
+---
+
+### [PowerUpManager.java](https://github.com/hcyzz1/CW2024/blob/master/src/main/java/com/hcyzz1company/skybattle/entity/item/PowerUpManager.java)
+
+- **Location**
+  - `src/main/java/com/hcyzz1company/skybattle/entity/item/PowerUpManager.java`
+- **Description**
+  - Manages the generation and dropping of power-up items during gameplay. This class determines the type of power-up item to drop based on random probabilities.
+- **Purpose**
+  - Centralizes the logic for power-up generation, allowing for random selection of power-ups to enhance gameplay dynamics. This helps maintain a balanced and engaging game environment by providing players with various power-up options.
+
+### [GameStartScreen.java](https://github.com/hcyzz1/CW2024/blob/master/src/main/java/com/hcyzz1company/skybattle/core/GameStartScreen.java)
+
+- **Location**
+  - `src/main/java/com/hcyzz1company/skybattle/core/GameStartScreen.java`
+- **Description**
+  - Represents the game's start screen with a background image and buttons for starting the game, viewing controls, and adjusting sound settings.
+- **Purpose**
+  - Provides a user-friendly interface for the game start, allowing players to initiate gameplay, view controls, and customize sound settings.
+
+### [HealthBar.java](https://github.com/hcyzz1/CW2024/blob/master/src/main/java/com/hcyzz1company/skybattle/ui/specialElements/HealthBar.java)
+
+- **Location**
+  - `src/main/java/com/hcyzz1company/skybattle/ui/specialElements/HealthBar.java`
+- **Description**
+  - Represents a health bar in the game, visually indicating the player's health status through a progress bar.
+- **Purpose**
+  - Provides a visual representation of health, allowing players to easily see their current health in relation to their maximum health.
+
+---
+
 ## Modified Java Classes
 
 Each title represents a file. Each number represents a change point. 
@@ -472,6 +545,7 @@ In fact, some of the changes described here may overlap with the "New Java Class
      - Same PR: PR:https://github.com/hcyzz1/CW2024/pull/9/files#diff-8db55e1c9c00b78214649359e9f60dad3b3039b0f3984719c1d9b426f1a5bc5a
    - Reason:
      -  Improve user experience and make the gameplay smoother.
+
 
 ### Other Simple Image Management Changes
 
