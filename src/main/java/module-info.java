@@ -16,10 +16,12 @@ module skyBattle {
     exports com.hcyzz1company.skybattle.core.level.levelOne;
     exports com.hcyzz1company.skybattle.core.level.levelTwo;
     exports com.hcyzz1company.skybattle.core.level.levelThree;
+    exports com.hcyzz1company.skybattle.core.level.levelFour;
 
     exports com.hcyzz1company.skybattle.entity.actors;
     exports com.hcyzz1company.skybattle.entity.common;
     exports com.hcyzz1company.skybattle.entity.projectiles;
+    exports com.hcyzz1company.skybattle.entity.item;
 
     exports com.hcyzz1company.skybattle.exceptions;
     exports com.hcyzz1company.skybattle.ui;

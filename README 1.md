@@ -661,3 +661,119 @@ I have refactored the project preliminarily.
   - I tried using the recommended `gh-pages` branch and setup on GitHub to create a page for browsing the JavaDoc! It's really cool!ßß
     - https://hcyzz1.github.io/CW2024/
   - I encountered some errors while generating the JavaDoc, but after running the command `mvn clean package source:jar javadoc:jar -Peclipse-release -DskipTests -Dpmd.skip=true -Dcheckstyle.skip=true`, it generated the JavaDoc correctly.
+
+
+### Day11 (2024/12/08)
+
+- **Integrated Audio Features for Immersive Gameplay**
+  - **Background Music**: Added background music that loops indefinitely during gameplay to enhance the immersive experience.
+    - **Method**: `MusicUtil.playBackGroundSound()`
+  - **Shooting Sound Effects**: Implemented shooting sound effects, triggered whenever the player fires a projectile.
+    - **Method**: `MusicUtil.playShootSound()`
+    - **Integration**:
+      - Added a call to `MusicUtil.playShootSound()` in the `UserInputHandle` class inside the `if (kc == KeyCode.SPACE)` block to ensure shooting sounds play when the space bar is pressed.
+  - **Explosion Sound Effects**: Included explosion sound effects that play when any plane (enemy or player) is destroyed.
+    - **Method**: `MusicUtil.playExplosionSound()`
+    - **Integration**:
+      - Added a call to `MusicUtil.playExplosionSound()` in the `Plane.takeDamage()` method, ensuring the sound plays when the plane's health reaches zero and it is destroyed.
+
+- **Enhanced Class Interactions**
+  - Integrated sound effect playback into:
+    - **`UserInputHandle`**: Shooting sound effect on spacebar press.
+    - **`Plane.takeDamage()`**: Explosion sound effect when a plane is destroyed.
+  - Updated **`LevelParent`** class to handle:
+    - Explosion visual effects for destroyed planes.
+    - Playback of explosion sound via `MusicUtil.playExplosionSound()`.
+    - Power-up item drops after a plane is destroyed in the `removeDestroyedActors()` method.
+
+- **Improved User Feedback**
+  - Players now receive auditory and visual feedback for key interactions:
+    - Shooting projectiles.
+    - Destroying planes, with explosion sounds and visual effects.
+  - Added item drops (e.g., power-ups) dynamically with explosion effects, enriching gameplay.
+
+- **Optimized Audio Control**
+  - Centralized audio logic in the `MusicUtil` utility class:
+    - Background music: `MusicUtil.playBackGroundSound()`
+    - Shooting sound: `MusicUtil.playShootSound()`
+    - Explosion sound: `MusicUtil.playExplosionSound()`
+  - Allows global toggling of sound settings (`isBackGroundPlaying`, `isShootPlaying`, `playExplosionSound`).
+
+- **Overall Benefits**
+  - Enhanced immersion with dynamic background music and sound effects.
+  - Clearer and modular code by centralizing audio logic in `MusicUtil`.
+  - More engaging gameplay with interactive sound, visual effects, and item drops.
+
+
+## Day 12 (2024/12/09)
+
+- **Implemented Power-Up System for Enhanced Gameplay**
+  - **Random Power-Up Drops**: Introduced a mechanism where enemy planes drop power-ups (Health or Attack Speed) upon destruction.
+    - **Method**: `PowerUpManager.dropPowerUp(double x, double y)`
+    - **Integration**:
+      - Integrated into the `removeDestroyedActors()` method of the `LevelParent` class, allowing for power-up generation at the location of destroyed enemy planes.
+
+  - **Health Power-Up**: Added a `HeartPowerUp` class that increases the player’s health when collected.
+    - **Method**: `Plane.addHealth()`
+    - **Integration**:
+      - When the player’s plane intersects with a `HeartPowerUp`, the player’s health is increased, enhancing survivability.
+
+  - **Attack Speed Power-Up**: Implemented an `AttackSpeedPowerUp` class that upgrades the player's projectile level.
+    - **Method**: `User.increaseProjectileLevel()`
+    - **Integration**:
+      - When the player’s plane collects an `AttackSpeedPowerUp`, it triggers an increase in projectile level, allowing for more powerful attacks.
+
+- **Enhanced Interaction with Power-Ups**
+  - Integrated power-up collection into:
+    - **`handleItem()`**: This method checks for collisions between the player's plane and power-ups, applying the effects based on the type of power-up collected.
+  - Updated **`LevelParent`** class to manage interactions with power-ups during gameplay.
+
+- **Improved Projectile Mechanics**
+  - **Projectile Level Enhancements**: Adjusted projectile firing logic based on power-up collection, allowing for varying levels of projectile fire.
+    - **Method**: `UserPlane.fireProjectile()`
+    - **Integration**:
+      - Depending on the `currentProjectileLevel`, the player can fire one, two, or three projectiles simultaneously, introducing strategic depth to combat.
+
+- **Visual Feedback for Power-Ups**
+  - Implemented visual indicators for power-up drops, enhancing player awareness of available power-ups.
+    - Used explosion effects to indicate where power-ups drop, improving overall gameplay experience.
+
+- **Overall Benefits**
+  - The addition of a power-up system adds strategic elements to gameplay, encouraging players to actively seek out and collect items.
+  - Improved player feedback through both auditory and visual cues during power-up interactions.
+  - Enhanced combat dynamics with upgraded projectile mechanics, making battles more engaging and varied.
+  - 
+## Day 12 (2024/12/10)
+
+- **Implemented Boss Transition and Health Display in Level Four**
+  - **Boss Plane Management**: Introduced a system to manage two bosses, `BossPlane` and `BossPlane1`, with a transition mechanism.
+    - **Method**: `spawnEnemyUnits()`
+    - **Integration**:
+      - The first boss (`BossPlane`) is spawned at the start, and upon its destruction, the second boss (`BossPlane1`) is activated.
+      - Utilized a flag `bossPlane1Spawned` to ensure that `BossPlane1` is only spawned once after the first boss is defeated.
+
+  - **Health Bar Display**: Added health bars for both bosses to provide visual feedback on their health status.
+    - **Method**: `addHealthBarForFirstBoss()`, `addHealthBarForSecondBoss()`
+    - **Integration**:
+      - Health bars are added to the root view for both bosses, updating dynamically based on their current health.
+
+- **Enhanced Game Flow with Boss Transitions**
+  - Integrated the boss spawning logic in the `spawnEnemyUnits()` method, which checks if the first boss is destroyed before spawning the second boss.
+  - Used `Platform.runLater()` to ensure that UI updates are performed on the JavaFX application thread.
+
+- **Improved Boss Interaction and Visibility**
+  - **Shield View Management**: Added visual indicators (shields) for both bosses to show their protective states.
+    - **Method**: `addShieldViewForFirstBoss()`, `addShieldViewForSecondBoss()`
+    - **Integration**:
+      - Shields are displayed on the screen and updated based on the boss states.
+
+- **Overall Benefits**
+  - Enhanced gameplay experience through strategic boss encounters, requiring players to adapt to different boss behaviors.
+  - Improved player feedback via health bars, making it clear how much health each boss has left.
+  - Introduced a dynamic game environment with a clear progression from one boss to another, adding depth to level design.
+- 
+- JavaDoc
+
+  - I tried using the recommended `gh-pages` branch and setup on GitHub to create a page for browsing the JavaDoc! It's really cool!ßß
+    - https://hcyzz1.github.io/CW2024/
+  - I encountered some errors while generating the JavaDoc, but after running the command `mvn clean package source:jar javadoc:jar -Peclipse-release -DskipTests -Dpmd.skip=true -Dcheckstyle.skip=true`, it generated the JavaDoc correctly.
