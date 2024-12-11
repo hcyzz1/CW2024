@@ -737,7 +737,14 @@ I have refactored the project preliminarily.
   - I encountered some errors while generating the JavaDoc, but after running the command `mvn clean package source:jar javadoc:jar -Peclipse-release -DskipTests -Dpmd.skip=true -Dcheckstyle.skip=true`, it generated the JavaDoc correctly.
 
 
-### Day11 (2024/12/08)
+### Day11 (2024/12/04)
+- I Display the number of kills added.
+- I Switching between levels, adding and loading images.
+- Add multiple layers of bullet attributes to the aircraft.
+- Add a fourth level and a new enemy plane and boss.
+- Fix some bugs during the testing process.
+
+### Day12 (2024/12/08)
 
 - **Integrated Audio Features for Immersive Gameplay**
   - **Background Music**: Added background music that loops indefinitely during gameplay to enhance the immersive experience.
@@ -779,7 +786,7 @@ I have refactored the project preliminarily.
   - More engaging gameplay with interactive sound, visual effects, and item drops.
 
 
-## Day 12 (2024/12/09)
+## Day 13 (2024/12/09)
 
 - **Implemented Power-Up System for Enhanced Gameplay**
   - **Random Power-Up Drops**: Introduced a mechanism where enemy planes drop power-ups (Health or Attack Speed) upon destruction.
@@ -817,7 +824,7 @@ I have refactored the project preliminarily.
   - Improved player feedback through both auditory and visual cues during power-up interactions.
   - Enhanced combat dynamics with upgraded projectile mechanics, making battles more engaging and varied.
   - 
-## Day 12 (2024/12/10)
+## Day 14 (2024/12/10)
 
 - **Implemented Boss Transition and Health Display in Level Four**
   - **Boss Plane Management**: Introduced a system to manage two bosses, `BossPlane` and `BossPlane1`, with a transition mechanism.
@@ -840,6 +847,11 @@ I have refactored the project preliminarily.
     - **Method**: `addShieldViewForFirstBoss()`, `addShieldViewForSecondBoss()`
     - **Integration**:
       - Shields are displayed on the screen and updated based on the boss states.
+
+## Day 15 (2024/12/11)
+
+-I tried to use visual paradigm to draw the class diagram , and it worked.
+-I tried to make the introduce video , but it not finished yet.
 
 - **Overall Benefits**
   - Enhanced gameplay experience through strategic boss encounters, requiring players to adapt to different boss behaviors.
